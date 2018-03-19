@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model:Screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:model="http://wireframesketcher.com/1.0/model.ecore" xmlns:o="http://wireframesketcher.com/1.0/model/overrides">
+  <widgets xsi:type="model:Master" id="1" x="290" y="38" measuredWidth="406" measuredHeight="794">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android5/Devices/Nexus%205.screen#Nexus%205"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="2" x="313" y="129" measuredWidth="360" measuredHeight="56">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android5/Navigation.screen#App%20Bar"/>
+    <overrides>
+      <widgetChanges xsi:type="o:Delete" ref="6"/>
+      <widgetChanges xsi:type="o:Delete" ref="4"/>
+      <widgets ref="5" x="22" y="10" text="OnlyMoov"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="4" x="368" y="702" measuredWidth="38" measuredHeight="38" annotation="true" link="Home.screen">
+    <screen xsi:type="model:WidgetGroup" href="assets/TouchGestures/TouchGestures.screen#Touch"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="21" x="312" y="184" measuredWidth="363" measuredHeight="48">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android5/Controls.screen#Tabs%20Icons"/>
+    <overrides>
+      <widgets ref="78" width="363" text="{assets/ic-directions-walk}, {assets/ic-directions-bike}, {assets/ic-directions-bus}, {car}">
+        <itemChanges xsi:type="o:Insert" newIndex="3">
+          <object xsi:type="model:Item" text="{car}"/>
+        </itemChanges>
+        <itemChanges xsi:type="o:Insert" newIndex="3">
+          <object xsi:type="model:Item" text="{assets/ic-directions-bus}"/>
+        </itemChanges>
+        <itemChanges xsi:type="o:Insert" newIndex="3">
+          <object xsi:type="model:Item" text="{assets/ic-directions-bike}"/>
+        </itemChanges>
+        <itemChanges xsi:type="o:Insert" newIndex="3">
+          <object xsi:type="model:Item" text="{assets/ic-directions-walk}"/>
+        </itemChanges>
+        <itemChanges xsi:type="o:Delete" ref="@items.2"/>
+        <itemChanges xsi:type="o:Delete" ref="@items.1"/>
+        <itemChanges xsi:type="o:Delete" ref="@items.0"/>
+      </widgets>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Panel" id="28" x="324" y="240" width="338" height="281" measuredWidth="338" measuredHeight="281"/>
+  <widgets xsi:type="model:Master" id="29" x="336" y="258" measuredWidth="34" measuredHeight="39">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android5/Typography.screen#Text%20Large"/>
+    <overrides>
+      <widgets ref="2" text="De"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="30" x="336" y="354" measuredWidth="50" measuredHeight="39">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android5/Typography.screen#Text%20Large"/>
+    <overrides>
+      <widgets ref="2" text="Vers"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="36" x="617" y="338" measuredWidth="38" measuredHeight="40">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android5/Typography.screen#Text%20Large"/>
+    <overrides>
+      <widgets ref="2" text="{neutral}"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Checkbox" id="41" x="617" y="464" measuredWidth="21" measuredHeight="29">
+    <font size="16px" bold="false"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="43" x="341" y="448" measuredWidth="39" measuredHeight="39">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android5/Typography.screen#Text%20Large"/>
+    <overrides>
+      <widgets ref="2" text="Par"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="46" x="385" y="250" measuredWidth="215" measuredHeight="72">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android5/Controls.screen#Text%20Field"/>
+    <overrides>
+      <widgets ref="44" width="215" text="Ma position"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="49" x="312" y="648" width="361" height="55" measuredWidth="361" measuredHeight="55">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android5/Controls.screen#Button%20Raised"/>
+    <overrides>
+      <widgets ref="15" width="361" height="55" text="ET ALLEZ C'EST PARTI !"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="50" x="394" y="338" measuredWidth="215" measuredHeight="72">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android5/Controls.screen#Text%20Field"/>
+    <overrides>
+      <widgets ref="44" width="215" text="Point d'arrivée"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="51" x="386" y="432" measuredWidth="215" measuredHeight="72">
+    <screen xsi:type="model:WidgetGroup" href="assets/Android5/Controls.screen#Text%20Field"/>
+    <overrides>
+      <widgets ref="44" width="215" text="Détour"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="52" x="313" y="648" width="360" measuredWidth="360" measuredHeight="55" annotation="true" link="map.screen">
+    <screen xsi:type="model:WidgetGroup" href="assets/TouchGestures/TouchGestures.screen#Touch"/>
+    <overrides>
+      <widgets ref="5" width="360" height="55"/>
+    </overrides>
+  </widgets>
+  <widgets xsi:type="model:Master" id="53" x="416" y="267" measuredWidth="38" measuredHeight="38" annotation="true">
+    <screen xsi:type="model:WidgetGroup" href="assets/TouchGestures/TouchGestures.screen#Touch"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="54" x="416" y="352" measuredWidth="38" measuredHeight="38" annotation="true">
+    <screen xsi:type="model:WidgetGroup" href="assets/TouchGestures/TouchGestures.screen#Touch"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="55" x="416" y="449" measuredWidth="38" measuredHeight="38" annotation="true">
+    <screen xsi:type="model:WidgetGroup" href="assets/TouchGestures/TouchGestures.screen#Touch"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="56" x="433" y="194" measuredWidth="38" measuredHeight="38" annotation="true">
+    <screen xsi:type="model:WidgetGroup" href="assets/TouchGestures/TouchGestures.screen#Touch"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="57" x="520" y="194" measuredWidth="38" measuredHeight="38" annotation="true">
+    <screen xsi:type="model:WidgetGroup" href="assets/TouchGestures/TouchGestures.screen#Touch"/>
+  </widgets>
+  <widgets xsi:type="model:Master" id="58" x="609" y="194" measuredWidth="38" measuredHeight="38" annotation="true">
+    <screen xsi:type="model:WidgetGroup" href="assets/TouchGestures/TouchGestures.screen#Touch"/>
+  </widgets>
+  <hRuler/>
+  <vRuler/>
+  <font size="12px"/>
+</model:Screen>
