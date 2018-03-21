@@ -4,7 +4,6 @@ public class TestBibliotheque {
  
     public static void main(String[] Args) {
         
-        
         int nombre = 0;
         Scanner entree = new Scanner(System.in);
         while (nombre != 10) {
