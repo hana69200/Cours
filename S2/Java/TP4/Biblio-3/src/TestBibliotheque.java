@@ -4,54 +4,67 @@ public class TestBibliotheque {
  
     public static void main(String[] Args) {
         
+        //MembreBibliotheque membre_1 = new MembreBibliotheque ("Gaillard", "Michel", "0749274938", "3 rue des Fleures");
+        //MembreBibliotheque membre_2 = new MembreBibliotheque ("Bertrand", "Jack", "0721587469", "7 allée des Champs");
+        
+        DocBibliotheque doc_1 = new DocBibliotheque ("ZER-128", "Jeau-Marc au pays des lapins", "Paul Berger", 2014);
+        //DocBibliotheque doc_2 = new DocBibliotheque ("GDF-654", "Deux hommes sur la lune", "Valentin Giraud", 1978);
+        
         
         int nombre = 0;
         Scanner entree = new Scanner(System.in);
         while (nombre != 10) {
             afficher();
-            System.out.print("Entrer votre choix : ");
+            System.out.println("Entrer votre choix : ");
             String ligne = entree.nextLine();
             nombre = gestionErreur(ligne);
             
-            switch(nombre)
+            switch(nombre) 
             {
                 case 10:
                     //On quitte le menu
                     break;
                     
                 case 1:
-                    //
+                    //Afficher des informations sur un document
+                    System.out.println(doc_1.toString());
+                    System.out.println("\nAppuyer sur une touche pour quitter");
+                    entree.nextLine();
                     break;
                     
                 case 2:
-                    //
+                    //Connaître l’état d’un document
+                    System.out.println(doc_1.getEtatPhysique());
+                    System.out.println("\nAppuyer sur une touche pour quitter");
+                    entree.nextLine();
                     break;
                     
                 case 3:
-                    //
+                    //Changer l’état d’un document
+                    String etat = entree.nextLine();
+                    switch(gestionErreur(etat)) {
+                        case 1:
+                            
+                    }
                     break;
                     
                 case 4:
-                    //
+                    //Faire une réservation
                     break;
                 
                 case 5:
-                    //
+                    //Annuler une réservation
                     break;
                 
                 case 6:
-                    //
+                    //Afficher le nombre de documents empruntés
                     break;
                 case 7:
-                    //
+                    //Afficher le nombre de documents sur la pile des retours
                     break;
                 case 8:
-                    //
+                    //Afficher le nombre de documents dans la section spéciale réservations
                     break;
-                case 9:
-                    //
-                    break;
-                
             }
             //Fin switch
         }

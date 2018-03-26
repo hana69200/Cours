@@ -135,14 +135,14 @@ public class DocBibliotheque {
         @Override
         public String toString() {
             return "Code d'archivage : "+ code_archivage +
-                "Titre : " + titre +
-                "Auteur principal : " + auteurPrincipal +
-                "Annee de publication : " + anneePublication +
-                "Etat physique : " + etatPhysique +
-                "Membre ayant reserve : " + membreQuiReserve +
-                "Membre entrain d'emprunter : " + membreQuiEmprunte +
-                "Nombre de documents empruntes : " + nombreDocEmprunte +
-                "Nombre de documents sur la pile des retours : " + nombreDocSurPileRetour +
-                "Nombre de documents sur la section reservation" + nombreDocSurSectionReservation;
+                "\nTitre : " + titre +
+                "\nAuteur principal : " + auteurPrincipal +
+                "\nAnnee de publication : " + anneePublication +
+                "\nEtat physique : " + etatPhysique +
+                "\nMembre ayant reserve : " + membreQuiReserve +
+                "\nMembre entrain d'emprunter : " + membreQuiEmprunte +
+                "\nNombre de documents empruntes : " + nombreDocEmprunte +
+                "\nNombre de documents sur la pile des retours : " + nombreDocSurPileRetour +
+                "\nNombre de documents sur la section reservation : " + nombreDocSurSectionReservation;
         }
 }

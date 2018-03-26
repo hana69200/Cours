@@ -2,12 +2,12 @@ public class MembreBibliotheque {
  
     private String nom = null;
     private String prenom = null;
-    private int numTelephone = 0;
+    private String numTelephone = null;
     private String adresse = null;
     private int numAbonne = 0;
     private static int dernierNumeroAbonne = 1;
     
-    public MembreBibliotheque(String newNom, String newPrenom, int newNumTelephone, String newAdresse) {
+    public MembreBibliotheque(String newNom, String newPrenom, String newNumTelephone, String newAdresse) {
         this.nom = newNom;
         this.prenom = newPrenom;
         this.numTelephone = newNumTelephone;
@@ -23,7 +23,7 @@ public class MembreBibliotheque {
         return this.prenom;
     }
     
-    public int getNumTelephone() {
+    public String getNumTelephone() {
         return this.numTelephone;
     }
     
@@ -35,24 +35,24 @@ public class MembreBibliotheque {
         return this.numAbonne;
     }
     
-    public String setNom() {
-        return this.nom;
+    public void setNom(String newNom) {
+        this.nom = newNom;
     }
     
-    public String setPrenom() {
-        return this.prenom;
+    public void setPrenom(String newPrenom) {
+        this.prenom = newPrenom;
     }
     
-    public int setNumTelephone() {
-        return this.numTelephone;
+    public void setNumTelephone(String newNumTelephone) {
+        this.numTelephone = newNumTelephone;
     }
     
-    public String setAdresse() {
-        return this.adresse;
+    public void setAdresse(String newAdresse) {
+        this.adresse = newAdresse;
     }
     
-    public int setNumAbonne() {
-        return this.numAbonne;
+    public void setNumAbonne(int newNumAbonne) {
+        this.numAbonne = newNumAbonne;
     }
     
     @Override
