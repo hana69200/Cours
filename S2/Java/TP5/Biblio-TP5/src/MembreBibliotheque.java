@@ -2,17 +2,17 @@ public class MembreBibliotheque {
  
     private String nom = null;
     private String prenom = null;
-    private int numTelephone = 0;
+    private String numTelephone = null;
     private String adresse = null;
     private int numAbonne = 0;
-    private static int dernierNumeroAbonne = 1;
+    private static int dernierNumeroAbonne = 0;
     
-    public MembreBibliotheque(String newNom, String newPrenom, int newNumTelephone, String newAdresse) {
+    public MembreBibliotheque(String newNom, String newPrenom, String newNumTelephone, String newAdresse) {
         this.nom = newNom;
         this.prenom = newPrenom;
         this.numTelephone = newNumTelephone;
         this.adresse = newAdresse;
-        this.numAbonne = ++dernierNumeroAbonne;
+        this.numAbonne = dernierNumeroAbonne++;
     }
     
     public String getNom() {
@@ -23,7 +23,7 @@ public class MembreBibliotheque {
         return this.prenom;
     }
     
-    public int getNumTelephone() {
+    public String getNumTelephone() {
         return this.numTelephone;
     }
     
@@ -43,7 +43,7 @@ public class MembreBibliotheque {
         this.prenom = newPrenom;
     }
     
-    public void setNumTelephone(int newNumTelephone) {
+    public void setNumTelephone(String newNumTelephone) {
         this.numTelephone = newNumTelephone;
     }
     
