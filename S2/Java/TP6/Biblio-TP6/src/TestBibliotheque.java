@@ -1,13 +1,13 @@
-//import java.util.Scanner;
+import java.util.Scanner;
 
 public class TestBibliotheque {
  
     public static void main(String[] Args) {
         
-        MembreBibliotheque membre_1 = new MembreBibliotheque ("Gaillard",
-                "Michel", "0749274938", "3 rue des Fleures");
-        MembreBibliotheque membre_2 = new MembreBibliotheque ("Bertrand",
-                "Jack", "0721587469", "7 allée des Champs");
+        //MembreBibliotheque membre_1 = new MembreBibliotheque ("Gaillard",
+        //        "Michel", "0749274938", "3 rue des Fleures");
+        //MembreBibliotheque membre_2 = new MembreBibliotheque ("Bertrand",
+        //        "Jack", "0721587469", "7 allée des Champs");
         //System.out.println(membre_1.getNumAbonne());
         //System.out.println(membre_2.getNumAbonne());
         
@@ -18,25 +18,30 @@ public class TestBibliotheque {
         
         Livre doc_1 = new Livre ("ZER-128", "Jeau-Marc au pays des lapins",
                 "Paul Berger", 2014, "Flame Kuche", 32, "0012");
-        Livre doc_2 = new Livre ("GDF-654", "Deux hommes sur la lune",
-                "Valentin Giraud", 1978, "Licorne Magique", 18, "0145");
+        //Livre doc_2 = new Livre ("GDF-654", "Deux hommes sur la lune",
+        //        "Valentin Giraud", 1978, "Licorne Magique", 18, "0145");
         
-        System.out.println(doc_1.toString() + "\n");
-        System.out.println(doc_2.toString() + "\n");
+        //System.out.println(doc_1.toString() + "\n");
+        //System.out.println(doc_2.toString() + "\n");
         
         //CatalogueBibliotheque monCatalogue = new CatalogueBibliotheque();
         //monCatalogue.ajouterDoc(doc_1);
         //monCatalogue.ajouterDoc(doc_2);
         //System.out.println(monCatalogue.getDoc(0).toString());
         
-        /*
+        
         int nombre = 0;
         Scanner entree = new Scanner(System.in);
         while (nombre != 10) {
             afficher();
             System.out.println("Entrer votre choix : ");
-            String ligne = entree.nextLine();
-            nombre = gestionErreur(ligne);
+            
+            //try {
+                nombre = entree.nextInt();
+            //}
+            //catch (NombreHorsLimiteException probleme) {
+            //    System.out.println("Erreur : " + probleme);
+            //}
             
             switch(nombre)
             {
@@ -60,8 +65,8 @@ public class TestBibliotheque {
                     
                 case 3:
                     //Changer l’état d’un document
-                    String etat = entree.nextLine();
-                    switch(gestionErreur(etat)) {
+                    int etat = entree.nextInt();
+                    switch(etat) {
                         case 1:
                             
                     }
@@ -88,7 +93,7 @@ public class TestBibliotheque {
             //Fin switch
         }
         //Fin while
-        */
+        
     }
 
     public static void afficher() {
@@ -107,46 +112,5 @@ public class TestBibliotheque {
         System.out.println("\n");
     }
     //Fin afficher()
-    
-    public static int gestionErreur(String nb)
-    {
-        switch(nb)
-        {
-            case "1":
-                return 1;
-                
-            case "2":
-                return 2;
-                
-            case "3":
-                return 3;
-                
-            case "4":
-                return 4;
-                
-            case "5":
-                return 5;
-                
-            case "6":
-                return 6;
-                
-            case "7":
-                return 7;
-                
-            case "8":
-                return 8;
-                
-            case "9":
-                return 9;
-            
-            case "10":
-                return 10;
-                
-            default :
-                return 0;
-        }
-        //Fin switch
-    }
-    //Fin gestionErreur()
 }
 //Fin main()

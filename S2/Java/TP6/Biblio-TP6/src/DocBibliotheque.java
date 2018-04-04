@@ -61,6 +61,19 @@ public class DocBibliotheque {
             return etatPhysique;
         }
         
+        
+        public int getNombreDocEmprunte() {
+            return nombreDocEmprunte;
+        }
+        
+        public int getNombreDocSurPileRetour() {
+            return nombreDocSurPileRetour;
+        }
+        
+        public int getNombreDocSurSectionReservation() {
+            return nombreDocSurSectionReservation;
+        }
+        
         public void emprunter(MembreBibliotheque newMembreQuiEmprunte) {
             //1 : livre est sur etagere
             //-> changer etat livre + changer membre qui emprunte
@@ -103,7 +116,7 @@ public class DocBibliotheque {
             }
         }
         
-        public void rangerLivre() {
+        public void rangerDoc() {
             //sur la pile des retours
             //-> 1 : il n'est pas reserve :
                 //le mettre sur l'etagere
@@ -121,7 +134,7 @@ public class DocBibliotheque {
             }
         }
         
-        public void retournerLivre() {
+        public void retournerDoc() {
             //livre emprunte
             //-> mettre membre qui emprunte a null ET mettre livre sur pile retour
             if (this.etatPhysique.equals("est emprunte")) {
