@@ -25,7 +25,7 @@ BEGIN
     SELECT AVG(sal) INTO sal_moy_emp 
     FROM emp 
     WHERE job = (SELECT job FROM emp WHERE empno = &num_emp); 
-    DBMS_OUTPUT.put_line('Moyenne des salaires des '||v_job||': '||sal_moy_emp||'€'); 
+    DBMS_OUTPUT.put_line('Moyenne des salaires des '||v_job||': '||sal_moy_emp||'¤'); 
     
     IF v_emp_sal < sal_moy_emp THEN 
         v_emp_sal := sal_moy_emp; 
