@@ -53,7 +53,7 @@ BEGIN
         SELECT job
         FROM emp
         WHERE empno = &p_empno);
-    DBMS_OUTPUT.PUT_LINE('Moyenne des salaires des employés ayant le même travail : ' || v_moy_sal);
+    DBMS_OUTPUT.PUT_LINE('Moyenne des sal/aires des employés ayant le même travail : ' || v_moy_sal);
 END;
 
 /*b)*/
@@ -91,7 +91,16 @@ BEGIN
     --Mise à jour de la valeur du salaire dans la table
 END;
 
-
+/*c)*/
+--Ne fonctionne pas, je ne comprends rien
+ACCEPT p_empno PROMPT 'Entrez le numéro de l''employé : '
+UPDATE emp
+SET sal = (
+    SELECT decode(least(emp.sal, AVG(sal)), AVG(sal), emp.sal*1.1, AVG(sal))
+    FROM emp
+    WHERE job = emp.job)
+WHERE empno = &p_empno;
+COMMIT;
 
 
 
