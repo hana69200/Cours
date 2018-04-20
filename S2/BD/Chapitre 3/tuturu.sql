@@ -102,20 +102,75 @@ SET sal = (
 WHERE empno = &p_empno;
 COMMIT;
 
+/*
+Exercice 3 : Faire un bloc PL/SQL permettant d'obtenir la factorielle d'un entier.
+Note : vous utiliserez, en dehors du bloc PL/SQL, la commande DEFINE pour définir une variable p_num pour fournir la valeur de l'entier.
+Exemple : "DEFINE p_num = 5"
+Dans le bloc PL/SQL, la valeur de p_num sera obtenu par &p_num
+*/
+
+DEFINE p_num = 16
+
+--activation de l'affichage
+SET SERVEROUTPUT ON
+
+--déclaration de la variable de résultat
+DECLARE
+    v_fact NUMBER := 1;
+
+BEGIN
+    FOR i IN 1..&p_num LOOP
+        v_fact := v_fact * i;
+    END LOOP;
+    DBMS_OUTPUT.PUT_LINE('La factorielle de ' || &p_num || ' est : ' || v_fact);
+END;
+
+/*
+Exercice 4 : Faire un bloc PL/SQL pour créer un tableau d'amortissement d'emprunt individus (table relationnel SLQ à créer en dehors du bloc PL/SQL).
+Rappel de mathématiques financières : à amortissement constant, l'annuité est constituée de l'intérêt sur la somme restant due en début d'année auquel on ajoute le remboursement.
+Exemple : pour une somme empruntée de 12000 euros, une durée de " ans et un taux d'intérêts de 4%, on devra pouvoir afficher (par ordre SELECT en dehors du bloc PL/SQL) la table suivante :
+Durée    Somme due    Remb. Annuel    Intérêt    Annuité
+1        12000        4000            480        4480
+2        8000         4000            320        4320
+3        4000         4000            160        4160
+*/
+
+--on supprime une éventuelle table déjà existante
+DROP TABLE amo;
+
+--création de la table en SQL
+CREATE TABLE amo (
+"Durée" NUMBER(2) PRIMARY KEY,
+"Somme due" NUMBER(7, 2),
+"Remb. Annuel" NUMBER(6, 2),
+"Intérêt" NUMBER(5, 2),
+"Annuité" NUMBER(6, 2));
+
+--enregistrement des données pour le calculs
+ACCEPT p_duree PROMPT 'Entrer la durée en année';
+ACCEPT p_somme PROMPT 'Entrer la somme empruntée';
+ACCEPT p_interet PROMPT 'Entrer le taux d''intérêt en %';
+
+DECLARE
+    v_remb_an amo."Remb. Annuel"%TYPE := &p_somme / &p_duree;
+    v_somme_due amo."Somme due"%TYPE;
+    v_interet amo."Intérêt"%TYPE;
+    v_annuite amo."Annuité"%TYPE := v_remb_an + v_interet;
+
+BEGIN
+    FOR i IN 1..&p_duree LOOP
+        v_somme_due := &p_somme - v_remb_an * (i - 1);
+        v_interet := v_somme_due * &p_interet / 100;
+        v_annuite := v_remb_an + v_interet;
+        INSERT INTO amo VALUES (i, v_somme_due, v_remb_an, v_interet, v_annuite);
+    END LOOP;
+    COMMIT;
+END;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+--vérification en SQL
+--ATTENTION : ne pas lancer en même temps que le bloc PL/SQL
+SELECT * FROM amo;
 
 
 
