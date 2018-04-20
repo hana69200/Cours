@@ -172,9 +172,25 @@ END;
 --ATTENTION : ne pas lancer en même temps que le bloc PL/SQL
 SELECT * FROM amo;
 
+/*
+Exercice 5 : Faire un bloc PL/SQL permettant d'afficher la table de multiplication d'un nombre saisi au clavier :
+a) Créer un tableau PL/SQL 'résultat comprenant deux colones : 'Col1' et 'Col2' ; qui contiendra les résultats fournis par la table de multiplication.
+'Col1' contiendra le rang du calcul et 'Col2' le résultat du produit.
+b) Afficher le contenu du tableau dans le bloc PL/SQL.
+Il faudra par exemple :
+    Col1    Col2
+    1       8
+    2       16
+    3       24
+    ...     ...
+    10      80
+*/
 
+--enregistrement du nombre dont on veut la table
+ACCEPT p_nombre PROMPT 'Entrer un nombre';
 
-
+--création de la table (tableau) PL/SQL
+TYPE t_mult IS TABLE OF
 
 
 
