@@ -11,6 +11,9 @@ public class DocBibliotheque {
     //sur la section spéciale "réservations" = 2
     //emprunté = 4
     private boolean reserve; //true si est réservé
+    private static int nbDocEmprunte = 0; //nombre de documents empruntés
+    private static int nbDocPile = 0; //nombre de documents sur la pile des retours
+    private static int nbDocReserve = 0; //nombre de documents réservés
     
     public DocBibliotheque (String newCode, String newTitre, String newAuteur, int newAnnee) {
         this.code = newCode;
@@ -32,7 +35,7 @@ public class DocBibliotheque {
             et qu'elle est différente de l'ancienne
         Alors :
             changer la valeur du code
-            et retourner "true"
+            retourner "true"
         Sinon :
             retourne "false"
         */
@@ -56,7 +59,7 @@ public class DocBibliotheque {
             et qu'elle est différente de l'ancienne
         Alors :
             changer la valeur du titre
-            et retourner "true"
+            retourner "true"
         Sinon :
             retourne "false"
         */
@@ -80,7 +83,7 @@ public class DocBibliotheque {
             et qu'elle est différente de l'ancienne
         Alors :
             changer la valeur de l'auteur
-            et retourner "true"
+            retourner "true"
         Sinon :
             retourne "false"
         */
@@ -104,7 +107,7 @@ public class DocBibliotheque {
             et qu'elle est différente de l'ancienne
         Alors :
             changer la valeur de l'année
-            et retourner "true"
+            retourner "true"
         Sinon :
             retourne "false"
         */
@@ -128,12 +131,14 @@ public class DocBibliotheque {
             et l'emprunteur est celui qui a réservé ATTENTION : NE MARCHE PAS ENCORE
         Alors :
             le doc est emprunté (= 4)
-            et retourner "true"
+            ajouter 1 aux docs empruntés
+            retourner "true"
         Sinon :
             retourner "false"
         */
         if (this.etatDoc == 0 || this.etatDoc == 2 /*&& emprunteur == this.emprunteur*/) {
             this.etatDoc = 4;
+            nbDocEmprunte ++;
             return true;
         }
         return false;
@@ -145,12 +150,16 @@ public class DocBibliotheque {
             le doc est emprunté (= 4)
         Alors :
             le doc est sur la pile des retours (= 1)
+            enlever 1 aux docs empruntés
+            ajouter 1 aux docs sur la pile des retours
             retourner "true"
         Sinon :
             retourner "false"
         */
         if (this.etatDoc == 4) {
             this.etatDoc = 1;
+            nbDocEmprunte --;
+            nbDocPile ++;
             return true;
         }
         return false;
@@ -168,12 +177,14 @@ public class DocBibliotheque {
             et le doc n'est pas déjà réservé
         Alors :
             le doc est réservé
+            ajouter 1 aux docs réservés
             retourner "true"
         Sinon :
             retourner "false"
         */
         if ((this.etatDoc == 4 || this.etatDoc == 1) && this.reserve == false) {
             this.reserve = true;
+            nbDocReserve ++;
             return true;
         }
         return false;
@@ -183,29 +194,34 @@ public class DocBibliotheque {
         /*
         Si :
             le doc est réservé
-        Alors si :
-            le doc est sur la pile des retours (= 1)
-            ou le doc est emprunté (= 4)
         Alors :
-            le doc n'est plus réservé
-            retourner "true"
-        Sinon si :
-            le doc est sur la section spéciale "réservations" (= 2)
-        Alors :
-            le doc n'est plus réservé
-            le doc est sur les étagères (= 0)
-            retourner "true"
+            Si :
+                le doc est sur la pile des retours (= 1)
+                ou le doc est emprunté (= 4)
+            Alors :
+                le doc n'est plus réservé
+                enlever 1 aux docs réservés
+                retourner "true"
+            Sinon si :
+                le doc est sur la section spéciale "réservations" (= 2)
+            Alors :
+                le doc n'est plus réservé
+                le doc est sur les étagères (= 0)
+                enlever 1 aux docs réservés
+                retourner "true"
         Sinon :
             retourner "false"
         */
         if (this.reserve == true) {
             if (this.etatDoc == 1 || this.etatDoc == 4) {
                 this.reserve = false;
+                nbDocReserve --;
                 return true;
             }
             if (this.etatDoc == 2) {
                 this.reserve = false;
                 this.etatDoc = 0;
+                nbDocReserve --;
                 return true;
             }
         }
@@ -219,12 +235,14 @@ public class DocBibliotheque {
             et le doc n'est pas réservé
         Alors :
             le doc est sur les étagères (= 0)
+            enlever 1 aux docs sur la pile des retours
             retourner "true"
         Sinon si :
             le doc est sur la pile des retours (= 1)
             et le doc est réservé
         Alors :
             le doc est sur la section spéciale "réservations" (= 2)
+            enlever 1 aux docs sur la pile des retours
             retourner "true"
         Sinon :
             retourner "false"
@@ -238,6 +256,7 @@ public class DocBibliotheque {
                 this.etatDoc = 2;
                 return true;
             }
+            nbDocPile --;
         }
         return false;
     }
