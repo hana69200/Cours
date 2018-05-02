@@ -1,6 +1,6 @@
 import exceptions.*;
 
-public class DocBibliotheque {
+public class DocBibliotheque implements Notifiable {
 	private String code_archivage;
 	private String titre;
 	private String auteurPrincipal;
@@ -10,8 +10,8 @@ public class DocBibliotheque {
 	//emprunte;
 	//sur la pile des retours;
         //sur la section reservation;
-        private MembreBibliotheque membreQuiEmprunte;
-        private MembreBibliotheque membreQuiReserve;
+        private Notifiable membreQuiEmprunte;
+        private Notifiable membreQuiReserve;
         private static int nombreDocEmprunte;
         private static int nombreDocSurPileRetour;
         private static int nombreDocSurSectionReservation;
@@ -63,7 +63,6 @@ public class DocBibliotheque {
             return etatPhysique;
         }
         
-        
         public int getNombreDocEmprunte() {
             return nombreDocEmprunte;
         }
@@ -76,7 +75,7 @@ public class DocBibliotheque {
             return nombreDocSurSectionReservation;
         }
         
-        public void emprunter(Notifiable newMembreQuiEmprunte) throws EmprunterException {
+        public void emprunter(MembreBibliotheque newMembreQuiEmprunte) throws EmprunterException {
             //1 : livre est sur etagere
             //-> changer etat livre + changer membre qui emprunte
             //2 : livre est sur section reservation ET emprunteur=this.emp
@@ -84,12 +83,12 @@ public class DocBibliotheque {
             
                 if (this.etatPhysique.equals("sur l'etagere")) {
                     this.etatPhysique = "est emprunte";
-                    this.membreQuiEmprunte = (MembreBibliotheque) newMembreQuiEmprunte;
+                    this.membreQuiEmprunte = newMembreQuiEmprunte;
                 }
                 else if (this.etatPhysique.equals("sur la section reservation")
                         && this.membreQuiReserve == newMembreQuiEmprunte) {
                     this.etatPhysique = "est emprunte";
-                    this.membreQuiEmprunte = (MembreBibliotheque) newMembreQuiEmprunte;
+                    this.membreQuiEmprunte = newMembreQuiEmprunte;
                     this.membreQuiReserve = null;
                 }
                 else {
@@ -103,11 +102,11 @@ public class DocBibliotheque {
             //-> changer le membre qui reserve
             if (this.etatPhysique.equals("est emprunte")
                     && !this.membreQuiEmprunte.equals(newMembreQuiReserve)) {
-                this.membreQuiReserve = (MembreBibliotheque) newMembreQuiReserve;
+                this.membreQuiReserve = newMembreQuiReserve;
             }
         }
                 
-        public void annulerReservation(MembreBibliotheque membreQuiAnnule) {
+        public void annulerReservation(Notifiable membreQuiAnnule) {
             //membre qui annule == membre qui reserve
             //-> 1 : emprunte :
                 //membre qui reserve = null
@@ -136,6 +135,7 @@ public class DocBibliotheque {
                 }
                 else {
                     this.etatPhysique = "sur la section reservation";
+                    this.membreQuiEmprunte.docDisponible(this);
                 }
                 nombreDocSurPileRetour--;
             }
@@ -162,4 +162,8 @@ public class DocBibliotheque {
                 "\nMembre ayant reserve : " + this.membreQuiReserve +
                 "\nMembre entrain d'emprunter : " + this.membreQuiEmprunte;
         }
+
+    @Override
+    public void docDisponible(DocBibliotheque doc){}
+
 }

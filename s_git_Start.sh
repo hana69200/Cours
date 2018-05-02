@@ -1,2 +1,2 @@
 git pull
-echo Terminé
+echo Terminé.

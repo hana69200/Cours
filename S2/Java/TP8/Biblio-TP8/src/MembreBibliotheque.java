@@ -68,5 +68,4 @@ public class MembreBibliotheque implements Notifiable {
     @Override
     public void docDisponible(DocBibliotheque doc){};
 
-
 }
