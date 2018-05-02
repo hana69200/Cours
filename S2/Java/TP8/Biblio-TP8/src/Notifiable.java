@@ -1,4 +1,5 @@
 public interface Notifiable {
     
-    public String docDisponible(DocBibliotheque doc);
+    public void docDisponible(DocBibliotheque doc);
+    
 }

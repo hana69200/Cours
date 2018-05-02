@@ -13,12 +13,12 @@ public class DocURL extends DocBibliotheque {
 
        
     @Override
-    public void emprunter(MembreBibliotheque membre){
+    public void emprunter(Notifiable membre){
        System.out.println("Ce document n'est pas empruntable.");
     }
     
     @Override
-    public void reserver(MembreBibliotheque membre){
+    public void reserver(Notifiable membre){
        System.out.println("Ce document n'est pas réservable.");
     }
     

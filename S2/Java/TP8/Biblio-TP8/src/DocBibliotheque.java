@@ -76,7 +76,7 @@ public class DocBibliotheque {
             return nombreDocSurSectionReservation;
         }
         
-        public void emprunter(MembreBibliotheque newMembreQuiEmprunte) throws EmprunterException {
+        public void emprunter(Notifiable newMembreQuiEmprunte) throws EmprunterException {
             //1 : livre est sur etagere
             //-> changer etat livre + changer membre qui emprunte
             //2 : livre est sur section reservation ET emprunteur=this.emp
@@ -84,12 +84,12 @@ public class DocBibliotheque {
             
                 if (this.etatPhysique.equals("sur l'etagere")) {
                     this.etatPhysique = "est emprunte";
-                    this.membreQuiEmprunte = newMembreQuiEmprunte;
+                    this.membreQuiEmprunte = (MembreBibliotheque) newMembreQuiEmprunte;
                 }
                 else if (this.etatPhysique.equals("sur la section reservation")
                         && this.membreQuiReserve == newMembreQuiEmprunte) {
                     this.etatPhysique = "est emprunte";
-                    this.membreQuiEmprunte = newMembreQuiEmprunte;
+                    this.membreQuiEmprunte = (MembreBibliotheque) newMembreQuiEmprunte;
                     this.membreQuiReserve = null;
                 }
                 else {
@@ -98,12 +98,12 @@ public class DocBibliotheque {
            
         }
         
-        public void reserver(MembreBibliotheque newMembreQuiReserve) {
+        public void reserver(Notifiable newMembreQuiReserve) {
             //le livre est emprunte ET le membre qui reserve n'est pas celui qui emprunte
             //-> changer le membre qui reserve
             if (this.etatPhysique.equals("est emprunte")
                     && !this.membreQuiEmprunte.equals(newMembreQuiReserve)) {
-                this.membreQuiReserve = newMembreQuiReserve;
+                this.membreQuiReserve = (MembreBibliotheque) newMembreQuiReserve;
             }
         }
                 

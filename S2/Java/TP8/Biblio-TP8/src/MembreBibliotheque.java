@@ -1,4 +1,4 @@
-public class MembreBibliotheque {
+public class MembreBibliotheque implements Notifiable {
  
     private String nom = null;
     private String prenom = null;
@@ -64,4 +64,9 @@ public class MembreBibliotheque {
                 "\nadresse : " + this.adresse +
                 "\nnumAbonne : " + this.numAbonne;
     }
+
+    @Override
+    public void docDisponible(DocBibliotheque doc){};
+
+
 }
