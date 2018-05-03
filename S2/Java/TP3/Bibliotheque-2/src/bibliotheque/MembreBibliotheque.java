@@ -1,11 +1,11 @@
 package bibliotheque;
 
 public class MembreBibliotheque {
-    private String nom;
-    private String prenom;
-    private String tel; //numéro de téléphone du membre
-    private String adresse;
-    private int num; //numéro d'abonné
+    private String nom = null;
+    private String prenom = null;
+    private String tel = null; //numéro de téléphone du membre
+    private String adresse = null;
+    private int num = 0; //numéro d'abonné
     private static int dernierNumeroAbonne = 0;
     
     public MembreBibliotheque(String newNom, String newPrenom, String newTel, String newAdresse) {
@@ -13,7 +13,7 @@ public class MembreBibliotheque {
         this.prenom = newPrenom;
         this.tel = newTel;
         this.adresse = newAdresse;
-        this.num = dernierNumeroAbonne++;
+        this.num = ++dernierNumeroAbonne;
     }
     
     public String getNom() {
@@ -21,23 +21,12 @@ public class MembreBibliotheque {
     }
     
     public boolean setNom(String newNom) {
-        /*
-        Si :
-            la nouvelle valeur du nom n'est pas "null"
-            et qu'elle est différente de l'ancienne
-        Alors :
-            changer la valeur du nom
-            et retourner "true"
-        Sinon :
-            retourne "false"
-        */
-        if (newNom != null && !newNom.equals(this.nom)) {
-            this.nom = newNom;
+        if (newNom != null //si la nouvelle valeur du nom n'est pas "null"
+                && !newNom.equals(this.nom)) { //et qu'elle est différente de l'ancienne
+            this.nom = newNom; //alors changer la valeur du nom
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
     
     public String getPrenom() {
@@ -45,23 +34,12 @@ public class MembreBibliotheque {
     }
     
     public boolean setPrenom(String newPrenom) {
-        /*
-        Si :
-            la nouvelle valeur du prénom n'est pas "null"
-            et qu'elle est différente de l'ancienne
-        Alors :
-            changer la valeur du prénom
-            et retourner "true"
-        Sinon :
-            retourne "false"
-        */
-        if (newPrenom != null && !newPrenom.equals(this.prenom)) {
-            this.prenom = newPrenom;
+        if (newPrenom != null //si la nouvelle valeur du prénom n'est pas "null"
+                && !newPrenom.equals(this.prenom)) { //et qu'elle est différente de l'ancienne
+            this.prenom = newPrenom; //alors changer la valeur du prénom
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
     
     public String getTel() {
@@ -69,23 +47,12 @@ public class MembreBibliotheque {
     }
     
     public boolean setTel(String newTel) {
-        /*
-        Si :
-            la nouvelle valeur du téléphone n'est pas "null"
-            et qu'elle est différente de l'ancienne
-        Alors :
-            changer la valeur du téléphone
-            et retourner "true"
-        Sinon :
-            retourne "false"
-        */
-        if (newTel != null && !newTel.equals(this.tel)) {
-            this.tel = newTel;
+        if (newTel != null //si la nouvelle valeur du téléphone n'est pas "null"
+                && !newTel.equals(this.tel)) { //et qu'elle est différente de l'ancienne
+            this.tel = newTel; //alors changer la valeur du téléphone
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
     
     public String getAdresse() {
@@ -93,23 +60,24 @@ public class MembreBibliotheque {
     }
     
     public boolean setAdresse(String newAdresse) {
-        /*
-        Si :
-            la nouvelle valeur de l'adresse n'est pas "null"
-            et qu'elle est différente de l'ancienne
-        Alors :
-            changer la valeur de l'adresse
-            et retourner "true"
-        Sinon :
-            retourne "false"
-        */
-        if (newAdresse != null && !newAdresse.equals(this.adresse)) {
-            this.adresse = newAdresse;
+        if (newAdresse != null //si la nouvelle valeur de l'adresse n'est pas "null"
+                && !newAdresse.equals(this.adresse)) { //et qu'elle est différente de l'ancienne
+            this.adresse = newAdresse; //alors changer la valeur de l'adresse
             return true;
         }
-        else {
-            return false;
+        return false;
+    }
+    
+    @Override
+    public String toString() {
+        if (this == null) {
+            return "rien";
         }
+        return "Nom : " + this.nom +
+               "\nPrénom : " + this.prenom +
+               "\nTéléphone : " + this.tel +
+               "\nAdresse : " + this.adresse +
+               "\nNuméro d'abonné : " + this.num;
     }
 
 }

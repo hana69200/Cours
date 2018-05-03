@@ -8,8 +8,8 @@ public class DocBibliotheque {
     private int etatDoc;
     //sur les étagères = 0
     //sur la pile des retours = 1
-    //sur la section spéciale "réservations" = 2
-    //emprunté = 4
+    //sur la section "réservations" = 2
+    //emprunté = 3
     private boolean reserve; //true si est réservé
     
     public DocBibliotheque (String newCode, String newTitre, String newAuteur, int newAnnee) {
@@ -26,23 +26,12 @@ public class DocBibliotheque {
     }
     
     public boolean setCode(String newCode) {
-        /*
-        Si :
-            la nouvelle valeur du code n'est pas "null"
-            et qu'elle est différente de l'ancienne
-        Alors :
-            changer la valeur du code
-            et retourner "true"
-        Sinon :
-            retourne "false"
-        */
-        if (newCode != null && !newCode.equals(this.code)) {
-            this.code = newCode;
+        if (newCode != null //si la nouvelle valeur du code n'est pas "null"
+                && !newCode.equals(this.code)) { //et qu'elle est différente de l'ancienne
+            this.code = newCode; //alors changer la valeur du code
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
         
     public String getTitre() {
@@ -50,23 +39,12 @@ public class DocBibliotheque {
     }
     
     public boolean setTitre(String newTitre) {
-        /*
-        Si :
-            la nouvelle valeur du titre n'est pas "null"
-            et qu'elle est différente de l'ancienne
-        Alors :
-            changer la valeur du titre
-            et retourner "true"
-        Sinon :
-            retourne "false"
-        */
-        if (newTitre != null && !newTitre.equals(this.titre)) {
-            this.titre = newTitre;
+        if (newTitre != null //si la nouvelle valeur du titre n'est pas "null"
+                && !newTitre.equals(this.titre)) { //et qu'elle est différente de l'ancienne
+            this.titre = newTitre; //alors changer la valeur du titre
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
     
     public String getAuteur() {
@@ -74,23 +52,12 @@ public class DocBibliotheque {
     }
     
     public boolean setAuteur(String newAuteur) {
-        /*
-        Si :
-            la nouvelle valeur de l'auteur n'est pas "null"
-            et qu'elle est différente de l'ancienne
-        Alors :
-            changer la valeur de l'auteur
-            et retourner "true"
-        Sinon :
-            retourne "false"
-        */
-        if (newAuteur != null && !newAuteur.equals(this.auteur)) {
-            this.auteur = newAuteur;
+        if (newAuteur != null //si la nouvelle valeur de l'auteur n'est pas "null"
+                && !newAuteur.equals(this.auteur)) { //et qu'elle est différente de l'ancienne
+            this.auteur = newAuteur; //alors changer la valeur de l'auteur
             return true;
         }
-        else {
-            return false;
-        }
+        return false;
     }
     
     public int getAnnee() {
@@ -98,18 +65,9 @@ public class DocBibliotheque {
     }
     
     public boolean setAnnee(int newAnnee) {
-        /*
-        Si :
-            la nouvelle valeur de l'année n'est égale à 0
-            et qu'elle est différente de l'ancienne
-        Alors :
-            changer la valeur de l'année
-            et retourner "true"
-        Sinon :
-            retourne "false"
-        */
-        if (newAnnee != 0 && newAnnee != this.annee) {
-            this.annee = newAnnee;
+        if (newAnnee != 0 //si la nouvelle valeur de l'année n'est pas vide (= 0)
+                && newAnnee != this.annee) { //et qu'elle est différente de l'ancienne
+            this.annee = newAnnee; //alors changer la valeur de l'année
             return true;
         }
         return false;
@@ -120,37 +78,24 @@ public class DocBibliotheque {
     }
     
     public boolean emprunterDoc() {
-        /*
-        Si :
-            le doc est sur les étagères (= 0)
-        Ou si :
-            le doc est sur la section spéciale "réservations" (= 2)
-            et l'emprunteur est celui qui a réservé ATTENTION : NE MARCHE PAS ENCORE
-        Alors :
-            le doc est emprunté (= 4)
-            et retourner "true"
-        Sinon :
-            retourner "false"
-        */
-        if (this.etatDoc == 0 || this.etatDoc == 2 /*&& emprunteur == this.emprunteur*/) {
-            this.etatDoc = 4;
+        if (this.etatDoc == 0 //si le doc est sur les étagères (= 0)
+                || this.etatDoc == 2) { //ou si le doc est sur la section "réservations" (= 2)
+            this.etatDoc = 3; //alors le doc est emprunté (= 3)
+            if (this.reserve) { //si le doc était réservé
+                this.reserve = false; //alors il n'est plus réservé
+            }
             return true;
         }
         return false;
     }
     
     public boolean retournerDoc() {
-        /*
-        Si :
-            le doc est emprunté (= 4)
-        Alors :
-            le doc est sur la pile des retours (= 1)
-            retourner "true"
-        Sinon :
-            retourner "false"
-        */
-        if (this.etatDoc == 4) {
-            this.etatDoc = 1;
+        if (this.etatDoc == 3) { //si le doc est emprunté (= 3)
+            if (this.reserve) { //alors si le doc est réservé
+                this.etatDoc = 2; //alors le doc est sur la section "réservations" (= 2)
+                return true;
+            }
+            this.etatDoc = 1; //sinon (non réservé) alors le doc est sur la pile des retours (= 1)
             return true;
         }
         return false;
@@ -161,94 +106,34 @@ public class DocBibliotheque {
     }
     
     public boolean reserverDoc() {
-        /*
-        Si :
-            le doc est emprunté (= 4)
-            ou le doc est sur la pile des retours (= 1)
-            et le doc n'est pas déjà réservé
-        Alors :
-            le doc est réservé
-            retourner "true"
-        Sinon :
-            retourner "false"
-        */
-        if ((this.etatDoc == 4 || this.etatDoc == 1) && this.reserve == false) {
-            this.reserve = true;
+        if (this.etatDoc == 3 //si le doc est emprunté (= 3)
+                && this.reserve == false) { //et le doc n'est pas déjà réservé
+            this.reserve = true; //alors le doc est réservé
             return true;
         }
         return false;
     }
     
     public boolean annulerReservation() {
-        /*
-        Si :
-            le doc est réservé
-        Alors si :
-            le doc est sur la pile des retours (= 1)
-            ou le doc est emprunté (= 4)
-        Alors :
-            le doc n'est plus réservé
-            retourner "true"
-        Sinon si :
-            le doc est sur la section spéciale "réservations" (= 2)
-        Alors :
-            le doc n'est plus réservé
-            le doc est sur les étagères (= 0)
-            retourner "true"
-        Sinon :
-            retourner "false"
-        */
-        if (this.reserve == true) {
-            if (this.etatDoc == 1 || this.etatDoc == 4) {
-                this.reserve = false;
-                return true;
+        if (this.reserve) { //si le doc est réservé (= 2 ou = 3)
+            if (this.etatDoc == 3) { //alors si le doc est emprunté (= 3)
+                this.reserve = false; //alors le doc n'est plus réservé
+                return true; //et retourner "true"
             }
-            if (this.etatDoc == 2) {
-                this.reserve = false;
-                this.etatDoc = 0;
-                return true;
-            }
+            //sinon si le doc est sur la section "réservations" (= 2)
+            this.reserve = false; //alors le doc n'est plus réservé
+            this.etatDoc = 1; //et le doc est sur le pile des retours (= 1)
+            return true;
         }
         return false;
     }
     
     public boolean rangerDoc() {
-        /*
-        Si :
-            le doc est sur la pile des retours (= 1)
-            et le doc n'est pas réservé
-        Alors :
-            le doc est sur les étagères (= 0)
-            retourner "true"
-        Sinon si :
-            le doc est sur la pile des retours (= 1)
-            et le doc est réservé
-        Alors :
-            le doc est sur la section spéciale "réservations" (= 2)
-            retourner "true"
-        Sinon :
-            retourner "false"
-        */
-        if (this.etatDoc == 1) {
-            if (this.reserve == false) {
-                this.etatDoc = 0;
-                return true;
-            }
-            if (this.reserve == true) {
-                this.etatDoc = 2;
-                return true;
-            }
+        if (this.etatDoc == 1) { //si le doc est sur la pile des retours (= 1)
+            this.etatDoc = 0; //alors le doc est sur les étagères (= 0)
+            return true;
         }
         return false;
     }
     
-    @Override
-    public String toString() {
-        return "Code d'archivage : " + this.code +
-                "\nTitre : " + this.titre +
-                "\nAuteur principal : " + this.auteur +
-                "\nAnnée de publication : " + this.annee +
-                "\nÉtat physique du document : " + this.etatDoc +
-                "\nÉtat de réservation du document : " + this.reserve;
-    }
 }
