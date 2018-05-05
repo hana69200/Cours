@@ -21,7 +21,7 @@ public class TestBibliotheque {
         boolean menu = true;
         Scanner entree = new Scanner(System.in);
         Scanner entree2 = new Scanner(System.in);
-        int choix;
+        int choix, choix2;
         String pause;
         
         while (menu) {
@@ -30,14 +30,20 @@ public class TestBibliotheque {
             
             switch(choix) {
                 
+                case 0:
+                    //Quitter
+                    menu = false;
+                    break;
+                
                 case 1:
                     //Afficher les informations d'un document
                     nettoyerAffichage(10);
                     System.out.print("\nChoisissez le numéro d'un document : ");
                     choix = entree.nextInt();
+                    nettoyerAffichage(10);
                     if (choix == 1) System.out.println("Doc 1 : \"Introduction à Java\" de J. Leblanc");
                     else System.out.println("Doc 2 : \"Structures de Données\" de M. Machin");
-                    System.out.print("Appuyer sur un chiffre pour continuer");
+                    System.out.print("\nAppuyer sur une touche pour continuer");
                     pause = entree2.nextLine();
                     nettoyerAffichage(10);
                     break;
@@ -47,6 +53,7 @@ public class TestBibliotheque {
                     nettoyerAffichage(10);
                     System.out.print("\nChoisissez le numéro d'un document : ");
                     choix = entree.nextInt();
+                    nettoyerAffichage(10);
                     if (choix == 1) {
                         switch(Doc1.getEtatDoc()) {
                             case 0:
@@ -79,40 +86,262 @@ public class TestBibliotheque {
                                 break;
                         }
                     }
-                    System.out.print("Appuyer sur un chiffre pour continuer");
+                    System.out.print("\nAppuyer sur une touche pour continuer");
                     pause = entree2.nextLine();
                     nettoyerAffichage(10);
                     break;
                 
                 case 3:
-                    //Changer l’état d’un document
+                    //Emprunter un document
+                    nettoyerAffichage(10);
+                    System.out.print("\nChoisissez le numéro d'un document : ");
+                    choix = entree.nextInt();
+                    nettoyerAffichage(10);
+                    
+                    nettoyerAffichage(10);
+                    System.out.print("\nChoisissez le numéro d'un membre : ");
+                    choix2 = entree.nextInt();
+                    nettoyerAffichage(10);
+                    
+                    if (choix == 1) {
+                        if (choix2 == 1) {
+                            if (Doc1.emprunterDoc(Membre1)) {
+                                System.out.println("Le membre 1 a emprunté le document 1");
+                            }
+                            else {
+                                System.out.println("Erreur");
+                            }
+                        }
+                        else {
+                            if (Doc1.emprunterDoc(Membre2)) {
+                                System.out.println("Le membre 2 a emprunté le document 1");
+                            }
+                            else {
+                                System.out.println("Erreur");
+                            }
+                        }
+                    }
+                    else {
+                        if (choix2 == 1) {
+                            if (Doc1.emprunterDoc(Membre1)) {
+                                System.out.println("Le membre 1 a emprunté le document 2");
+                            }
+                            else {
+                                System.out.println("Erreur");
+                            }
+                        }
+                        else {
+                            if (Doc1.emprunterDoc(Membre2)) {
+                                System.out.println("Le membre 2 a emprunté le document 2");
+                            }
+                            else {
+                                System.out.println("Erreur");
+                            }
+                        }
+                    }
+                    System.out.print("\nAppuyer sur une touche pour continuer");
+                    pause = entree2.nextLine();
+                    nettoyerAffichage(10);
                     break;
                 
                 case 4:
-                    //Faire une réservation
+                    //Rendre un document
+                    nettoyerAffichage(10);
+                    System.out.print("\nChoisissez le numéro du document : ");
+                    choix = entree.nextInt();
+                    nettoyerAffichage(10);
+                    if (choix == 1) {
+                        if (Doc1.retournerDoc()) {
+                            System.out.println("Le document 1 a été rendu");
+                        }
+                        else {
+                            System.out.println("Erreur");
+                        }
+                    }
+                    else {
+                        if (Doc2.retournerDoc()) {
+                            System.out.println("Le document 2 a été rendu");
+                        }
+                        else {
+                            System.out.println("Erreur");
+                        }
+                    }
+                    System.out.print("\nAppuyer sur une touche pour continuer");
+                    pause = entree2.nextLine();
+                    nettoyerAffichage(10);
                     break;
                 
                 case 5:
-                    //Annuler une réservation
+                    //Ranger un document
+                    nettoyerAffichage(10);
+                    System.out.print("\nChoisissez le numéro du document : ");
+                    choix = entree.nextInt();
+                    nettoyerAffichage(10);
+                    if (choix == 1) {
+                        if (Doc1.rangerDoc()) {
+                            System.out.println("Le document 1 a été rangé");
+                        }
+                        else {
+                            System.out.println("Erreur");
+                        }
+                    }
+                    else {
+                        if (Doc2.rangerDoc()) {
+                            System.out.println("Le document 2 a été rangé");
+                        }
+                        else {
+                            System.out.println("Erreur");
+                        }
+                    }
+                    System.out.print("\nAppuyer sur une touche pour continuer");
+                    pause = entree2.nextLine();
+                    nettoyerAffichage(10);
                     break;
                 
                 case 6:
-                    //Afficher le nombre de documents empruntés
+                    //Faire une réservation
+                    nettoyerAffichage(10);
+                    System.out.print("\nChoisissez le numéro du document : ");
+                    choix = entree.nextInt();
+                    nettoyerAffichage(10);
+                    
+                    nettoyerAffichage(10);
+                    System.out.print("\nChoisissez le numéro du membre : ");
+                    choix2 = entree.nextInt();
+                    nettoyerAffichage(10);
+                    
+                    if (choix == 1) {
+                        if (choix2 == 1) {
+                            if (Doc1.reserverDoc(Membre1)) {
+                                System.out.println("Le membre 1 a reservé le document 1");
+                            }
+                            else {
+                                System.out.println("Erreur");
+                            }
+                        }
+                        else {
+                            if (Doc1.reserverDoc(Membre2)) {
+                                System.out.println("Le membre 2 a reservé le document 1");
+                            }
+                            else {
+                                System.out.println("Erreur");
+                            }
+                        }
+                    }
+                    else {
+                        if (choix2 == 1) {
+                            if (Doc1.reserverDoc(Membre1)) {
+                                System.out.println("Le membre 1 a reservé le document 2");
+                            }
+                            else {
+                                System.out.println("Erreur");
+                            }
+                        }
+                        else {
+                            if (Doc1.reserverDoc(Membre2)) {
+                                System.out.println("Le membre 2 a reservé le document 2");
+                            }
+                            else {
+                                System.out.println("Erreur");
+                            }
+                        }
+                    }
+                    System.out.print("\nAppuyer sur une touche pour continuer");
+                    pause = entree2.nextLine();
+                    nettoyerAffichage(10);
                     break;
                 
                 case 7:
-                    //Afficher le nombre de documents sur la pile des retours
+                    //Annuler une réservation
+                    nettoyerAffichage(10);
+                    System.out.print("\nChoisissez le numéro du document : ");
+                    choix = entree.nextInt();
+                    nettoyerAffichage(10);
+                    
+                    nettoyerAffichage(10);
+                    System.out.print("\nChoisissez le numéro du membre : ");
+                    choix2 = entree.nextInt();
+                    nettoyerAffichage(10);
+                    
+                    if (choix == 1) {
+                        if (choix2 == 1) {
+                            if (Doc1.annulerReservation(Membre1)) {
+                                System.out.println("Le membre 1 a annulé la réservation du "
+                                        + "document 1");
+                            }
+                            else {
+                                System.out.println("Erreur");
+                            }
+                        }
+                        else {
+                            if (Doc1.annulerReservation(Membre2)) {
+                                System.out.println("Le membre 2 a annulé la réservation du "
+                                        + "document 1");
+                            }
+                            else {
+                                System.out.println("Erreur");
+                            }
+                        }
+                    }
+                    else {
+                        if (choix2 == 1) {
+                            if (Doc1.annulerReservation(Membre1)) {
+                                System.out.println("Le membre 1 a annulé la réservation du "
+                                        + "document 2");
+                            }
+                            else {
+                                System.out.println("Erreur");
+                            }
+                        }
+                        else {
+                            if (Doc1.annulerReservation(Membre2)) {
+                                System.out.println("Le membre 2 a annulé la réservation du "
+                                        + "document 2");
+                            }
+                            else {
+                                System.out.println("Erreur");
+                            }
+                        }
+                    }
+                    System.out.print("\nAppuyer sur une touche pour continuer");
+                    pause = entree2.nextLine();
+                    nettoyerAffichage(10);
                     break;
                 
                 case 8:
-                    //Afficher le nombre de documents dans la section spéciale réservations
+                    //Afficher le nombre de documents empruntés
+                    nettoyerAffichage(10);
+                    System.out.println("Il y a " + DocBibliotheque.getNbDocEmprunte()
+                            + " documents empruntés");
+                    
+                    System.out.print("\nAppuyer sur une touche pour continuer");
+                    pause = entree2.nextLine();
+                    nettoyerAffichage(10);
                     break;
                 
                 case 9:
-                    //À faire
+                    //Afficher le nombre de documents sur la pile des retours
+                    nettoyerAffichage(10);
+                    System.out.println("Il y a " + DocBibliotheque.getNbDocPile()
+                            + " documents sur la pile des retours");
+                    
+                    System.out.print("\nAppuyer sur une touche pour continuer");
+                    pause = entree2.nextLine();
+                    nettoyerAffichage(10);
                     break;
                 
                 case 10:
+                    //Afficher le nombre de documents dans la section spéciale réservations
+                    nettoyerAffichage(10);
+                    System.out.println("Il y a " + DocBibliotheque.getNbDocSectionReservation()
+                            + " documents sur la section réservation");
+                    
+                    System.out.print("\nAppuyer sur une touche pour continuer");
+                    pause = entree2.nextLine();
+                    nettoyerAffichage(10);
+                    break;
+                
+                case 11:
                     //Quitter
                     menu = false;
                     break;
@@ -128,14 +357,15 @@ public class TestBibliotheque {
         System.out.println(
                   "1  : Afficher les informations d'un document\n"
                 + "2  : Connaître l’état d’un document\n"
-                + "3  : Changer l’état d’un document\n"
-                + "4  : Faire une réservation\n"
-                + "5  : Annuler une réservation\n"
-                + "6  : Afficher le nombre de documents empruntés\n"
-                + "7  : Afficher le nombre de documents sur la pile des retours\n"
-                + "8  : Afficher le nombre de documents dans la section spéciale réservations\n"
-                + "9  : À faire\n"
-                + "10 : Quitter\n");
+                + "3  : Emprunter un document\n"
+                + "4  : Rendre un document\n"
+                + "5  : Ranger un document\n"
+                + "6  : Faire une réservation\n"
+                + "7  : Annuler une réservation\n"
+                + "8  : Afficher le nombre de documents empruntés\n"
+                + "9  : Afficher le nombre de documents sur la pile des retours\n"
+                + "10 : Afficher le nombre de documents dans la section réservations\n"
+                + "\n0  : Quitter\n");
         System.out.print("Entrer votre choix : ");
     }
     
