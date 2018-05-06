@@ -37,6 +37,10 @@ public class CatalogueBibliotheque {
         return false;
     }
     
+    public boolean emprunterDoc(int indice, MembreBibliotheque membre) {
+        return this.liste.get(indice).emprunterDoc(membre);
+    }
+    
     public boolean retournerDoc(int indice) {
         return this.liste.get(indice).retournerDoc(); //doc.retournerDoc()
     }

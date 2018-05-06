@@ -5,21 +5,24 @@ import java.util.ArrayList;
 public class ListeMembres {
     
     ArrayList<MembreBibliotheque> liste;
+    private int dernier;
     
     public ListeMembres() {
         this.liste = new ArrayList<>();
+        this.liste.add(null);
+        this.dernier = 0;
     }
     
     public boolean ajouterMembre(MembreBibliotheque membre) {
         if (membre != null) {
-            this.liste.add(membre);
+            this.liste.add(++this.dernier, membre);
             return true;
         }
         return false;
     }
     
     public MembreBibliotheque getMembre(int numAbonne) {
-        for (int i = 0; i < this.liste.size(); i++) { //pour tous les membre de la liste
+        for (int i = 1; i <= this.dernier; i++) { //pour tous les membre de la liste
             if (this.liste.get(i).getNumAbonne() == numAbonne) { //si les num correspondent
                 return this.liste.get(i);
             }
@@ -37,9 +40,9 @@ public class ListeMembres {
     @Override
     public String toString() { //toString minimum sur une ligne pour tous les membres
         String chaine = "";
-        for (int i = 0; i < this.liste.size(); i++) {
+        for (int i = 1; i <= this.dernier; i++) {
             chaine += "Membre abonné n°" + this.liste.get(i).getNumAbonne() + " : "
-                + this.liste.get(i).getPrenom() + " " + this.liste.get(i).getNom() + "\n";
+                + this.liste.get(i).getNom() + " " + this.liste.get(i).getPrenom() + "\n";
         }
         return chaine;
     }
