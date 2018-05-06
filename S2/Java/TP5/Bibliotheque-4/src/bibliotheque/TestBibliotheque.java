@@ -6,11 +6,12 @@ public class TestBibliotheque {
     
     public static void main(String[] args) {
         
-        //créer des documents
-        DocBibliotheque Doc1 = new DocBibliotheque("004. 178 K20PM",
-                "Introduction à Java", "J. Leblanc", 2015);
-        DocBibliotheque Doc2 = new DocBibliotheque("967. 4987 T248O",
-                "Structures de Données", "M. Machin", 2017);
+        //créer un catalogue de documents
+        CatalogueBibliotheque catalogue = new CatalogueBibliotheque(); //création du catalogue
+        catalogue.ajouterDoc(new DocBibliotheque("004. 178 K20PM",
+                "Introduction à Java", "J. Leblanc", 2015)); //ajout de Doc1 au catalogue
+        catalogue.ajouterDoc(new DocBibliotheque("967. 4987 T248O",
+                "Structures de Données", "M. Machin", 2017)); //ajout de Doc2 au catalogue
         
         //créer des membres
         MembreBibliotheque Membre1 = new MembreBibliotheque("Bernard", "Alfred",
@@ -36,11 +37,16 @@ public class TestBibliotheque {
                 
                 case 1: //Afficher les informations d'un document
                     nettoyerAffichage(10);
+                    
+                    //affichage de la liste des documents
+                    System.out.println(catalogue.toString());
+                    
                     System.out.print("\nChoisissez le numéro d'un document : ");
                     choix = entree.nextInt();
                     nettoyerAffichage(10);
-                    if (choix == 1) System.out.println("Doc 1 : \"Introduction à Java\" de J. Leblanc");
-                    else System.out.println("Doc 2 : \"Structures de Données\" de M. Machin");
+                    
+                    System.out.println("\n" + catalogue.toString(choix));
+                    
                     System.out.print("\nAppuyer sur une touche pour continuer");
                     pause = entree2.nextLine();
                     nettoyerAffichage(10);
@@ -48,46 +54,38 @@ public class TestBibliotheque {
                 
                 case 2: //Connaître l’état d’un document
                     nettoyerAffichage(10);
+                    
+                    //affichage de la liste des documents
+                    System.out.println(catalogue.toString());
+                    
                     System.out.print("\nChoisissez le numéro d'un document : ");
                     choix = entree.nextInt();
                     nettoyerAffichage(10);
-                    if (choix == 1) {
-                        switch(Doc1.getEtatDoc()) {
-                            case 0:
-                                System.out.println("\nDoc 1 : sur les étagères");
-                                break;
-                            case 1:
-                                System.out.println("\nDoc 1 : sur la pile des retours");
-                                break;
-                            case 2:
-                                System.out.println("\nDoc 1 : sur la section réservations");
-                                break;
-                            case 3:
-                                System.out.println("\nDoc 1 : emprunté");
-                                break;
-                        }
+                    
+                    System.out.print("Le document n°" + choix + " est ");
+                    switch(catalogue.getDoc(choix).getEtatDoc()) {
+                        case 0:
+                            System.out.println("sur les étagères.");
+                            break;
+                            
+                        case 1:
+                            System.out.println("sur la pile des retours.");
+                            break;
+                            
+                        case 2:
+                            System.out.println("sur la section réservations.");
+                            break;
+                            
+                        case 3:
+                            System.out.println("emprunté.");
+                            break;
                     }
-                    else {
-                        switch(Doc2.getEtatDoc()) {
-                            case 0:
-                                System.out.println("\nDoc 2 : sur les étagères");
-                                break;
-                            case 1:
-                                System.out.println("\nDoc 2 : sur la pile des retours");
-                                break;
-                            case 2:
-                                System.out.println("\nDoc 2 : sur la section réservations");
-                                break;
-                            case 3:
-                                System.out.println("\nDoc 2 : emprunté");
-                                break;
-                        }
-                    }
+                    
                     System.out.print("\nAppuyer sur une touche pour continuer");
                     pause = entree2.nextLine();
                     nettoyerAffichage(10);
                     break;
-                
+                /*
                 case 3: //Emprunter un document
                     nettoyerAffichage(10);
                     System.out.print("\nChoisissez le numéro d'un document : ");
@@ -299,7 +297,7 @@ public class TestBibliotheque {
                     pause = entree2.nextLine();
                     nettoyerAffichage(10);
                     break;
-                
+                */
                 case 8: //Afficher le nombre de documents empruntés
                     nettoyerAffichage(10);
                     System.out.println("Il y a " + DocBibliotheque.getNbDocEmprunte()
@@ -334,21 +332,33 @@ public class TestBibliotheque {
             
         } //fin du while
         
+        /*
+Afficher : 
+Modifier : 
+Effectuer :
+*/
+        
     } //fin du main
     
     public static void affichageMenu() {
         nettoyerAffichage(10);
         System.out.println(
-                  "1  : Afficher les informations d'un document\n"
-                + "2  : Connaître l’état d’un document\n"
-                + "3  : Emprunter un document\n"
-                + "4  : Rendre un document\n"
-                + "5  : Ranger un document\n"
-                + "6  : Faire une réservation\n"
-                + "7  : Annuler une réservation\n"
-                + "8  : Afficher le nombre de documents empruntés\n"
-                + "9  : Afficher le nombre de documents sur la pile des retours\n"
-                + "10 : Afficher le nombre de documents dans la section réservations\n"
+                  "1  : Modifier  : Ajouter un nouveau membre\n"
+                + "2  : Afficher  : Afficher les informations d'un membre\n"
+                + "3  : Modifier  : Modifier les informations d'un membre\n"
+                + "4  : Modifier  : Ajouter un nouveau document\n"
+                + "5  : Modifier  : Supprimer un document\n"
+                + "6  : Afficher  : Afficher les informations d'un document\n"
+                + "7  : Modifier  : Modifier les informations d'un document\n"
+                + "8  : Afficher  : Afficher l’état d’un document\n"
+                + "9  : Effectuer : Emprunter un document\n"
+                + "10 : Effectuer : Rendre un document\n"
+                + "11 : Effectuer : Ranger un document\n"
+                + "12 : Effectuer : Faire une réservation\n"
+                + "13 : Effectuer : Annuler une réservation\n"
+                + "14 : Afficher  : Afficher le nombre de documents empruntés\n"
+                + "15 : Afficher  : Afficher le nombre de documents sur la pile des retours\n"
+                + "16 : Afficher  : Afficher le nombre de documents dans la section réservations\n"
                 + "\n0  : Quitter\n");
         System.out.print("Entrer votre choix : ");
     }

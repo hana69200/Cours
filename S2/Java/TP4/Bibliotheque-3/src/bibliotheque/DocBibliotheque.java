@@ -192,7 +192,14 @@ public class DocBibliotheque {
                 "\nAuteur principal : " + this.auteur +
                 "\nAnnée de publication : " + this.annee +
                 "\nÉtat physique du document : " + this.etatDoc +
-                "\nMembre qui emprunte : \n" + this.membreQuiEmprunte +
-                "\nMembre qui réserve : \n" + this.membreQuiReserve;
+                "\nMembre qui emprunte : \n" + membreToString(this.membreQuiEmprunte) +
+                "\nMembre qui réserve : \n" + membreToString(this.membreQuiReserve);
+    }
+    
+    public String membreToString(MembreBibliotheque membre) {
+        if (membre == null) {
+            return "aucun";
+        }
+        return membre.toString();
     }
 }

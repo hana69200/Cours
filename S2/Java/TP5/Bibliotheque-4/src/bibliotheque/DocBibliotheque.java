@@ -15,6 +15,7 @@ public class DocBibliotheque {
     private static int nbDocEmprunte = 0; //nombre de documents empruntés
     private static int nbDocPile = 0; //nombre de documents sur la pile des retours
     private static int nbDocReserve = 0; //nombre de documents réservés
+    private static int nbDocSectionReservation = 0;
     
     public DocBibliotheque (String newCode, String newTitre, String newAuteur, int newAnnee) {
         this.code = newCode;
@@ -90,16 +91,20 @@ public class DocBibliotheque {
         return this.membreQuiReserve;
     }
     
-    public int getNbDocEmprunte() {
+    public static int getNbDocEmprunte() {
         return nbDocEmprunte;
     }
     
-    public int getNbDocPile() {
+    public static int getNbDocPile() {
         return nbDocPile;
     }
     
-    public int getNbDocReserve() {
+    public static int getNbDocReserve() {
         return nbDocReserve;
+    }
+    
+    public static int getNbDocSectionReservation() {
+        return nbDocSectionReservation;
     }
     
     public boolean emprunterDoc(MembreBibliotheque membre) {
@@ -115,6 +120,7 @@ public class DocBibliotheque {
             this.membreQuiEmprunte = membre; //et mettre à jour l'emprunteur
             nbDocEmprunte ++;
             nbDocReserve --;
+            nbDocSectionReservation --;
             return true;
         }
         return false;
@@ -126,6 +132,7 @@ public class DocBibliotheque {
                 this.etatDoc = 2; //alors le doc est sur la section "réservations" (= 2)
                 this.membreQuiEmprunte = null; //et réinitialiser l'emprunteur
                 nbDocEmprunte --;
+                nbDocSectionReservation ++;
                 return true;
             }
             this.etatDoc = 1; //sinon (non réservé) alors le doc est sur la pile des retours (= 1)
@@ -142,7 +149,8 @@ public class DocBibliotheque {
     
     public boolean reserverDoc(MembreBibliotheque membre) {
         if (this.etatDoc == 3 //si le doc est emprunté (= 3)
-                && this.membreQuiReserve == null) { //et le doc n'est pas déjà réservé
+                && this.membreQuiReserve == null //et le doc n'est pas déjà réservé
+                && this.membreQuiEmprunte != membre) {
             this.membreQuiReserve = membre; //alors le doc est réservé
             nbDocReserve ++;
             return true;
@@ -161,6 +169,7 @@ public class DocBibliotheque {
             this.membreQuiReserve = null; //alors le doc n'est plus réservé
             this.etatDoc = 1; //et le doc est sur le pile des retours (= 1)
             nbDocReserve --;
+            nbDocSectionReservation --;
             nbDocPile ++;
             return true;
         }
@@ -174,6 +183,11 @@ public class DocBibliotheque {
             return true;
         }
         return false;
+    }
+    
+    public String toStringOneLine() {
+        return "\"" + this.titre
+                + "\" de " + this.auteur;
     }
     
     @Override

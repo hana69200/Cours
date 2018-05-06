@@ -68,8 +68,15 @@ public class MembreBibliotheque {
         return false;
     }
     
+    public int getNumAbonne() {
+        return this.num;
+    }
+    
     @Override
     public String toString() {
+        if (this == null) {
+            return "rien";
+        }
         return "Nom : " + this.nom +
                "\nPrénom : " + this.prenom +
                "\nTéléphone : " + this.tel +
