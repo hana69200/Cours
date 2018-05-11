@@ -1,11 +1,11 @@
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class ListeMembres {
-    ArrayList<MembreBibliotheque> membres;
+    LinkedList<MembreBibliotheque> membres;
     private int numero_membre = 0;
     
     public ListeMembres() {
-         this.membres = new ArrayList<>();
+         this.membres = new LinkedList<>();
     }
     
     public int getIndice() {

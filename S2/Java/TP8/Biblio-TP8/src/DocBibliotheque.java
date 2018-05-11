@@ -149,7 +149,13 @@ public class DocBibliotheque implements Notifiable {
                 this.membreQuiEmprunte = null;
                 nombreDocEmprunte--;
                 nombreDocSurPileRetour++;
+                
+            //Appeler methode docDisponible
             }
+        }
+        
+        public void setEtatPhysique(String newEtatPhysique) {
+            this.etatPhysique = newEtatPhysique;
         }
 
         @Override
