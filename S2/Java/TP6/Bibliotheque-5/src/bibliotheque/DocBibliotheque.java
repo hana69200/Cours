@@ -1,5 +1,7 @@
 package bibliotheque;
 
+import java.util.ArrayList;
+
 public class DocBibliotheque {
     private String code; //code d'archivage
     private String titre;
@@ -32,7 +34,7 @@ public class DocBibliotheque {
     }
     
     public boolean setCode(String newCode) {
-        if (newCode != null //si la nouvelle valeur du code n'est pas "null"
+        if (newCode != null && !newCode.equals("") //si la nouvelle valeur du code n'est pas "null"
                 && !newCode.equals(this.code)) { //et qu'elle est différente de l'ancienne
             this.code = newCode; //alors changer la valeur du code
             return true;
@@ -45,7 +47,7 @@ public class DocBibliotheque {
     }
     
     public boolean setTitre(String newTitre) {
-        if (newTitre != null //si la nouvelle valeur du titre n'est pas "null"
+        if (newTitre != null && !newTitre.equals("") //si la nouvelle valeur du titre n'est pas "null"
                 && !newTitre.equals(this.titre)) { //et qu'elle est différente de l'ancienne
             this.titre = newTitre; //alors changer la valeur du titre
             return true;
@@ -58,7 +60,7 @@ public class DocBibliotheque {
     }
     
     public boolean setAuteur(String newAuteur) {
-        if (newAuteur != null //si la nouvelle valeur de l'auteur n'est pas "null"
+        if (newAuteur != null && !newAuteur.equals("") //si la nouvelle valeur de l'auteur n'est pas "null"
                 && !newAuteur.equals(this.auteur)) { //et qu'elle est différente de l'ancienne
             this.auteur = newAuteur; //alors changer la valeur de l'auteur
             return true;
@@ -77,6 +79,10 @@ public class DocBibliotheque {
             return true;
         }
         return false;
+    }
+    
+    public void setEtatDoc(int nb) { //pour  docURL
+        this.etatDoc = nb;
     }
     
     public int getEtatDoc() {
@@ -108,26 +114,31 @@ public class DocBibliotheque {
     }
     
     public boolean emprunterDoc(MembreBibliotheque membre) {
-        if (this.etatDoc == 0) { //si le doc est sur les étagères (= 0)
-            this.etatDoc = 3; //alors le doc est emprunté (= 3)
-            this.membreQuiEmprunte = membre;
-            nbDocEmprunte ++;
-            return true;
-        }
-        if (this.etatDoc == 2 //ou si le doc est sur la section "réservations" (= 2)
-            && this.membreQuiReserve.equals(membre)) { //et que l'emprunteur est le réserveur
-            this.membreQuiReserve = null; //alors réinitialiser le réserveur
-            this.membreQuiEmprunte = membre; //et mettre à jour l'emprunteur
-            nbDocEmprunte ++;
-            nbDocReserve --;
-            nbDocSectionReservation --;
-            return true;
+        if (membre.peutEmprunterAutreDocument()) {
+            if (this.etatDoc == 0) { //si le doc est sur les étagères (= 0)
+                this.etatDoc = 3; //alors le doc est emprunté (= 3)
+                this.membreQuiEmprunte = membre;
+                this.membreQuiEmprunte.addDocEmprunte();
+                nbDocEmprunte ++;
+                return true;
+            }
+            if (this.etatDoc == 2 //ou si le doc est sur la section "réservations" (= 2)
+                && this.membreQuiReserve.equals(membre)) { //et que l'emprunteur est le réserveur
+                this.membreQuiReserve = null; //alors réinitialiser le réserveur
+                this.membreQuiEmprunte = membre; //et mettre à jour l'emprunteur
+                this.membreQuiEmprunte.addDocEmprunte();
+                nbDocEmprunte ++;
+                nbDocReserve --;
+                nbDocSectionReservation --;
+                return true;
+            }
         }
         return false;
     }
     
     public boolean retournerDoc() {
         if (this.etatDoc == 3) { //si le doc est emprunté (= 3)
+            this.membreQuiEmprunte.removeDocEmprunte();
             if (this.membreQuiReserve != null) { //alors si le doc est réservé
                 this.etatDoc = 2; //alors le doc est sur la section "réservations" (= 2)
                 this.membreQuiEmprunte = null; //et réinitialiser l'emprunteur
@@ -185,9 +196,17 @@ public class DocBibliotheque {
         return false;
     }
     
+    public int getTypeDoc() {
+        return 0; //DocBibliotheque
+    }
+    
     public String toStringOneLine() {
         return "\"" + this.titre
                 + "\" de " + this.auteur;
+    }
+    
+    public boolean setMorceaux(ArrayList <String> newMorceaux) {
+        return true;
     }
     
     @Override
@@ -196,7 +215,6 @@ public class DocBibliotheque {
                 "\nTitre : " + this.titre +
                 "\nAuteur principal : " + this.auteur +
                 "\nAnnée de publication : " + this.annee +
-                "\nÉtat physique du document : " + this.etatDoc +
                 "\nMembre qui emprunte : \n" + membreToString(this.membreQuiEmprunte) +
                 "\nMembre qui réserve : \n" + membreToString(this.membreQuiReserve);
     }
@@ -206,5 +224,25 @@ public class DocBibliotheque {
             return "aucun";
         }
         return membre.toString();
+    }
+
+    public boolean setURL(String newTxt) {
+        return true;
+    }
+
+    public boolean setDescription(String newTxt) {
+        return true;
+    }
+
+    public boolean setNbPage(int nbPage) {
+        return true;
+    }
+
+    public boolean setNomEditeur(String newTxt) {
+        return true;
+    }
+
+    public boolean setISBN(String newTxt) {
+        return true;
     }
 }

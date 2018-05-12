@@ -25,11 +25,7 @@ public class CatalogueBibliotheque {
     }
     
     public boolean ajouterDoc(DocBibliotheque doc) {
-        if (doc != null
-                && !doc.getCode().equals("")
-                && !doc.getTitre().equals("")
-                && !doc.getAuteur().equals("")
-                && doc.getAnnee() != 0) {
+        if (doc != null) {
             this.liste.add(++this.dernier, doc);
             return true;
         }
@@ -71,6 +67,26 @@ public class CatalogueBibliotheque {
     
     public boolean annulerReservation(int indice, MembreBibliotheque membre) {
         return this.liste.get(indice).annulerReservation(membre); //doc.annulerReservation(membre)
+    }
+    
+    public int compteLivres() { //– fournit le nombre total de livres dans la bibliothèque.
+        int compteur = 0;
+        for (int i = 1; i <= this.dernier; i++) {
+            if (this.getDoc(i).getTypeDoc() == 3) {
+                compteur ++;
+            }
+        }
+        return compteur;
+    }
+    
+    public int compteCDs() { // – fournit le nombre total de CDs dans la bibliothèque.
+        int compteur = 0;
+        for (int i = 1; i <= this.dernier; i++) {
+            if (this.getDoc(i).getTypeDoc() == 1) {
+                compteur ++;
+            }
+        }
+        return compteur;
     }
     
     public String toString(int indice) { //toString d'un document connu par son indice

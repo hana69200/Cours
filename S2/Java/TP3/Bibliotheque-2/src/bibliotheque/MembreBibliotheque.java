@@ -21,7 +21,7 @@ public class MembreBibliotheque {
     }
     
     public boolean setNom(String newNom) {
-        if (newNom != null //si la nouvelle valeur du nom n'est pas "null"
+        if (newNom != null && !newNom.equals("") //si la nouvelle valeur du nom n'est pas "null"
                 && !newNom.equals(this.nom)) { //et qu'elle est différente de l'ancienne
             this.nom = newNom; //alors changer la valeur du nom
             return true;
@@ -34,7 +34,7 @@ public class MembreBibliotheque {
     }
     
     public boolean setPrenom(String newPrenom) {
-        if (newPrenom != null //si la nouvelle valeur du prénom n'est pas "null"
+        if (newPrenom != null && !newPrenom.equals("") //si la nouvelle valeur du prénom n'est pas "null"
                 && !newPrenom.equals(this.prenom)) { //et qu'elle est différente de l'ancienne
             this.prenom = newPrenom; //alors changer la valeur du prénom
             return true;
@@ -47,7 +47,7 @@ public class MembreBibliotheque {
     }
     
     public boolean setTel(String newTel) {
-        if (newTel != null //si la nouvelle valeur du téléphone n'est pas "null"
+        if (newTel != null && !newTel.equals("") //si la nouvelle valeur du téléphone n'est pas "null"
                 && !newTel.equals(this.tel)) { //et qu'elle est différente de l'ancienne
             this.tel = newTel; //alors changer la valeur du téléphone
             return true;
@@ -60,7 +60,7 @@ public class MembreBibliotheque {
     }
     
     public boolean setAdresse(String newAdresse) {
-        if (newAdresse != null //si la nouvelle valeur de l'adresse n'est pas "null"
+        if (newAdresse != null && !newAdresse.equals("") //si la nouvelle valeur de l'adresse n'est pas "null"
                 && !newAdresse.equals(this.adresse)) { //et qu'elle est différente de l'ancienne
             this.adresse = newAdresse; //alors changer la valeur de l'adresse
             return true;

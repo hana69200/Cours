@@ -26,7 +26,7 @@ public class DocBibliotheque {
     }
     
     public boolean setCode(String newCode) {
-        if (newCode != null //si la nouvelle valeur du code n'est pas "null"
+        if (newCode != null && !newCode.equals("") //si la nouvelle valeur du code n'est pas "null"
                 && !newCode.equals(this.code)) { //et qu'elle est différente de l'ancienne
             this.code = newCode; //alors changer la valeur du code
             return true;
@@ -39,7 +39,7 @@ public class DocBibliotheque {
     }
     
     public boolean setTitre(String newTitre) {
-        if (newTitre != null //si la nouvelle valeur du titre n'est pas "null"
+        if (newTitre != null && !newTitre.equals("") //si la nouvelle valeur du titre n'est pas "null"
                 && !newTitre.equals(this.titre)) { //et qu'elle est différente de l'ancienne
             this.titre = newTitre; //alors changer la valeur du titre
             return true;
@@ -52,7 +52,7 @@ public class DocBibliotheque {
     }
     
     public boolean setAuteur(String newAuteur) {
-        if (newAuteur != null //si la nouvelle valeur de l'auteur n'est pas "null"
+        if (newAuteur != null && !newAuteur.equals("") //si la nouvelle valeur de l'auteur n'est pas "null"
                 && !newAuteur.equals(this.auteur)) { //et qu'elle est différente de l'ancienne
             this.auteur = newAuteur; //alors changer la valeur de l'auteur
             return true;

@@ -86,7 +86,7 @@ public class TestBibliotheque {
                         System.out.println("1 : Modifier le nom du membre\n"
                             + "2 : Modifier le prénom du membre\n"
                             + "3 : Modifier le numéro de téléphone du membre\n"
-                            + "4 : Modifier l'adresse du membre");
+                            + "4 : Modifier l'adresse du membre\n");
                     
                         System.out.print("\nChoisissez l'élément que vous souhaitez modifier : ");
                         choix = entree.nextInt();
@@ -100,39 +100,48 @@ public class TestBibliotheque {
 
                             nettoyerAffichage();
 
-                            if (!newTxt.equals("")) { //s'il n'y a pas eu d'erreur
-                                
-                                switch(choix) {
+                            switch(choix) {
                                     
-                                    case 1:
-                                        membre.setNom(newTxt);
+                                case 1:
+                                    if (membre.setNom(newTxt)) {
                                         System.out.println("Le nom du membre a bien été changé");
-                                        break;
+                                    }
+                                    else {
+                                        System.out.println("Erreur de saisi");
+                                    }
+                                    break;
 
-                                    case 2:
-                                        membre.setPrenom(newTxt);
+                                case 2:
+                                    if (membre.setPrenom(newTxt)) {
                                         System.out.println("Le prénom du membre a bien été changé");
-                                        break;
+                                    }
+                                    else {
+                                        System.out.println("Erreur de saisi");
+                                    }
+                                    break;
 
-                                    case 3:
-                                        membre.setTel(newTxt);
+                                case 3:
+                                    if (membre.setTel(newTxt)) {
                                         System.out.println("Le numéro de téléphone du membre a bien été changé");
-                                        break;
+                                    }
+                                    else {
+                                        System.out.println("Erreur de saisi");
+                                    }
+                                    break;
 
-                                    case 4:
-                                        membre.setAdresse(newTxt);
+                                case 4:
+                                    if (membre.setAdresse(newTxt)) {
                                         System.out.println("L'adresse du membre a bien été changé");
-                                        break;
+                                    }
+                                    else {
+                                        System.out.println("Erreur de saisi");
+                                    }
+                                    break;
 
-                                    default :
-                                        System.out.print("Erreur de saisi");
-                                        break;
-                                } //fin switch
-                                
-                            } //fin if (!newTxt.equals(""))
-                            else {
-                                System.out.println("Erreur de saisi");
-                            }
+                                default :
+                                    System.out.print("Erreur de saisi");
+                                    break;
+                            } //fin switch
                             
                         } //fin if (choix == OK)
                         else {
@@ -202,15 +211,13 @@ public class TestBibliotheque {
                         System.out.println("1 : Modifier le code du document\n"
                             + "2 : Modifier le titre du document\n"
                             + "3 : Modifier l'auteur du document\n"
-                            + "4 : Modifier l'année de publication du document");
+                            + "4 : Modifier l'année de publication du document\n");
 
                         System.out.print("\nChoisissez l'élément que vous souhaitez modifier : ");
                         choix = entree.nextInt();
                         nettoyerAffichage();
 
-                        if (choix > 0 && choix <= 4) { //s'il n'y a pas eu d'erreur
-                            
-                            if (choix == 4) { //seul cas où l'entrée est un int
+                        if (choix == 4) { //seul cas où l'entrée est un int
                                 System.out.print("Entrer la nouvelle année de publication du document : ");
                                     annee = entree.nextInt();
                                     nettoyerAffichage();
@@ -229,49 +236,41 @@ public class TestBibliotheque {
                                 newTxt = entree2.nextLine();
                                 nettoyerAffichage();
                                 
-                                if (!newTxt.equals("")) { //s'il n'y a pas eu d'erreur
-                                    
-                                    switch(choix) {
+                                switch(choix) {
                                         
-                                        case 1:
-                                            if (doc.setCode(newTxt)) {
-                                                System.out.println("Code modifié");
-                                            }
-                                            else {
-                                                System.out.println("Erreur de saisi");
-                                            }
-                                            break;
-
-                                        case 2:
-                                            if (doc.setTitre(newTxt)) {
-                                                System.out.println("Titre modifié");
-                                            }
-                                            else {
-                                                System.out.println("Erreur de saisi");
-                                            }
-                                            break;
-
-                                        case 3:
-                                            if (doc.setAuteur(newTxt)) {
-                                                System.out.println("Auteur modifié");
-                                            }
-                                            else {
-                                                System.out.println("Erreur de saisi");
-                                            }
-                                            break;
-
-                                        default:
+                                    case 1:
+                                        if (doc.setCode(newTxt)) {
+                                            System.out.println("Code modifié");
+                                        }
+                                        else {
                                             System.out.println("Erreur de saisi");
-                                    } //fin switch
-                                    
-                                } //fin if (!newTxt.equals(""))
+                                        }
+                                        break;
+
+                                    case 2:
+                                        if (doc.setTitre(newTxt)) {
+                                            System.out.println("Titre modifié");
+                                        }
+                                        else {
+                                            System.out.println("Erreur de saisi");
+                                        }
+                                        break;
+
+                                    case 3:
+                                        if (doc.setAuteur(newTxt)) {
+                                            System.out.println("Auteur modifié");
+                                        }
+                                        else {
+                                            System.out.println("Erreur de saisi");
+                                        }
+                                        break;
+
+                                    default:
+                                        System.out.println("Erreur de saisi");
+                                } //fin switch
                                 
                             } //fin else
-
-                        } //fin if (choix == OK)
-                        else {
-                            System.out.println("Erreur de saisi");
-                        }
+                        
                     } //fin if (doc != null)
                     
                     finCase(entree2);
