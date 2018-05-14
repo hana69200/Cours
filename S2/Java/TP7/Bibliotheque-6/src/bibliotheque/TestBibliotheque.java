@@ -2,10 +2,11 @@ package bibliotheque;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import exceptions.*;
 
 public class TestBibliotheque {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NombreHorsLimiteException {
         
         //créer un catalogue de documents
         CatalogueBibliotheque catalogue = new CatalogueBibliotheque(); //création du catalogue
@@ -44,14 +45,36 @@ public class TestBibliotheque {
         MembreBibliotheque membre;
         DocBibliotheque doc;
         String nom, prenom, tel, adresse, code, titre, auteur, newTxt, nomEditeur, ISBN, artiste, URL, description;
-        int choix, annee, nbPage, i;
+        int choix, annee, nbPage;
         ArrayList<String> morceaux = new ArrayList<>();
         
         while (menu) {
-            affichageMenu();
-            choix = entree.nextInt();
+            try {
+                affichageMenu();
+                choix = entree.nextInt();
+                if (choix < 0 || choix > 18) {
+                    throw new NombreHorsLimiteException(choix);
+                }
+            }
+            catch (java.util.InputMismatchException probleme){
+                nettoyerAffichage();
+                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                choix = -1;
+                entree = new Scanner(System.in);
+                finCase(entree2);
+            }
+            catch (NombreHorsLimiteException probleme) {
+                nettoyerAffichage();
+                System.out.println(probleme);
+                choix = -1;
+                entree = new Scanner(System.in);
+                finCase(entree2);
+            }
             
             switch(choix) {
+                
+                case -1: //ne fait rien
+                    break;
                 
                 case 0: //Quitter
                     menu = false;
@@ -61,50 +84,63 @@ public class TestBibliotheque {
                     nettoyerAffichage();
                     
                     System.out.print("1 : Membre étudiant\n2 : Membre personnel\n\nEntrer le type du nouveau membre : ");
-                    choix = entree.nextInt();
+                    try {
+                        choix = entree.nextInt();
+                        if (choix <= 0 || choix > 2) {
+                            throw new NombreHorsLimiteException(choix);
+                        }
+                    }
+                    catch (java.util.InputMismatchException probleme){
+                        nettoyerAffichage();
+                        System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                        entree = new Scanner(System.in);
+                        finCase(entree2);
+                        break;
+                    }
+                    catch (NombreHorsLimiteException probleme) {
+                        nettoyerAffichage();
+                        System.out.println(probleme);
+                        entree = new Scanner(System.in);
+                        finCase(entree2);
+                        break;
+                    }
                     nettoyerAffichage();
                     
-                    if (choix == 1 || choix == 2) {
-                        System.out.print("Entrer le nom du nouveau membre : ");
-                        nom = entree2.nextLine();
-                        nettoyerAffichage();
+                    System.out.print("Entrer le nom du nouveau membre : ");
+                    nom = entree2.nextLine();
+                    nettoyerAffichage();
 
-                        System.out.print("Entrer le prénom du nouveau membre : ");
-                        prenom = entree2.nextLine();
-                        nettoyerAffichage();
+                    System.out.print("Entrer le prénom du nouveau membre : ");
+                    prenom = entree2.nextLine();
+                    nettoyerAffichage();
 
-                        System.out.print("Entrer le numéro de téléphone du nouveau membre : ");
-                        tel = entree2.nextLine();
-                        nettoyerAffichage();
+                    System.out.print("Entrer le numéro de téléphone du nouveau membre : ");
+                    tel = entree2.nextLine();
+                    nettoyerAffichage();
 
-                        System.out.print("Entrer l'adresse du nouveau membre : ");
-                        adresse = entree2.nextLine();
-                        nettoyerAffichage();
-                        
-                        switch(choix) {
-                            
-                            case 1:
-                                if (membres.ajouterMembre(new MembreEtudiant(nom, prenom, tel, adresse))) {
-                                    System.out.println("Membre ajouté");
-                                }
-                                else {
-                                    System.out.println("Erreur de saisi");
-                                }
-                                break;
-                                
-                            case 2:
-                                if (membres.ajouterMembre(new MembrePersonnel(nom, prenom, tel, adresse))) {
-                                    System.out.println("Membre ajouté");
-                                }
-                                else {
-                                    System.out.println("Erreur de saisi");
-                                }
-                                break;
-                        }
-                            
-                    } //fin if (choix == 1 || choix == 2)
-                    else {
-                        System.out.println("Erreur de saisi");
+                    System.out.print("Entrer l'adresse du nouveau membre : ");
+                    adresse = entree2.nextLine();
+                    nettoyerAffichage();
+
+                    switch(choix) {
+
+                        case 1:
+                            if (membres.ajouterMembre(new MembreEtudiant(nom, prenom, tel, adresse))) {
+                                System.out.println("Membre ajouté");
+                            }
+                            else {
+                                System.out.println("Erreur de saisi");
+                            }
+                            break;
+
+                        case 2:
+                            if (membres.ajouterMembre(new MembrePersonnel(nom, prenom, tel, adresse))) {
+                                System.out.println("Membre ajouté");
+                            }
+                            else {
+                                System.out.println("Erreur de saisi");
+                            }
+                            break;
                     }
                     
                     finCase(entree2);
@@ -130,64 +166,76 @@ public class TestBibliotheque {
                             + "4 : Modifier l'adresse du membre\n");
                     
                         System.out.print("\nChoisissez l'élément que vous souhaitez modifier : ");
-                        choix = entree.nextInt();
-
+                        try {
+                            choix = entree.nextInt();
+                            if (choix <= 0 || choix > 4) {
+                                throw new NombreHorsLimiteException(choix);
+                            }
+                        }
+                        catch (java.util.InputMismatchException probleme){
+                            nettoyerAffichage();
+                            System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                            entree = new Scanner(System.in);
+                            finCase(entree2);
+                            break;
+                        }
+                        catch (NombreHorsLimiteException probleme) {
+                            nettoyerAffichage();
+                            System.out.println(probleme);
+                            entree = new Scanner(System.in);
+                            finCase(entree2);
+                            break;
+                        }
                         nettoyerAffichage();
                         
-                        if (choix > 0 && choix <= 4) { //s'il n'y a pas eu d'erreur
+                        System.out.print("\nChoisissez sa nouvelle valeur : ");
+                        newTxt = entree2.nextLine();
+
+                        nettoyerAffichage();
+
+                        switch(choix) {
+
+                            case 1:
+                                if (membre.setNom(newTxt)) {
+                                    System.out.println("Le nom du membre a bien été changé");
+                                }
+                                else {
+                                    System.out.println("Erreur de saisi");
+                                }
+                                break;
+
+                            case 2:
+                                if (membre.setPrenom(newTxt)) {
+                                    System.out.println("Le prénom du membre a bien été changé");
+                                }
+                                else {
+                                    System.out.println("Erreur de saisi");
+                                }
+                                break;
+
+                            case 3:
+                                if (membre.setTel(newTxt)) {
+                                    System.out.println("Le numéro de téléphone du membre a bien été changé");
+                                }
+                                else {
+                                    System.out.println("Erreur de saisi");
+                                }
+                                break;
+
+                            case 4:
+                                if (membre.setAdresse(newTxt)) {
+                                    System.out.println("L'adresse du membre a bien été changé");
+                                }
+                                else {
+                                    System.out.println("Erreur de saisi");
+                                }
+                                break;
+
+                            default :
+                                System.out.print("Erreur de saisi");
+                                break;
+                        } //fin switch
                         
-                            System.out.print("\nChoisissez sa nouvelle valeur : ");
-                            newTxt = entree2.nextLine();
-
-                            nettoyerAffichage();
-
-                            switch(choix) {
-                                    
-                                case 1:
-                                    if (membre.setNom(newTxt)) {
-                                        System.out.println("Le nom du membre a bien été changé");
-                                    }
-                                    else {
-                                        System.out.println("Erreur de saisi");
-                                    }
-                                    break;
-
-                                case 2:
-                                    if (membre.setPrenom(newTxt)) {
-                                        System.out.println("Le prénom du membre a bien été changé");
-                                    }
-                                    else {
-                                        System.out.println("Erreur de saisi");
-                                    }
-                                    break;
-
-                                case 3:
-                                    if (membre.setTel(newTxt)) {
-                                        System.out.println("Le numéro de téléphone du membre a bien été changé");
-                                    }
-                                    else {
-                                        System.out.println("Erreur de saisi");
-                                    }
-                                    break;
-
-                                case 4:
-                                    if (membre.setAdresse(newTxt)) {
-                                        System.out.println("L'adresse du membre a bien été changé");
-                                    }
-                                    else {
-                                        System.out.println("Erreur de saisi");
-                                    }
-                                    break;
-
-                                default :
-                                    System.out.print("Erreur de saisi");
-                                    break;
-                            } //fin switch
-                            
-                        } //fin if (choix == OK)
-                        else {
-                                System.out.println("Erreur de saisi");
-                            }
                     } //fin if (membre != null)
                     
                     finCase(entree2);
@@ -198,7 +246,26 @@ public class TestBibliotheque {
                     
                     System.out.println("1 : Livre\n2 : CD\n3 : DocURL\n");
                     System.out.print("\nEntrer le type du nouveau document : ");
-                    choix = entree.nextInt();
+                    try {
+                        choix = entree.nextInt();
+                        if (choix <= 0 || choix > 3) {
+                            throw new NombreHorsLimiteException(choix);
+                        }
+                    }
+                    catch (java.util.InputMismatchException probleme){
+                        nettoyerAffichage();
+                        System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                        entree = new Scanner(System.in);
+                        finCase(entree2);
+                        break;
+                    }
+                    catch (NombreHorsLimiteException probleme) {
+                        nettoyerAffichage();
+                        System.out.println(probleme);
+                        entree = new Scanner(System.in);
+                        finCase(entree2);
+                        break;
+                    }
                     nettoyerAffichage();
                     
                     switch(choix) {
@@ -217,7 +284,17 @@ public class TestBibliotheque {
                             nettoyerAffichage();
 
                             System.out.print("\nEntrer l'année de publication du nouveau livre : ");
-                            annee = entree.nextInt();
+                            try {
+                                annee = entree.nextInt();
+                            }
+                            catch (java.util.InputMismatchException probleme){
+                                nettoyerAffichage();
+                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                entree = new Scanner(System.in);
+                                finCase(entree2);
+                                nettoyerAffichage();
+                                break;
+                            }
                             nettoyerAffichage();
                             
                             System.out.print("\nEntrer le nom de l'éditeur du nouveau livre : ");
@@ -225,7 +302,17 @@ public class TestBibliotheque {
                             nettoyerAffichage();
                             
                             System.out.print("\nEntrer le nombre de pages du nouveau livre : ");
-                            nbPage = entree.nextInt();
+                            try {
+                                nbPage = entree.nextInt();
+                            }
+                            catch (java.util.InputMismatchException probleme){
+                                nettoyerAffichage();
+                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                entree = new Scanner(System.in);
+                                finCase(entree2);
+                                nettoyerAffichage();
+                                break;
+                            }
                             nettoyerAffichage();
                             
                             System.out.print("\nEntrer l'ISBN du nouveau livre : ");
@@ -256,13 +343,33 @@ public class TestBibliotheque {
                             nettoyerAffichage();
 
                             System.out.print("\nEntrer l'année de publication du nouveau CD : ");
-                            annee = entree.nextInt();
+                            try {
+                                annee = entree.nextInt();
+                            }
+                            catch (java.util.InputMismatchException probleme){
+                                nettoyerAffichage();
+                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                entree = new Scanner(System.in);
+                                finCase(entree2);
+                                nettoyerAffichage();
+                                break;
+                            }
                             nettoyerAffichage();
                             
                             System.out.print("\nEntrer le nombre de morceaux du nouveau CD : ");
-                            choix = entree.nextInt();
+                            try {
+                                choix = entree.nextInt();
+                            }
+                            catch (java.util.InputMismatchException probleme){
+                                nettoyerAffichage();
+                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                entree = new Scanner(System.in);
+                                finCase(entree2);
+                                nettoyerAffichage();
+                                break;
+                            }
                             morceaux.clear();
-                            for (i = 1; i <= choix; i++) {
+                            for (int i = 1; i <= choix; i++) {
                                 nettoyerAffichage();
                                 System.out.print("\nEntrer le nom du morceau n°" + i + " : ");
                                 String test = entree2.nextLine();
@@ -303,10 +410,6 @@ public class TestBibliotheque {
                             else {
                                 System.out.println("Erreur de saisi");
                             }
-                            break;
-                        
-                        default:
-                            System.out.println("Erreur de saisi");
                             break;
                     } //fin switch
 
@@ -351,12 +454,41 @@ public class TestBibliotheque {
                                     + "4 : Modifier l'année de publication du document\n");
 
                                 System.out.print("\nChoisissez l'élément que vous souhaitez modifier : ");
-                                choix = entree.nextInt();
+                                try {
+                                    choix = entree.nextInt();
+                                    if (choix <= 0 || choix > 4) {
+                                        throw new NombreHorsLimiteException(choix);
+                                    }
+                                }
+                                catch (java.util.InputMismatchException probleme){
+                                    nettoyerAffichage();
+                                    System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                    entree = new Scanner(System.in);
+                                    finCase(entree2);
+                                    break;
+                                }
+                                catch (NombreHorsLimiteException probleme) {
+                                    nettoyerAffichage();
+                                    System.out.println(probleme);
+                                    entree = new Scanner(System.in);
+                                    finCase(entree2);
+                                    break;
+                                }
                                 nettoyerAffichage();
 
                                 if (choix == 4) { //seul cas où l'entrée est un int
                                         System.out.print("Entrer la nouvelle année de publication du document : ");
-                                            annee = entree.nextInt();
+                                            try {
+                                                annee = entree.nextInt();
+                                            }
+                                            catch (java.util.InputMismatchException probleme){
+                                                nettoyerAffichage();
+                                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                                entree = new Scanner(System.in);
+                                                finCase(entree2);
+                                                nettoyerAffichage();
+                                                break;
+                                            }
                                             nettoyerAffichage();
 
                                             if (annee != 0) { //s'il n'y a pas eu d'erreur
@@ -401,9 +533,6 @@ public class TestBibliotheque {
                                                     System.out.println("Erreur de saisi");
                                                 }
                                                 break;
-
-                                            default:
-                                                System.out.println("Erreur de saisi");
                                         } //fin switch
 
                                     } //fin else
@@ -417,13 +546,43 @@ public class TestBibliotheque {
                                     + "5 : Modifier les morceaux du CD");
 
                                 System.out.print("\nChoisissez l'élément que vous souhaitez modifier : ");
-                                choix = entree.nextInt();
+                                try {
+                                    choix = entree.nextInt();
+                                    if (choix <= 0 || choix > 5) {
+                                        throw new NombreHorsLimiteException(choix);
+                                    }
+                                }
+                                catch (java.util.InputMismatchException probleme){
+                                    nettoyerAffichage();
+                                    System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                    entree = new Scanner(System.in);
+                                    finCase(entree2);
+                                    nettoyerAffichage();
+                                    break;
+                                }
+                                catch (NombreHorsLimiteException probleme) {
+                                    nettoyerAffichage();
+                                    System.out.println(probleme);
+                                    entree = new Scanner(System.in);
+                                    finCase(entree2);
+                                    break;
+                                }
                                 nettoyerAffichage();
 
                                 if (choix == 4 || choix == 5) { //cas particuliers
                                     if (choix == 4) { //seul cas avec un int
                                         System.out.print("Entrer la nouvelle année de publication du CD : ");
-                                            annee = entree.nextInt();
+                                            try {
+                                                annee = entree.nextInt();
+                                            }
+                                            catch (java.util.InputMismatchException probleme){
+                                                nettoyerAffichage();
+                                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                                entree = new Scanner(System.in);
+                                                finCase(entree2);
+                                                nettoyerAffichage();
+                                                break;
+                                            }
                                             nettoyerAffichage();
 
                                             if (annee != 0) { //s'il n'y a pas eu d'erreur
@@ -437,9 +596,19 @@ public class TestBibliotheque {
                                     }
                                     else { //cas de la liste de String
                                         System.out.print("\nEntrer le nombre de morceaux du nouveau CD : ");
-                                        choix = entree.nextInt();
+                                        try {
+                                            choix = entree.nextInt();
+                                        }
+                                        catch (java.util.InputMismatchException probleme){
+                                            nettoyerAffichage();
+                                            System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                            entree = new Scanner(System.in);
+                                            finCase(entree2);
+                                            nettoyerAffichage();
+                                            break;
+                                        }
                                         morceaux.clear();
-                                        for (i = 1; i <= choix; i++) {
+                                        for (int i = 1; i <= choix; i++) {
                                             nettoyerAffichage();
                                             System.out.print("\nEntrer le nom du morceau n°" + i + " : ");
                                             String test = entree2.nextLine();
@@ -487,9 +656,6 @@ public class TestBibliotheque {
                                                 System.out.println("Erreur de saisi");
                                             }
                                             break;
-
-                                        default:
-                                            System.out.println("Erreur de saisi");
                                     } //fin switch
 
                                 } //fin else
@@ -502,7 +668,27 @@ public class TestBibliotheque {
                                     + "4 : Modifier la description du document\n");
 
                                 System.out.print("\nChoisissez l'élément que vous souhaitez modifier : ");
-                                choix = entree.nextInt();
+                                try {
+                                    choix = entree.nextInt();
+                                    if (choix <= 0 || choix > 4) {
+                                        throw new NombreHorsLimiteException(choix);
+                                    }
+                                }
+                                catch (java.util.InputMismatchException probleme){
+                                    nettoyerAffichage();
+                                    System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                    entree = new Scanner(System.in);
+                                    finCase(entree2);
+                                    nettoyerAffichage();
+                                    break;
+                                }
+                                catch (NombreHorsLimiteException probleme) {
+                                    nettoyerAffichage();
+                                    System.out.println(probleme);
+                                    entree = new Scanner(System.in);
+                                    finCase(entree2);
+                                    break;
+                                }
                                 nettoyerAffichage();
 
                                 System.out.print("Entrer la nouvelle valeur de cet élément : ");
@@ -546,9 +732,6 @@ public class TestBibliotheque {
                                             System.out.println("Erreur de saisi");
                                         }
                                         break;
-
-                                    default:
-                                        System.out.println("Erreur de saisi");
                                 } //fin switch
                                 break;
                                 
@@ -562,13 +745,43 @@ public class TestBibliotheque {
                                     + "7 : Modifier l'ISBN du livre\n");
 
                                 System.out.print("\nChoisissez l'élément que vous souhaitez modifier : ");
-                                choix = entree.nextInt();
+                                try {
+                                    choix = entree.nextInt();
+                                    if (choix <= 0 || choix > 7) {
+                                        throw new NombreHorsLimiteException(choix);
+                                    }
+                                }
+                                catch (java.util.InputMismatchException probleme){
+                                    nettoyerAffichage();
+                                    System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                    entree = new Scanner(System.in);
+                                    finCase(entree2);
+                                    nettoyerAffichage();
+                                    break;
+                                }
+                                catch (NombreHorsLimiteException probleme) {
+                                    nettoyerAffichage();
+                                    System.out.println(probleme);
+                                    entree = new Scanner(System.in);
+                                    finCase(entree2);
+                                    break;
+                                }
                                 nettoyerAffichage();
 
                                 if (choix == 4 || choix == 6) { //seuls cas où l'entrée est un int
                                     if (choix == 4) {
                                         System.out.print("Entrer la nouvelle année de publication du Livre : ");
-                                        annee = entree.nextInt();
+                                        try {
+                                            annee = entree.nextInt();
+                                        }
+                                        catch (java.util.InputMismatchException probleme){
+                                            nettoyerAffichage();
+                                            System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                            entree = new Scanner(System.in);
+                                            finCase(entree2);
+                                            nettoyerAffichage();
+                                            break;
+                                        }
                                         nettoyerAffichage();
 
                                         if (annee != 0) { //s'il n'y a pas eu d'erreur
@@ -582,7 +795,17 @@ public class TestBibliotheque {
                                     }
                                     else { //choix == 6
                                         System.out.print("Entrer le nouveau nombre de pages du Livre : ");
-                                        nbPage = entree.nextInt();
+                                        try {
+                                            nbPage = entree.nextInt();
+                                        }
+                                        catch (java.util.InputMismatchException probleme){
+                                            nettoyerAffichage();
+                                            System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                            entree = new Scanner(System.in);
+                                            finCase(entree2);
+                                            nettoyerAffichage();
+                                            break;
+                                        }
                                         nettoyerAffichage();
 
                                         if (nbPage != 0) { //s'il n'y a pas eu d'erreur
@@ -646,9 +869,6 @@ public class TestBibliotheque {
                                                 System.out.println("Erreur de saisi");
                                             }
                                             break;
-
-                                        default:
-                                            System.out.println("Erreur de saisi");
                                     } //fin switch
 
                                 } //fin else
@@ -816,10 +1036,6 @@ public class TestBibliotheque {
                     
                     finCase(entree2);
                     break;
-                    
-                default :
-                    System.out.println("Erreur de saisi");
-                    break;
                 
             } //fin du switch
             
@@ -855,6 +1071,7 @@ public class TestBibliotheque {
     }
     
     private static void finCase(Scanner entree2) {
+        entree2 = new Scanner(System.in);
         System.out.print("\nAppuyer sur une touche pour continuer");
         String pause;
         pause = entree2.nextLine();
@@ -872,7 +1089,20 @@ public class TestBibliotheque {
         System.out.println(catalogue.toString());
 
         System.out.print("\nChoisissez le numéro d'un document : ");
-        choix = entree.nextInt();
+        try {
+            choix = entree.nextInt();
+        }
+        catch (java.util.InputMismatchException probleme){
+            choix = -1;
+            nettoyerAffichage();
+            System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+            entree = new Scanner(System.in);
+            System.out.print("\nAppuyer sur une touche pour continuer");
+            String pause;
+            pause = entree.nextLine();
+            pause += "";
+            nettoyerAffichage();
+        }
         nettoyerAffichage();
 
         if (choix > 0 && choix <= catalogue.getDernier()) {
@@ -894,7 +1124,20 @@ public class TestBibliotheque {
         System.out.println(membres.toString());
 
         System.out.print("\nChoisissez le numéro d'abonné d'un membre : ");
-        choix = entree.nextInt();
+        try {
+            choix = entree.nextInt();
+        }
+        catch (java.util.InputMismatchException probleme){
+            choix = -1;
+            nettoyerAffichage();
+            System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+            entree = new Scanner(System.in);
+            System.out.print("\nAppuyer sur une touche pour continuer");
+            String pause;
+            pause = entree.nextLine();
+            pause += "";
+            nettoyerAffichage();
+        }
         nettoyerAffichage();
 
         if (choix > 0 && choix <= membres.getDernier()) { //si le membre existe
