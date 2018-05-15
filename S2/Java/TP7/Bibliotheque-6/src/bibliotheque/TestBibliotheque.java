@@ -6,7 +6,7 @@ import exceptions.*;
 
 public class TestBibliotheque {
     
-    public static void main(String[] args) throws NombreHorsLimiteException {
+    public static void main(String[] args) {
         
         //créer un catalogue de documents
         CatalogueBibliotheque catalogue = new CatalogueBibliotheque(); //création du catalogue
@@ -125,20 +125,32 @@ public class TestBibliotheque {
                     switch(choix) {
 
                         case 1:
-                            if (membres.ajouterMembre(new MembreEtudiant(nom, prenom, tel, adresse))) {
-                                System.out.println("Membre ajouté");
+                            try {
+                                if (membres.ajouterMembre(new MembreEtudiant(nom, prenom, tel, adresse))) {
+                                    System.out.println("Membre ajouté");
+                                }
+                                else {
+                                    throw new AjouterMembreException();
+                                }
                             }
-                            else {
-                                System.out.println("Erreur de saisi");
+                            catch (AjouterMembreException probleme) {
+                                System.out.println(probleme);
+                                finCase(entree2);
                             }
                             break;
 
                         case 2:
-                            if (membres.ajouterMembre(new MembrePersonnel(nom, prenom, tel, adresse))) {
-                                System.out.println("Membre ajouté");
+                            try {
+                                if (membres.ajouterMembre(new MembrePersonnel(nom, prenom, tel, adresse))) {
+                                    System.out.println("Membre ajouté");
+                                }
+                                else {
+                                    throw new AjouterMembreException();
+                                }
                             }
-                            else {
-                                System.out.println("Erreur de saisi");
+                            catch (AjouterMembreException probleme) {
+                                System.out.println(probleme);
+                                finCase(entree2);
                             }
                             break;
                     }
@@ -149,8 +161,13 @@ public class TestBibliotheque {
                 case 2: //Afficher les informations d'un membre
                     membre = selectMembre(membres);
                     
-                    if (membre != null) { //s'il n'y a pas eu d'erreur
-                        System.out.println(membre.toString());
+                    try {
+                        if (membre == null) {
+                            throw new SelectMembreException();
+                        }
+                    }
+                    catch (SelectMembreException probleme) {
+                        System.out.println(probleme);
                     }
                     
                     finCase(entree2);
@@ -159,85 +176,110 @@ public class TestBibliotheque {
                 case 3: //Modifier les informations d'un membre
                     membre = selectMembre(membres);
                     
-                    if (membre != null) { //s'il n'y a pas eu d'erreur
-                        System.out.println("1 : Modifier le nom du membre\n"
-                            + "2 : Modifier le prénom du membre\n"
-                            + "3 : Modifier le numéro de téléphone du membre\n"
-                            + "4 : Modifier l'adresse du membre\n");
+                    try {
+                        if (membre == null) {
+                            throw new SelectMembreException();
+                        }
+                    }
+                    catch (SelectMembreException probleme) {
+                        System.out.println(probleme);
+                        finCase(entree2);
+                        break;
+                    }
                     
-                        System.out.print("\nChoisissez l'élément que vous souhaitez modifier : ");
-                        try {
-                            choix = entree.nextInt();
-                            if (choix <= 0 || choix > 4) {
-                                throw new NombreHorsLimiteException(choix);
-                            }
+                    System.out.println("1 : Modifier le nom du membre\n"
+                        + "2 : Modifier le prénom du membre\n"
+                        + "3 : Modifier le numéro de téléphone du membre\n"
+                        + "4 : Modifier l'adresse du membre\n");
+
+                    System.out.print("\nChoisissez l'élément que vous souhaitez modifier : ");
+                    try {
+                        choix = entree.nextInt();
+                        if (choix <= 0 || choix > 4) {
+                            throw new NombreHorsLimiteException(choix);
                         }
-                        catch (java.util.InputMismatchException probleme){
-                            nettoyerAffichage();
-                            System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
-                            entree = new Scanner(System.in);
-                            finCase(entree2);
-                            break;
-                        }
-                        catch (NombreHorsLimiteException probleme) {
-                            nettoyerAffichage();
-                            System.out.println(probleme);
-                            entree = new Scanner(System.in);
-                            finCase(entree2);
-                            break;
-                        }
+                    }
+                    catch (java.util.InputMismatchException probleme){
                         nettoyerAffichage();
-                        
-                        System.out.print("\nChoisissez sa nouvelle valeur : ");
-                        newTxt = entree2.nextLine();
-
+                        System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                        entree = new Scanner(System.in);
+                        finCase(entree2);
+                        break;
+                    }
+                    catch (NombreHorsLimiteException probleme) {
                         nettoyerAffichage();
+                        System.out.println(probleme);
+                        entree = new Scanner(System.in);
+                        finCase(entree2);
+                        break;
+                    }
+                    nettoyerAffichage();
 
-                        switch(choix) {
+                    System.out.print("\nChoisissez sa nouvelle valeur : ");
+                    newTxt = entree2.nextLine();
 
-                            case 1:
+                    nettoyerAffichage();
+
+                    switch(choix) {
+
+                        case 1:
+                            try {
                                 if (membre.setNom(newTxt)) {
                                     System.out.println("Le nom du membre a bien été changé");
                                 }
                                 else {
-                                    System.out.println("Erreur de saisi");
+                                    throw new SetElementException();
                                 }
-                                break;
+                            }
+                            catch (SetElementException probleme) {
+                                System.out.println(probleme);
+                            }
+                            break;
 
-                            case 2:
+                        case 2:
+                            try {
                                 if (membre.setPrenom(newTxt)) {
                                     System.out.println("Le prénom du membre a bien été changé");
                                 }
                                 else {
-                                    System.out.println("Erreur de saisi");
+                                    throw new SetElementException();
                                 }
-                                break;
+                            }
+                            catch (SetElementException probleme) {
+                                System.out.println(probleme);
+                            }
+                            break;
 
-                            case 3:
+                        case 3:
+                            try {
                                 if (membre.setTel(newTxt)) {
                                     System.out.println("Le numéro de téléphone du membre a bien été changé");
                                 }
                                 else {
-                                    System.out.println("Erreur de saisi");
+                                    throw new SetElementException();
                                 }
-                                break;
+                            }
+                            catch (SetElementException probleme) {
+                                System.out.println(probleme);
+                            }
+                            break;
 
-                            case 4:
+                        case 4:
+                            try {
                                 if (membre.setAdresse(newTxt)) {
                                     System.out.println("L'adresse du membre a bien été changé");
                                 }
                                 else {
-                                    System.out.println("Erreur de saisi");
+                                    throw new SetElementException();
                                 }
-                                break;
+                            }
+                            catch (SetElementException probleme) {
+                                System.out.println(probleme);
+                            }
+                            
+                            break;
+                    } //fin switch
 
-                            default :
-                                System.out.print("Erreur de saisi");
-                                break;
-                        } //fin switch
-                        
-                    } //fin if (membre != null)
-                    
                     finCase(entree2);
                     break;
                     
@@ -319,13 +361,18 @@ public class TestBibliotheque {
                             ISBN = entree2.nextLine();
                             nettoyerAffichage();
                             
-                            if (!code.equals("") && !titre.equals("") && !auteur.equals("")
-                                    && !nomEditeur.equals("") && !ISBN.equals("")
-                                    && catalogue.ajouterDoc(new Livre(code, titre, auteur, annee, nomEditeur, nbPage, ISBN))) {
-                            System.out.println("Livre ajouté");
+                            try {
+                                if (!code.equals("") && !titre.equals("") && !auteur.equals("")
+                                        && !nomEditeur.equals("") && !ISBN.equals("")
+                                        && catalogue.ajouterDoc(new Livre(code, titre, auteur, annee, nomEditeur, nbPage, ISBN))) {
+                                System.out.println("Livre ajouté");
+                                }
+                                else {
+                                    throw new AjouterDocException();
+                                }
                             }
-                            else {
-                                System.out.println("Erreur de saisi");
+                            catch (AjouterDocException probleme) {
+                                System.out.println(probleme);
                             }
                             break;
                             
@@ -377,12 +424,17 @@ public class TestBibliotheque {
                             }
                             nettoyerAffichage();
                             
-                            if (!code.equals("") && !code.equals("") && !code.equals("") && !code.equals("") && valide(morceaux)
-                                    && catalogue.ajouterDoc(new CD(code, titre, artiste, annee, morceaux))) {
-                                System.out.println("CD ajouté");
+                            try {
+                                if (!code.equals("") && !code.equals("") && !code.equals("") && !code.equals("") && valide(morceaux)
+                                        && catalogue.ajouterDoc(new CD(code, titre, artiste, annee, morceaux))) {
+                                    System.out.println("CD ajouté");
+                                }
+                                else {
+                                    throw new AjouterDocException();
+                                }
                             }
-                            else {
-                                System.out.println("Erreur de saisi");
+                            catch (AjouterDocException probleme) {
+                                System.out.println(probleme);
                             }
                             break;
                             
@@ -403,12 +455,17 @@ public class TestBibliotheque {
                             description = entree2.nextLine();
                             nettoyerAffichage();
                             
-                            if (!code.equals("") && !auteur.equals("") && !URL.equals("") && !description.equals("")
+                            try {
+                                if (!code.equals("") && !auteur.equals("") && !URL.equals("") && !description.equals("")
                                     && catalogue.ajouterDoc(new DocURL(code, auteur, URL, description))) {
-                                System.out.println("Document ajouté");
+                                    System.out.println("CD ajouté");
+                                }
+                                else {
+                                    throw new AjouterDocException();
+                                }
                             }
-                            else {
-                                System.out.println("Erreur de saisi");
+                            catch (AjouterDocException probleme) {
+                                System.out.println(probleme);
                             }
                             break;
                     } //fin switch
@@ -419,358 +476,93 @@ public class TestBibliotheque {
                 case 5: //Supprimer un document
                     doc = selectDoc(catalogue);
                     
-                    if (doc != null) { //s'il n'y a pas eu d'erreur
-                        if (catalogue.enleverDoc(doc)) {
-                            System.out.println("Document supprimé");
+                    try {
+                        if (doc == null) {
+                            throw new SelectDocException();
                         }
-                        else {
-                            System.out.println("Erreur de saisi");
-                        }
+                    }
+                    catch (SelectDocException probleme) {
+                        System.out.println(probleme);
+                        finCase(entree2);
+                        break;
+                    }
+                    
+                    if (catalogue.enleverDoc(doc)) {
+                        System.out.println("Document supprimé");
+                    }
+                    else {
+                        System.out.println("Erreur de saisi");
                     }
                     finCase(entree2);
                     break;
                 
                 case 6: //Afficher les informations d'un document
                     doc = selectDoc(catalogue);
-                    if (doc != null) { //s'il n'y a pas eu d'erreur
-                        System.out.println(doc.toString());
+                    
+                    try {
+                        if (doc == null) {
+                            throw new SelectDocException();
+                        }
                     }
+                    catch (SelectDocException probleme) {
+                        System.out.println(probleme);
+                        finCase(entree2);
+                        break;
+                    }
+                    
+                    System.out.println(doc.toString());
                     
                     finCase(entree2);
                     break;
                     
                 case 7: //Modifier les informations d'un document
-                    //ne prend pas en compte les differents types de documents
                     doc = selectDoc(catalogue);
                     
-                    if (doc != null) { //s'il n'y a pas eu d'erreur
+                    try {
+                        if (doc == null) {
+                            throw new SelectDocException();
+                        }
+                    }
+                    catch (SelectDocException probleme) {
+                        System.out.println(probleme);
+                        finCase(entree2);
+                        break;
+                    }
+                    
                         
-                        switch(doc.getTypeDoc()) {
-                            
-                            case 0: //DocBibliotheque normal
-                                System.out.println("1 : Modifier le code du document\n"
-                                    + "2 : Modifier le titre du document\n"
-                                    + "3 : Modifier l'auteur du document\n"
-                                    + "4 : Modifier l'année de publication du document\n");
+                    switch(doc.getTypeDoc()) {
 
-                                System.out.print("\nChoisissez l'élément que vous souhaitez modifier : ");
-                                try {
-                                    choix = entree.nextInt();
-                                    if (choix <= 0 || choix > 4) {
-                                        throw new NombreHorsLimiteException(choix);
-                                    }
+                        case 0: //DocBibliotheque normal
+                            System.out.println("1 : Modifier le code du document\n"
+                                + "2 : Modifier le titre du document\n"
+                                + "3 : Modifier l'auteur du document\n"
+                                + "4 : Modifier l'année de publication du document\n");
+
+                            System.out.print("\nChoisissez l'élément que vous souhaitez modifier : ");
+                            try {
+                                choix = entree.nextInt();
+                                if (choix <= 0 || choix > 4) {
+                                    throw new NombreHorsLimiteException(choix);
                                 }
-                                catch (java.util.InputMismatchException probleme){
-                                    nettoyerAffichage();
-                                    System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
-                                    entree = new Scanner(System.in);
-                                    finCase(entree2);
-                                    break;
-                                }
-                                catch (NombreHorsLimiteException probleme) {
-                                    nettoyerAffichage();
-                                    System.out.println(probleme);
-                                    entree = new Scanner(System.in);
-                                    finCase(entree2);
-                                    break;
-                                }
+                            }
+                            catch (java.util.InputMismatchException probleme){
                                 nettoyerAffichage();
-
-                                if (choix == 4) { //seul cas où l'entrée est un int
-                                        System.out.print("Entrer la nouvelle année de publication du document : ");
-                                            try {
-                                                annee = entree.nextInt();
-                                            }
-                                            catch (java.util.InputMismatchException probleme){
-                                                nettoyerAffichage();
-                                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
-                                                entree = new Scanner(System.in);
-                                                finCase(entree2);
-                                                nettoyerAffichage();
-                                                break;
-                                            }
-                                            nettoyerAffichage();
-
-                                            if (annee != 0) { //s'il n'y a pas eu d'erreur
-                                                doc.setAnnee(annee);
-                                                System.out.println("Année modifiée");
-                                            }
-                                            else {
-                                                System.out.println("Erreur de saisi");
-                                            }
-                                            break;
-                                    }
-                                    else {
-                                        System.out.print("Entrer la nouvelle valeur de cet élément : ");
-                                        newTxt = entree2.nextLine();
-                                        nettoyerAffichage();
-
-                                        switch(choix) {
-
-                                            case 1:
-                                                if (doc.setCode(newTxt)) {
-                                                    System.out.println("Code modifié");
-                                                }
-                                                else {
-                                                    System.out.println("Erreur de saisi");
-                                                }
-                                                break;
-
-                                            case 2:
-                                                if (doc.setTitre(newTxt)) {
-                                                    System.out.println("Titre modifié");
-                                                }
-                                                else {
-                                                    System.out.println("Erreur de saisi");
-                                                }
-                                                break;
-
-                                            case 3:
-                                                if (doc.setAuteur(newTxt)) {
-                                                    System.out.println("Auteur modifié");
-                                                }
-                                                else {
-                                                    System.out.println("Erreur de saisi");
-                                                }
-                                                break;
-                                        } //fin switch
-
-                                    } //fin else
+                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                entree = new Scanner(System.in);
+                                finCase(entree2);
                                 break;
-                                
-                            case 1: //CD
-                                System.out.println("1 : Modifier le code du CD\n"
-                                    + "2 : Modifier le titre du CD\n"
-                                    + "3 : Modifier l'artiste du CD\n"
-                                    + "4 : Modifier l'année de publication du CD\n"
-                                    + "5 : Modifier les morceaux du CD");
-
-                                System.out.print("\nChoisissez l'élément que vous souhaitez modifier : ");
-                                try {
-                                    choix = entree.nextInt();
-                                    if (choix <= 0 || choix > 5) {
-                                        throw new NombreHorsLimiteException(choix);
-                                    }
-                                }
-                                catch (java.util.InputMismatchException probleme){
-                                    nettoyerAffichage();
-                                    System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
-                                    entree = new Scanner(System.in);
-                                    finCase(entree2);
-                                    nettoyerAffichage();
-                                    break;
-                                }
-                                catch (NombreHorsLimiteException probleme) {
-                                    nettoyerAffichage();
-                                    System.out.println(probleme);
-                                    entree = new Scanner(System.in);
-                                    finCase(entree2);
-                                    break;
-                                }
+                            }
+                            catch (NombreHorsLimiteException probleme) {
                                 nettoyerAffichage();
-
-                                if (choix == 4 || choix == 5) { //cas particuliers
-                                    if (choix == 4) { //seul cas avec un int
-                                        System.out.print("Entrer la nouvelle année de publication du CD : ");
-                                            try {
-                                                annee = entree.nextInt();
-                                            }
-                                            catch (java.util.InputMismatchException probleme){
-                                                nettoyerAffichage();
-                                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
-                                                entree = new Scanner(System.in);
-                                                finCase(entree2);
-                                                nettoyerAffichage();
-                                                break;
-                                            }
-                                            nettoyerAffichage();
-
-                                            if (annee != 0) { //s'il n'y a pas eu d'erreur
-                                                doc.setAnnee(annee);
-                                                System.out.println("Année modifiée");
-                                            }
-                                            else {
-                                                System.out.println("Erreur de saisi");
-                                            }
-                                            break;
-                                    }
-                                    else { //cas de la liste de String
-                                        System.out.print("\nEntrer le nombre de morceaux du nouveau CD : ");
-                                        try {
-                                            choix = entree.nextInt();
-                                        }
-                                        catch (java.util.InputMismatchException probleme){
-                                            nettoyerAffichage();
-                                            System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
-                                            entree = new Scanner(System.in);
-                                            finCase(entree2);
-                                            nettoyerAffichage();
-                                            break;
-                                        }
-                                        morceaux.clear();
-                                        for (int i = 1; i <= choix; i++) {
-                                            nettoyerAffichage();
-                                            System.out.print("\nEntrer le nom du morceau n°" + i + " : ");
-                                            String test = entree2.nextLine();
-                                            morceaux.add(test);
-                                        }
-                                        nettoyerAffichage();
-                                        if (doc.setMorceaux(morceaux)) {
-                                            System.out.println("Morceaux modifiés");
-                                        }
-                                        else {
-                                            System.out.println("Erreur de saisi");
-                                        }
-                                    }
-                                }
-                                else { //cas avec un String simple
-                                    System.out.print("Entrer la nouvelle valeur de cet élément : ");
-                                    newTxt = entree2.nextLine();
-                                    nettoyerAffichage();
-
-                                    switch(choix) {
-
-                                        case 1:
-                                            if (doc.setCode(newTxt)) {
-                                                System.out.println("Code modifié");
-                                            }
-                                            else {
-                                                System.out.println("Erreur de saisi");
-                                            }
-                                            break;
-
-                                        case 2:
-                                            if (doc.setTitre(newTxt)) {
-                                                System.out.println("Titre modifié");
-                                            }
-                                            else {
-                                                System.out.println("Erreur de saisi");
-                                            }
-                                            break;
-
-                                        case 3:
-                                            if (doc.setAuteur(newTxt)) {
-                                                System.out.println("Artiste modifié");
-                                            }
-                                            else {
-                                                System.out.println("Erreur de saisi");
-                                            }
-                                            break;
-                                    } //fin switch
-
-                                } //fin else
+                                System.out.println(probleme);
+                                entree = new Scanner(System.in);
+                                finCase(entree2);
                                 break;
-                                
-                            case 2: //DocURL
-                                System.out.println("1 : Modifier le code du document\n"
-                                    + "2 : Modifier l'auteur ou entreprise ayant publié le document\n"
-                                    + "3 : Modifier l'URL du document\n"
-                                    + "4 : Modifier la description du document\n");
+                            }
+                            nettoyerAffichage();
 
-                                System.out.print("\nChoisissez l'élément que vous souhaitez modifier : ");
-                                try {
-                                    choix = entree.nextInt();
-                                    if (choix <= 0 || choix > 4) {
-                                        throw new NombreHorsLimiteException(choix);
-                                    }
-                                }
-                                catch (java.util.InputMismatchException probleme){
-                                    nettoyerAffichage();
-                                    System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
-                                    entree = new Scanner(System.in);
-                                    finCase(entree2);
-                                    nettoyerAffichage();
-                                    break;
-                                }
-                                catch (NombreHorsLimiteException probleme) {
-                                    nettoyerAffichage();
-                                    System.out.println(probleme);
-                                    entree = new Scanner(System.in);
-                                    finCase(entree2);
-                                    break;
-                                }
-                                nettoyerAffichage();
-
-                                System.out.print("Entrer la nouvelle valeur de cet élément : ");
-                                newTxt = entree2.nextLine();
-                                nettoyerAffichage();
-
-                                switch(choix) {
-
-                                    case 1:
-                                        if (doc.setCode(newTxt)) {
-                                            System.out.println("Code modifié");
-                                        }
-                                        else {
-                                            System.out.println("Erreur de saisi");
-                                        }
-                                        break;
-
-                                    case 2:
-                                        if (doc.setAuteur(newTxt)) {
-                                            System.out.println("Auteur ou entreprise modifié");
-                                        }
-                                        else {
-                                            System.out.println("Erreur de saisi");
-                                        }
-                                        break;
-
-                                    case 3:
-                                        if (doc.setURL(newTxt)) {
-                                            System.out.println("URL modifié");
-                                        }
-                                        else {
-                                            System.out.println("Erreur de saisi");
-                                        }
-                                        break;
-
-                                    case 4:
-                                        if (doc.setDescription(newTxt)) {
-                                            System.out.println("Description modifiée");
-                                        }
-                                        else {
-                                            System.out.println("Erreur de saisi");
-                                        }
-                                        break;
-                                } //fin switch
-                                break;
-                                
-                            case 3: //Livre
-                                System.out.println("1 : Modifier le code du Livre\n"
-                                    + "2 : Modifier le titre du Livre\n"
-                                    + "3 : Modifier l'auteur du Livre\n"
-                                    + "4 : Modifier l'année de publication du Livre\n"
-                                    + "5 : Modifier le nom de l'éditeur du Livre\n"
-                                    + "6 : Modifier le nombre de pages du livre\n"
-                                    + "7 : Modifier l'ISBN du livre\n");
-
-                                System.out.print("\nChoisissez l'élément que vous souhaitez modifier : ");
-                                try {
-                                    choix = entree.nextInt();
-                                    if (choix <= 0 || choix > 7) {
-                                        throw new NombreHorsLimiteException(choix);
-                                    }
-                                }
-                                catch (java.util.InputMismatchException probleme){
-                                    nettoyerAffichage();
-                                    System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
-                                    entree = new Scanner(System.in);
-                                    finCase(entree2);
-                                    nettoyerAffichage();
-                                    break;
-                                }
-                                catch (NombreHorsLimiteException probleme) {
-                                    nettoyerAffichage();
-                                    System.out.println(probleme);
-                                    entree = new Scanner(System.in);
-                                    finCase(entree2);
-                                    break;
-                                }
-                                nettoyerAffichage();
-
-                                if (choix == 4 || choix == 6) { //seuls cas où l'entrée est un int
-                                    if (choix == 4) {
-                                        System.out.print("Entrer la nouvelle année de publication du Livre : ");
+                            if (choix == 4) { //seul cas où l'entrée est un int
+                                    System.out.print("Entrer la nouvelle année de publication du document : ");
                                         try {
                                             annee = entree.nextInt();
                                         }
@@ -784,19 +576,99 @@ public class TestBibliotheque {
                                         }
                                         nettoyerAffichage();
 
-                                        if (annee != 0) { //s'il n'y a pas eu d'erreur
-                                            doc.setAnnee(annee);
-                                            System.out.println("Année modifiée");
-                                        }
-                                        else {
-                                            System.out.println("Erreur de saisi");
-                                        }
+                                        doc.setAnnee(annee);
+                                        System.out.println("Année modifiée");
                                         break;
-                                    }
-                                    else { //choix == 6
-                                        System.out.print("Entrer le nouveau nombre de pages du Livre : ");
+                                }
+                                else {
+                                    System.out.print("Entrer la nouvelle valeur de cet élément : ");
+                                    newTxt = entree2.nextLine();
+                                    nettoyerAffichage();
+
+                                    switch(choix) {
+
+                                        case 1:
+                                            try {
+                                                if (doc.setCode(newTxt)) {
+                                                    System.out.println("Code modifié");
+                                                }
+                                                else {
+                                                    throw new SetElementException();
+                                                }
+                                            }
+                                            catch (SetElementException probleme) {
+                                                System.out.println(probleme);
+                                            }
+                                            break;
+
+                                        case 2:
+                                            try {
+                                                if (doc.setTitre(newTxt)) {
+                                                    System.out.println("Titre modifié");
+                                                }
+                                                else {
+                                                    throw new SetElementException();
+                                                }
+                                            }
+                                            catch (SetElementException probleme) {
+                                                System.out.println(probleme);
+                                            }
+                                            break;
+
+                                        case 3:
+                                            try {
+                                                if (doc.setAuteur(newTxt)) {
+                                                    System.out.println("Auteur modifié");
+                                                }
+                                                else {
+                                                    throw new SetElementException();
+                                                }
+                                            }
+                                            catch (SetElementException probleme) {
+                                                System.out.println(probleme);
+                                            }
+                                            break;
+                                    } //fin switch
+
+                                } //fin else
+                            break;
+
+                        case 1: //CD
+                            System.out.println("1 : Modifier le code du CD\n"
+                                + "2 : Modifier le titre du CD\n"
+                                + "3 : Modifier l'artiste du CD\n"
+                                + "4 : Modifier l'année de publication du CD\n"
+                                + "5 : Modifier les morceaux du CD");
+
+                            System.out.print("\nChoisissez l'élément que vous souhaitez modifier : ");
+                            try {
+                                choix = entree.nextInt();
+                                if (choix <= 0 || choix > 5) {
+                                    throw new NombreHorsLimiteException(choix);
+                                }
+                            }
+                            catch (java.util.InputMismatchException probleme){
+                                nettoyerAffichage();
+                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                entree = new Scanner(System.in);
+                                finCase(entree2);
+                                nettoyerAffichage();
+                                break;
+                            }
+                            catch (NombreHorsLimiteException probleme) {
+                                nettoyerAffichage();
+                                System.out.println(probleme);
+                                entree = new Scanner(System.in);
+                                finCase(entree2);
+                                break;
+                            }
+                            nettoyerAffichage();
+
+                            if (choix == 4 || choix == 5) { //cas particuliers
+                                if (choix == 4) { //seul cas avec un int
+                                    System.out.print("Entrer la nouvelle année de publication du CD : ");
                                         try {
-                                            nbPage = entree.nextInt();
+                                            annee = entree.nextInt();
                                         }
                                         catch (java.util.InputMismatchException probleme){
                                             nettoyerAffichage();
@@ -808,75 +680,359 @@ public class TestBibliotheque {
                                         }
                                         nettoyerAffichage();
 
+                                        doc.setAnnee(annee);
+                                        System.out.println("Année modifiée");
+                                        break;
+                                }
+                                else { //cas de la liste de String
+                                    System.out.print("\nEntrer le nombre de morceaux du nouveau CD : ");
+                                    try {
+                                        choix = entree.nextInt();
+                                    }
+                                    catch (java.util.InputMismatchException probleme){
+                                        nettoyerAffichage();
+                                        System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                        entree = new Scanner(System.in);
+                                        finCase(entree2);
+                                        nettoyerAffichage();
+                                        break;
+                                    }
+                                    morceaux.clear();
+                                    for (int i = 1; i <= choix; i++) {
+                                        nettoyerAffichage();
+                                        System.out.print("\nEntrer le nom du morceau n°" + i + " : ");
+                                        String test = entree2.nextLine();
+                                        morceaux.add(test);
+                                    }
+                                    nettoyerAffichage();
+                                    
+                                    try {
+                                        if (doc.setMorceaux(morceaux)) {
+                                            System.out.println("Morceaux modifiés");
+                                        }
+                                        else {
+                                            throw new SetElementException();
+                                        }
+                                    }
+                                    catch (SetElementException probleme) {
+                                        System.out.println(probleme);
+                                    }
+                                }
+                            }
+                            else { //cas avec un String simple
+                                System.out.print("Entrer la nouvelle valeur de cet élément : ");
+                                newTxt = entree2.nextLine();
+                                nettoyerAffichage();
+
+                                switch(choix) {
+
+                                    case 1:
+                                        try {
+                                            if (doc.setCode(newTxt)) {
+                                                System.out.println("Code modifié");
+                                            }
+                                            else {
+                                                throw new SetElementException();
+                                            }
+                                        }
+                                        catch (SetElementException probleme) {
+                                            System.out.println(probleme);
+                                        }
+                                        break;
+
+                                    case 2:
+                                        try {
+                                            if (doc.setTitre(newTxt)) {
+                                                System.out.println("Titre modifié");
+                                            }
+                                            else {
+                                                throw new SetElementException();
+                                            }
+                                        }
+                                        catch (SetElementException probleme) {
+                                            System.out.println(probleme);
+                                        }
+                                        break;
+
+                                    case 3:
+                                        try {
+                                            if (doc.setAuteur(newTxt)) {
+                                                System.out.println("Artiste modifié");
+                                            }
+                                            else {
+                                                throw new SetElementException();
+                                            }
+                                        }
+                                        catch (SetElementException probleme) {
+                                            System.out.println(probleme);
+                                        }
+                                        break;
+                                } //fin switch
+
+                            } //fin else
+                            break;
+
+                        case 2: //DocURL
+                            System.out.println("1 : Modifier le code du document\n"
+                                + "2 : Modifier l'auteur ou entreprise ayant publié le document\n"
+                                + "3 : Modifier l'URL du document\n"
+                                + "4 : Modifier la description du document\n");
+
+                            System.out.print("\nChoisissez l'élément que vous souhaitez modifier : ");
+                            try {
+                                choix = entree.nextInt();
+                                if (choix <= 0 || choix > 4) {
+                                    throw new NombreHorsLimiteException(choix);
+                                }
+                            }
+                            catch (java.util.InputMismatchException probleme){
+                                nettoyerAffichage();
+                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                entree = new Scanner(System.in);
+                                finCase(entree2);
+                                nettoyerAffichage();
+                                break;
+                            }
+                            catch (NombreHorsLimiteException probleme) {
+                                nettoyerAffichage();
+                                System.out.println(probleme);
+                                entree = new Scanner(System.in);
+                                finCase(entree2);
+                                break;
+                            }
+                            nettoyerAffichage();
+
+                            System.out.print("Entrer la nouvelle valeur de cet élément : ");
+                            newTxt = entree2.nextLine();
+                            nettoyerAffichage();
+
+                            switch(choix) {
+
+                                case 1:
+                                    try {
+                                        if (doc.setCode(newTxt)) {
+                                            System.out.println("Code modifié");
+                                        }
+                                        else {
+                                            throw new SetElementException();
+                                        }
+                                    }
+                                    catch (SetElementException probleme) {
+                                        System.out.println(probleme);
+                                    }
+                                    break;
+
+                                case 2:
+                                    try {
+                                        if (doc.setAuteur(newTxt)) {
+                                            System.out.println("Auteur ou entreprise modifié");
+                                        }
+                                        else {
+                                            throw new SetElementException();
+                                        }
+                                    }
+                                    catch (SetElementException probleme) {
+                                        System.out.println(probleme);
+                                    }
+                                    break;
+
+                                case 3:
+                                    try {
+                                        if (doc.setURL(newTxt)) {
+                                            System.out.println("URL modifié");
+                                        }
+                                        else {
+                                            throw new SetElementException();
+                                        }
+                                    }
+                                    catch (SetElementException probleme) {
+                                        System.out.println(probleme);
+                                    }
+                                    break;
+
+                                case 4:
+                                    try {
+                                        if (doc.setDescription(newTxt)) {
+                                            System.out.println("Description modifiée");
+                                        }
+                                        else {
+                                            throw new SetElementException();
+                                        }
+                                    }
+                                    catch (SetElementException probleme) {
+                                        System.out.println(probleme);
+                                    }
+                                    break;
+                            } //fin switch
+                            break;
+
+                        case 3: //Livre
+                            System.out.println("1 : Modifier le code du Livre\n"
+                                + "2 : Modifier le titre du Livre\n"
+                                + "3 : Modifier l'auteur du Livre\n"
+                                + "4 : Modifier l'année de publication du Livre\n"
+                                + "5 : Modifier le nom de l'éditeur du Livre\n"
+                                + "6 : Modifier le nombre de pages du livre\n"
+                                + "7 : Modifier l'ISBN du livre\n");
+
+                            System.out.print("\nChoisissez l'élément que vous souhaitez modifier : ");
+                            try {
+                                choix = entree.nextInt();
+                                if (choix <= 0 || choix > 7) {
+                                    throw new NombreHorsLimiteException(choix);
+                                }
+                            }
+                            catch (java.util.InputMismatchException probleme){
+                                nettoyerAffichage();
+                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                entree = new Scanner(System.in);
+                                finCase(entree2);
+                                nettoyerAffichage();
+                                break;
+                            }
+                            catch (NombreHorsLimiteException probleme) {
+                                nettoyerAffichage();
+                                System.out.println(probleme);
+                                entree = new Scanner(System.in);
+                                finCase(entree2);
+                                break;
+                            }
+                            nettoyerAffichage();
+
+                            if (choix == 4 || choix == 6) { //seuls cas où l'entrée est un int
+                                if (choix == 4) {
+                                    System.out.print("Entrer la nouvelle année de publication du Livre : ");
+                                    try {
+                                        annee = entree.nextInt();
+                                    }
+                                    catch (java.util.InputMismatchException probleme){
+                                        nettoyerAffichage();
+                                        System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                        entree = new Scanner(System.in);
+                                        finCase(entree2);
+                                        nettoyerAffichage();
+                                        break;
+                                    }
+                                    nettoyerAffichage();
+
+                                    doc.setAnnee(annee);
+                                    System.out.println("Année modifiée");
+                                    break;
+                                }
+                                else { //choix == 6
+                                    System.out.print("Entrer le nouveau nombre de pages du Livre : ");
+                                    try {
+                                        nbPage = entree.nextInt();
+                                    }
+                                    catch (java.util.InputMismatchException probleme){
+                                        nettoyerAffichage();
+                                        System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                        entree = new Scanner(System.in);
+                                        finCase(entree2);
+                                        nettoyerAffichage();
+                                        break;
+                                    }
+                                    nettoyerAffichage();
+                                    
+                                    try {
                                         if (nbPage != 0) { //s'il n'y a pas eu d'erreur
                                             doc.setNbPage(nbPage);
                                             System.out.println("Nombre de pages modifiée");
                                         }
                                         else {
-                                            System.out.println("Erreur de saisi");
+                                            throw new SetElementException();
                                         }
+                                    }
+                                    catch (SetElementException probleme) {
+                                        System.out.println(probleme);
+                                        finCase(entree2);
                                         break;
                                     }
+                                    break;
                                 }
-                                else {
-                                    System.out.print("Entrer la nouvelle valeur de cet élément : ");
-                                    newTxt = entree2.nextLine();
-                                    nettoyerAffichage();
+                            }
+                            else {
+                                System.out.print("Entrer la nouvelle valeur de cet élément : ");
+                                newTxt = entree2.nextLine();
+                                nettoyerAffichage();
 
-                                    switch(choix) {
+                                switch(choix) {
 
-                                        case 1:
+                                    case 1:
+                                        try {
                                             if (doc.setCode(newTxt)) {
                                                 System.out.println("Code modifié");
                                             }
                                             else {
-                                                System.out.println("Erreur de saisi");
+                                                throw new SetElementException();
                                             }
-                                            break;
+                                        }
+                                        catch (SetElementException probleme) {
+                                            System.out.println(probleme);
+                                        }
+                                        break;
 
-                                        case 2:
+                                    case 2:
+                                        try {
                                             if (doc.setTitre(newTxt)) {
                                                 System.out.println("Titre modifié");
                                             }
                                             else {
-                                                System.out.println("Erreur de saisi");
+                                                throw new SetElementException();
                                             }
-                                            break;
+                                        }
+                                        catch (SetElementException probleme) {
+                                            System.out.println(probleme);
+                                        }
+                                        break;
 
-                                        case 3:
+                                    case 3:
+                                        try {
                                             if (doc.setAuteur(newTxt)) {
                                                 System.out.println("Auteur modifié");
                                             }
                                             else {
-                                                System.out.println("Erreur de saisi");
+                                                throw new SetElementException();
                                             }
-                                            break;
-                                            
-                                        case 5:
+                                        }
+                                        catch (SetElementException probleme) {
+                                            System.out.println(probleme);
+                                        }
+                                        break;
+
+                                    case 5:
+                                        try {
                                             if (doc.setNomEditeur(newTxt)) {
                                                 System.out.println("Nom de l'éditeur modifié");
                                             }
                                             else {
-                                                System.out.println("Erreur de saisi");
+                                                throw new SetElementException();
                                             }
-                                            break;
-                                            
-                                        case 7:
+                                        }
+                                        catch (SetElementException probleme) {
+                                            System.out.println(probleme);
+                                        }
+                                        break;
+
+                                    case 7:
+                                        try {
                                             if (doc.setISBN(newTxt)) {
                                                 System.out.println("ISBN modifié");
                                             }
                                             else {
-                                                System.out.println("Erreur de saisi");
+                                                throw new SetElementException();
                                             }
-                                            break;
-                                    } //fin switch
+                                        }
+                                        catch (SetElementException probleme) {
+                                            System.out.println(probleme);
+                                        }
+                                        break;
+                                } //fin switch
 
-                                } //fin else
-                                break;
-                        
-                        }//fin du switch
-                        
-                    } //fin if (doc != null)
+                            } //fin else
+                            break;
+
+                    }//fin du switch
                     
                     finCase(entree2);
                     break;
@@ -884,27 +1040,36 @@ public class TestBibliotheque {
                 case 8: //Afficher l’état d’un document
                     doc = selectDoc(catalogue);
                     
-                    if (doc != null) { //s'il n'y a pas eu d'erreur
-                        System.out.print("Le document est ");
-                        
-                        switch(doc.getEtatDoc()) {
-                            
-                            case 0:
-                                System.out.println("sur les étagères.");
-                                break;
-
-                            case 1:
-                                System.out.println("sur la pile des retours.");
-                                break;
-
-                            case 2:
-                                System.out.println("sur la section réservations.");
-                                break;
-
-                            case 3:
-                                System.out.println("emprunté.");
-                                break;
+                    try {
+                        if (doc == null) {
+                            throw new SelectDocException();
                         }
+                    }
+                    catch (SelectDocException probleme) {
+                        System.out.println(probleme);
+                        finCase(entree2);
+                        break;
+                    }
+                    
+                    System.out.print("Le document est ");
+
+                    switch(doc.getEtatDoc()) {
+
+                        case 0:
+                            System.out.println("sur les étagères.");
+                            break;
+
+                        case 1:
+                            System.out.println("sur la pile des retours.");
+                            break;
+
+                        case 2:
+                            System.out.println("sur la section réservations.");
+                            break;
+
+                        case 3:
+                            System.out.println("emprunté.");
+                            break;
                     }
                     
                     finCase(entree2);
@@ -913,17 +1078,40 @@ public class TestBibliotheque {
                 case 9: //Emprunter un document
                     doc = selectDoc(catalogue);
                     
-                    if (doc != null) { //s'il n'y a pas eu d'erreur
-                        membre = selectMembre(membres);
-                        
-                        if (membre != null) { //s'il n'y a pas eu d'erreur
-                            if (doc.emprunterDoc(membre)) {
-                                System.out.println("Le document est maintenant emprunté");
-                            }
-                            else {
-                                System.out.println("Opération impossible");
-                            }
+                    try {
+                        if (doc == null) {
+                            throw new SelectDocException();
                         }
+                    }
+                    catch (SelectDocException probleme) {
+                        System.out.println(probleme);
+                        finCase(entree2);
+                        break;
+                    }
+                    
+                    membre = selectMembre(membres);
+                    
+                    try {
+                        if (membre == null) {
+                            throw new SelectMembreException();
+                        }
+                    }
+                    catch (SelectMembreException probleme) {
+                        System.out.println(probleme);
+                        finCase(entree2);
+                        break;
+                    }
+                    
+                    try {
+                        if (doc.emprunterDoc(membre)) {
+                        System.out.println("Le document est maintenant emprunté");
+                        }
+                        else {
+                            throw new EmprunterDocException();
+                        }
+                    }
+                    catch (EmprunterDocException probleme) {
+                        System.out.println(probleme);
                     }
                     
                     finCase(entree2);
@@ -932,13 +1120,27 @@ public class TestBibliotheque {
                 case 10: //Rendre un document
                     doc = selectDoc(catalogue);
                     
-                    if (doc != null) { //s'il n'y a pas eu d'erreur
+                    try {
+                        if (doc == null) {
+                            throw new SelectDocException();
+                        }
+                    }
+                    catch (SelectDocException probleme) {
+                        System.out.println(probleme);
+                        finCase(entree2);
+                        break;
+                    }
+                    
+                    try {
                         if (doc.retournerDoc()) {
                             System.out.println("Document rendu");
                         }
                         else {
-                            System.out.println("Opération impossible");
+                            throw new RetournerDocException();
                         }
+                    }
+                    catch (RetournerDocException probleme) {
+                        System.out.println(probleme);
                     }
                     
                     finCase(entree2);
