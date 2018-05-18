@@ -2,7 +2,7 @@ package bibliotheque;
 
 import java.util.ArrayList;
 
-public class DocBibliotheque {
+public abstract class DocBibliotheque {
     private String code; //code d'archivage
     private String titre;
     private String auteur; //auteur principal
@@ -13,7 +13,7 @@ public class DocBibliotheque {
     //sur la section "réservations" = 2
     //emprunté = 3
     private MembreBibliotheque membreQuiEmprunte;
-    private MembreBibliotheque membreQuiReserve;
+    private Notifiable membreQuiReserve;
     private static int nbDocEmprunte = 0; //nombre de documents empruntés
     private static int nbDocPile = 0; //nombre de documents sur la pile des retours
     private static int nbDocReserve = 0; //nombre de documents réservés
@@ -93,7 +93,7 @@ public class DocBibliotheque {
         return this.membreQuiEmprunte;
     }
     
-    public MembreBibliotheque getMembreQuiReserve() {
+    public Notifiable getMembreQuiReserve() {
         return this.membreQuiReserve;
     }
     
@@ -113,6 +113,35 @@ public class DocBibliotheque {
         return nbDocSectionReservation;
     }
     
+    
+    public boolean setURL(String newTxt) {
+        return true;
+    }
+
+    public boolean setDescription(String newTxt) {
+        return true;
+    }
+
+    public boolean setNbPage(int nbPage) {
+        return true;
+    }
+
+    public boolean setNomEditeur(String newTxt) {
+        return true;
+    }
+
+    public boolean setISBN(String newTxt) {
+        return true;
+    }
+        
+    public int getTypeDoc() {
+        return 0; //DocBibliotheque
+    }
+    
+    public boolean setMorceaux(ArrayList <String> newMorceaux) {
+        return true;
+    }
+    
     public boolean emprunterDoc(MembreBibliotheque membre) {
         if (membre.peutEmprunterAutreDocument()) {
             if (this.etatDoc == 0) { //si le doc est sur les étagères (= 0)
@@ -124,6 +153,7 @@ public class DocBibliotheque {
             }
             if (this.etatDoc == 2 //ou si le doc est sur la section "réservations" (= 2)
                 && this.membreQuiReserve.equals(membre)) { //et que l'emprunteur est le réserveur
+                this.etatDoc = 3; //alors le doc est emprunté (= 3)
                 this.membreQuiReserve = null; //alors réinitialiser le réserveur
                 this.membreQuiEmprunte = membre; //et mettre à jour l'emprunteur
                 this.membreQuiEmprunte.addDocEmprunte();
@@ -144,6 +174,7 @@ public class DocBibliotheque {
                 this.membreQuiEmprunte = null; //et réinitialiser l'emprunteur
                 nbDocEmprunte --;
                 nbDocSectionReservation ++;
+                this.membreQuiReserve.docDisponible(this);
                 return true;
             }
             this.etatDoc = 1; //sinon (non réservé) alors le doc est sur la pile des retours (= 1)
@@ -158,7 +189,7 @@ public class DocBibliotheque {
         return (this.membreQuiReserve != null); //"true" si le réserveur n'est pas "null"
     }
     
-    public boolean reserverDoc(MembreBibliotheque membre) {
+    public boolean reserverDoc(Notifiable membre) {
         if (this.etatDoc == 3 //si le doc est emprunté (= 3)
                 && this.membreQuiReserve == null //et le doc n'est pas déjà réservé
                 && this.membreQuiEmprunte != membre) {
@@ -169,7 +200,7 @@ public class DocBibliotheque {
         return false;
     }
     
-    public boolean annulerReservation(MembreBibliotheque membre) {
+    public boolean annulerReservation(Notifiable membre) {
         if (membre.equals(this.membreQuiReserve)) { //si le doc est réservé par l'annuleur
             if (this.etatDoc == 3) { //alors si le doc est emprunté (= 3)
                 this.membreQuiReserve = null; //alors le doc n'a plus de réserveur
@@ -195,18 +226,11 @@ public class DocBibliotheque {
         }
         return false;
     }
-    
-    public int getTypeDoc() {
-        return 0; //DocBibliotheque
-    }
+
     
     public String toStringOneLine() {
         return "\"" + this.titre
                 + "\" de " + this.auteur;
-    }
-    
-    public boolean setMorceaux(ArrayList <String> newMorceaux) {
-        return true;
     }
     
     @Override
@@ -225,24 +249,12 @@ public class DocBibliotheque {
         }
         return membre.toString();
     }
-
-    public boolean setURL(String newTxt) {
-        return true;
+    
+    public String membreToString(Notifiable membre) {
+        if (membre == null) {
+            return "aucun";
+        }
+        return membre.toString();
     }
 
-    public boolean setDescription(String newTxt) {
-        return true;
-    }
-
-    public boolean setNbPage(int nbPage) {
-        return true;
-    }
-
-    public boolean setNomEditeur(String newTxt) {
-        return true;
-    }
-
-    public boolean setISBN(String newTxt) {
-        return true;
-    }
 }

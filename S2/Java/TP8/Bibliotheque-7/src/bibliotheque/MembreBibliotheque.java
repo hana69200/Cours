@@ -1,6 +1,6 @@
 package bibliotheque;
 
-public class MembreBibliotheque implements Notifiable {
+public abstract class MembreBibliotheque implements Notifiable {
     private String nom = null;
     private String prenom = null;
     private String tel = null; //numéro de téléphone du membre
@@ -103,7 +103,5 @@ public class MembreBibliotheque implements Notifiable {
                "\nNombre de document(s) emprunté(s) : " + this.nbDocEmprunte;
     }
 
-    @Override
-    public void docDisponible(DocBibliotheque doc) {}
 
 }

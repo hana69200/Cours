@@ -10,26 +10,17 @@ public class TestBibliotheque {
         
         //créer un catalogue de documents
         CatalogueBibliotheque catalogue = new CatalogueBibliotheque(); //création du catalogue
-        catalogue.ajouterDoc(new DocBibliotheque("004. 178 K20PM",
-                "Introduction à Java", "J. Leblanc", 2015));
-        catalogue.ajouterDoc(new DocBibliotheque("967. 498 T24AN",
-                "Structures de Données", "M. Machin", 2017));
-        catalogue.ajouterDoc(new DocBibliotheque("890. 471 T24AN",
-                "Doc 3", "M. Machin 2", 1999));
-        catalogue.ajouterDoc(new DocBibliotheque("657. 572 T24AN",
-                "Doc 4", "M. Machin 3", 2002));
-        catalogue.ajouterDoc(new DocBibliotheque("345. 663 T24AN",
-                "Doc 5", "M. Machin 4", 2008));
-        catalogue.ajouterDoc(new DocBibliotheque("123. 754 T24AN",
-                "Doc 6", "M. Machin 5", 1995));
-        catalogue.ajouterDoc(new DocBibliotheque("368. 845 T24AN",
-                "Doc 7", "M. Machin 6", 1993));
-        catalogue.ajouterDoc(new DocBibliotheque("973. 936 T24AN",
-                "Doc 8", "M. Machin 7", 2009));
-        catalogue.ajouterDoc(new DocBibliotheque("347. 027 T24AN",
-                "Doc 9", "M. Machin 8", 2013));
-        catalogue.ajouterDoc(new DocBibliotheque("642. 108 T24AN",
-                "Doc 10", "M. Machin 9", 2011));
+        catalogue.ajouterDoc(new Livre("code1", "titre1", "auteur1", 1999, "nomEditeur1", 33, "1AAWE"));
+        catalogue.ajouterDoc(new Livre("code2", "titre2", "auteur2", 2000, "nomEditeur2", 34, "2AAWE"));
+        catalogue.ajouterDoc(new Livre("code3", "titre3", "auteur3", 2001, "nomEditeur3", 35, "3AAWE"));
+        catalogue.ajouterDoc(new Livre("code4", "titre4", "auteur4", 2002, "nomEditeur4", 36, "4AAWE"));
+        catalogue.ajouterDoc(new Livre("code5", "titre5", "auteur5", 2003, "nomEditeur5", 37, "5AAWE"));
+        catalogue.ajouterDoc(new Livre("code6", "titre6", "auteur6", 2004, "nomEditeur6", 38, "6AAWE"));
+        catalogue.ajouterDoc(new Livre("code7", "titre7", "auteur7", 2005, "nomEditeur7", 39, "7AAWE"));
+        catalogue.ajouterDoc(new Livre("code8", "titre8", "auteur8", 2006, "nomEditeur8", 40, "8AAWE"));
+        catalogue.ajouterDoc(new DocURL("cod1", "aut1", "www1", "description1"));
+        catalogue.ajouterDoc(new DocURL("cod2", "aut2", "www2", "description2"));
+
         
         //créer une liste de membres
         ListeMembres membres = new ListeMembres(); //création de la liste
@@ -58,7 +49,7 @@ public class TestBibliotheque {
             }
             catch (java.util.InputMismatchException probleme){
                 nettoyerAffichage();
-                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu");
                 choix = -1;
                 entree = new Scanner(System.in);
                 finCase(entree2);
@@ -92,7 +83,7 @@ public class TestBibliotheque {
                     }
                     catch (java.util.InputMismatchException probleme){
                         nettoyerAffichage();
-                        System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                        System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu");
                         entree = new Scanner(System.in);
                         finCase(entree2);
                         break;
@@ -165,6 +156,9 @@ public class TestBibliotheque {
                         if (membre == null) {
                             throw new SelectMembreException();
                         }
+                        else {
+                            System.out.println(membre.toString());
+                        }
                     }
                     catch (SelectMembreException probleme) {
                         System.out.println(probleme);
@@ -201,7 +195,7 @@ public class TestBibliotheque {
                     }
                     catch (java.util.InputMismatchException probleme){
                         nettoyerAffichage();
-                        System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                        System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu");
                         entree = new Scanner(System.in);
                         finCase(entree2);
                         break;
@@ -296,7 +290,7 @@ public class TestBibliotheque {
                     }
                     catch (java.util.InputMismatchException probleme){
                         nettoyerAffichage();
-                        System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                        System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu");
                         entree = new Scanner(System.in);
                         finCase(entree2);
                         break;
@@ -331,7 +325,7 @@ public class TestBibliotheque {
                             }
                             catch (java.util.InputMismatchException probleme){
                                 nettoyerAffichage();
-                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu");
                                 entree = new Scanner(System.in);
                                 finCase(entree2);
                                 nettoyerAffichage();
@@ -349,7 +343,7 @@ public class TestBibliotheque {
                             }
                             catch (java.util.InputMismatchException probleme){
                                 nettoyerAffichage();
-                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu");
                                 entree = new Scanner(System.in);
                                 finCase(entree2);
                                 nettoyerAffichage();
@@ -395,7 +389,7 @@ public class TestBibliotheque {
                             }
                             catch (java.util.InputMismatchException probleme){
                                 nettoyerAffichage();
-                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu");
                                 entree = new Scanner(System.in);
                                 finCase(entree2);
                                 nettoyerAffichage();
@@ -409,7 +403,7 @@ public class TestBibliotheque {
                             }
                             catch (java.util.InputMismatchException probleme){
                                 nettoyerAffichage();
-                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu");
                                 entree = new Scanner(System.in);
                                 finCase(entree2);
                                 nettoyerAffichage();
@@ -547,7 +541,7 @@ public class TestBibliotheque {
                             }
                             catch (java.util.InputMismatchException probleme){
                                 nettoyerAffichage();
-                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu");
                                 entree = new Scanner(System.in);
                                 finCase(entree2);
                                 break;
@@ -568,7 +562,7 @@ public class TestBibliotheque {
                                         }
                                         catch (java.util.InputMismatchException probleme){
                                             nettoyerAffichage();
-                                            System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                            System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu");
                                             entree = new Scanner(System.in);
                                             finCase(entree2);
                                             nettoyerAffichage();
@@ -649,7 +643,7 @@ public class TestBibliotheque {
                             }
                             catch (java.util.InputMismatchException probleme){
                                 nettoyerAffichage();
-                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu");
                                 entree = new Scanner(System.in);
                                 finCase(entree2);
                                 nettoyerAffichage();
@@ -672,7 +666,7 @@ public class TestBibliotheque {
                                         }
                                         catch (java.util.InputMismatchException probleme){
                                             nettoyerAffichage();
-                                            System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                            System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu");
                                             entree = new Scanner(System.in);
                                             finCase(entree2);
                                             nettoyerAffichage();
@@ -691,7 +685,7 @@ public class TestBibliotheque {
                                     }
                                     catch (java.util.InputMismatchException probleme){
                                         nettoyerAffichage();
-                                        System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                        System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu");
                                         entree = new Scanner(System.in);
                                         finCase(entree2);
                                         nettoyerAffichage();
@@ -787,7 +781,7 @@ public class TestBibliotheque {
                             }
                             catch (java.util.InputMismatchException probleme){
                                 nettoyerAffichage();
-                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu");
                                 entree = new Scanner(System.in);
                                 finCase(entree2);
                                 nettoyerAffichage();
@@ -884,7 +878,7 @@ public class TestBibliotheque {
                             }
                             catch (java.util.InputMismatchException probleme){
                                 nettoyerAffichage();
-                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu");
                                 entree = new Scanner(System.in);
                                 finCase(entree2);
                                 nettoyerAffichage();
@@ -907,7 +901,7 @@ public class TestBibliotheque {
                                     }
                                     catch (java.util.InputMismatchException probleme){
                                         nettoyerAffichage();
-                                        System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                        System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu");
                                         entree = new Scanner(System.in);
                                         finCase(entree2);
                                         nettoyerAffichage();
@@ -926,7 +920,7 @@ public class TestBibliotheque {
                                     }
                                     catch (java.util.InputMismatchException probleme){
                                         nettoyerAffichage();
-                                        System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+                                        System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu");
                                         entree = new Scanner(System.in);
                                         finCase(entree2);
                                         nettoyerAffichage();
@@ -1056,19 +1050,19 @@ public class TestBibliotheque {
                     switch(doc.getEtatDoc()) {
 
                         case 0:
-                            System.out.println("sur les étagères.");
+                            System.out.println("sur les étagères");
                             break;
 
                         case 1:
-                            System.out.println("sur la pile des retours.");
+                            System.out.println("sur la pile des retours");
                             break;
 
                         case 2:
-                            System.out.println("sur la section réservations.");
+                            System.out.println("sur la section réservations");
                             break;
 
                         case 3:
-                            System.out.println("emprunté.");
+                            System.out.println("emprunté");
                             break;
                     }
                     
@@ -1133,7 +1127,7 @@ public class TestBibliotheque {
                     
                     try {
                         if (doc.retournerDoc()) {
-                            System.out.println("Document rendu");
+                            System.out.println("\nDocument rendu");
                         }
                         else {
                             throw new RetournerDocException();
@@ -1332,7 +1326,7 @@ public class TestBibliotheque {
         System.out.print("Entrer votre choix : ");
     }
     
-    private static void finCase(Scanner entree2) {
+    public static void finCase(Scanner entree2) {
         entree2 = new Scanner(System.in);
         System.out.print("\nAppuyer sur une touche pour continuer");
         String pause;
@@ -1357,7 +1351,7 @@ public class TestBibliotheque {
         catch (java.util.InputMismatchException probleme){
             choix = -1;
             nettoyerAffichage();
-            System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+            System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu");
             entree = new Scanner(System.in);
             System.out.print("\nAppuyer sur une touche pour continuer");
             String pause;
@@ -1392,7 +1386,7 @@ public class TestBibliotheque {
         catch (java.util.InputMismatchException probleme){
             choix = -1;
             nettoyerAffichage();
-            System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu ");
+            System.out.println(probleme + ":\n\nErreur de saisi : nombre attendu");
             entree = new Scanner(System.in);
             System.out.print("\nAppuyer sur une touche pour continuer");
             String pause;
@@ -1411,7 +1405,7 @@ public class TestBibliotheque {
         }
     }
     
-    private static void nettoyerAffichage() {
+    public static void nettoyerAffichage() {
         for (int i = 0; i < 20; i++) System.out.println("\n");
     }
     

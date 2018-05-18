@@ -1,5 +1,7 @@
 package bibliotheque;
 
+import static bibliotheque.TestBibliotheque.finCase;
+import static bibliotheque.TestBibliotheque.nettoyerAffichage;
 import exceptions.EmprunterDocException;
 import java.util.Scanner;
 
@@ -21,22 +23,27 @@ public class MembreEtudiant extends MembreBibliotheque {
     
     @Override
     public void docDisponible(DocBibliotheque doc) {
-        
-        System.out.println("Le document \"" + doc.getTitre() + "\" que vous avez réservé est disponible."
-                + "Désirez-vous l’emprunter maintenant ? (oui/non) : ");
+        System.out.print("Le document \"" + doc.getTitre() + "\" que vous avez réservé est disponible."
+                + "\n\nDésirez-vous l’emprunter maintenant ? (oui/non) : ");
         Scanner entree = new Scanner(System.in);
         String rep = entree.nextLine();
+        nettoyerAffichage();
         switch (rep) {
             case "oui":
                 try {
-                    if (!doc.emprunterDoc(this)) {
+                    if (doc.emprunterDoc(this)) {
+                        System.out.println("\nDocument emprunté");
+                        finCase(new Scanner(System.in));
+                    }
+                    else {
                         throw new EmprunterDocException();
                     }
                 } catch (EmprunterDocException probleme) {
                     System.out.println(probleme);
                 }   break;
             default:
-                System.out.println("Document non emprunté");
+                System.out.println("\nDocument non emprunté");
+                finCase(new Scanner(System.in));
                 break;
         }
     }

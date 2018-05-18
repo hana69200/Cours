@@ -18,7 +18,6 @@ public class MembrePersonnel extends MembreBibliotheque {
     
     @Override
     public void docDisponible(DocBibliotheque doc) {
-        
         System.out.println("Le document \"" + doc.getTitre() + "\" que vous avez réservé "
             + "est désormais disponible à l’emprunt au bureau des réservations");
     }

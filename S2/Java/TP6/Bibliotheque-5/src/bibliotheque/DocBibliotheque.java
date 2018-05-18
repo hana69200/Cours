@@ -124,6 +124,7 @@ public class DocBibliotheque {
             }
             if (this.etatDoc == 2 //ou si le doc est sur la section "réservations" (= 2)
                 && this.membreQuiReserve.equals(membre)) { //et que l'emprunteur est le réserveur
+                this.etatDoc = 3; //alors le doc est emprunté (= 3)
                 this.membreQuiReserve = null; //alors réinitialiser le réserveur
                 this.membreQuiEmprunte = membre; //et mettre à jour l'emprunteur
                 this.membreQuiEmprunte.addDocEmprunte();
