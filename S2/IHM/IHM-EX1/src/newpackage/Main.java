@@ -1,10 +1,10 @@
 package newpackage;
 
-public class TestCalculatrice {
+public class Main {
     
     public static void main(String[] Args) {
         
-        Calculatrice calc = new Calculatrice();
+        Evenements_2 calc = new Evenements_2();
         
     }
     
