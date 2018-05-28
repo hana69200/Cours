@@ -44,7 +44,6 @@ public class ModeleCBString extends AbstractListModel<String> implements ComboBo
     }
     
     void effaceString(String string){
-        //ATTENTION marche pas très bien
         for (int i = 0; i < this.tab.size(); i++) {
             if (this.tab.get(i).equals(string)) {
                 this.tab.remove(i);
