@@ -44,15 +44,16 @@ public class ModeleCBString extends AbstractListModel<String> implements ComboBo
     }
     
     void effaceString(String string){
+        //ATTENTION marche pas très bien
         for (int i = 0; i < this.tab.size(); i++) {
             if (this.tab.get(i).equals(string)) {
-                    this.tab.remove(i);
-                    super.fireIntervalRemoved(this, getSize(), getSize());
-                    if (this.getSize() != 0) {
-                        this.selectedItem = this.tab.get(i-1);
-                    }
-                    else {
-                        this.selectedItem = "";
+                this.tab.remove(i);
+                super.fireIntervalRemoved(this, getSize(), getSize());
+                if (this.getSize() != 0) {
+                    this.selectedItem = this.tab.get(0);
+                }
+                else {
+                    this.selectedItem = "";
                 }
             }
         }
@@ -60,6 +61,7 @@ public class ModeleCBString extends AbstractListModel<String> implements ComboBo
     
     void effaceTout() {
         this.tab.clear();
+        super.fireIntervalRemoved(this, getSize(), getSize());
         this.selectedItem = "";
     }
     
