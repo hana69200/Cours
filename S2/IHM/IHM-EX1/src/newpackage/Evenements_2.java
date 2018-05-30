@@ -1,11 +1,10 @@
 package newpackage;
 
 import java.awt.GridLayout;
-import java.awt.PopupMenu;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Evenements_2 extends JFrame {
+public class Evenements_2 extends JFrame{
     
      public Evenements_2(){
         creerFenetre();
@@ -32,24 +31,26 @@ public class Evenements_2 extends JFrame {
          String[] tab = new String[] {"c'est beau le texte", "c'est sympa chez vous"};
         
         
-        JComboBox jcb1 = new JComboBox(tab);
-        JComboBox jcb2 = new JComboBox();
+        ModeleCBString model1 = new ModeleCBString(tab);
+        ModeleCBString model2 = new ModeleCBString();
+        
+        JComboBox<String> jcb1 = new JComboBox<>(model1);
+        JComboBox<String> jcb2 = new JComboBox<>(model2);
         
         
         JButton bouton1 = new JButton("copier un élément du premier jcb");
-        bouton1.addActionListener(new ActionListener() {
-            @Override
-            public abstract void actionPerformed(ActionEvent e);
+        bouton1.addActionListener((ActionEvent e) -> {
+            model2.ajoutString((String)model1.getSelectedItem());
         });
         
         JButton bouton2 = new JButton("supprimer un élément du second jcb");
-        bouton1.addActionListener((ActionEvent e) -> {
-            
+        bouton2.addActionListener((ActionEvent e) -> {
+           model2.effaceString((String)model2.getSelectedItem());
         });
         
         JButton bouton3 = new JButton("vider tout le second jcb");
-        bouton1.addActionListener((ActionEvent e) -> {
-            
+        bouton3.addActionListener((ActionEvent e) -> {
+            model2.effaceTout();
         });
         
         panel.add(jcb1);
