@@ -124,7 +124,7 @@ public class Fenetre extends javax.swing.JFrame implements ActionListener {
 
         JFrame fenetre = creerFenetre();
         
-        /*
+        
         java.awt.EventQueue.invokeLater(() -> {
             try {
                 dataSourceDAO = OracleDataSourceDAO.getOracleDataSourceDAO();
@@ -137,12 +137,10 @@ public class Fenetre extends javax.swing.JFrame implements ActionListener {
                 Logger.getLogger(Fenetre.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        */
+        
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public void actionPerformed(ActionEvent e) {}
 
 }
