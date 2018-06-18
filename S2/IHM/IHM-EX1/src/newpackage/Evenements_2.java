@@ -3,7 +3,7 @@ package newpackage;
 import java.awt.GridLayout;
 import javax.swing.*;
 
-public class Evenements_2 extends JFrame{
+public class Evenements_2 extends JFrame {
     
     
     String[] tab = new String[] {"c'est beau le texte", "c'est sympa chez vous"};
