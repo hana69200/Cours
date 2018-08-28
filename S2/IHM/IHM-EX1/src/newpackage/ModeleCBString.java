@@ -19,7 +19,6 @@ public class ModeleCBString extends AbstractListModel<String> implements ComboBo
         this.tab = new ArrayList<>();
         for (String tabString : tabStrings) {
             this.tab.add(tabString);
-            System.out.println(tabString);
         }
         this.selectedItem = tabStrings[0];
     }

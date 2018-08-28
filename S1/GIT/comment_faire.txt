@@ -22,3 +22,9 @@ git push
 
 pour re extraire les fichiers de l'archive git :
 git checkout -f HEAD
+
+SSH:
+ssh-keygen
+sudo apt-get install xclip
+xclip -sel clip < ~/.ssh/id_rsa.pub
+Puis il faut ajouter la clé publique sur github
