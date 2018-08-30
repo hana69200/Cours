@@ -42,7 +42,7 @@ $impots *=$nbParts
     </head>
 
     <body>
-        <form action="ex5.php" method="post">
+        <form action="impots1.php" method="post">
             <p>Nombre d'enfants : <input type="text" name="nbEnfants" value = "<? echo ($nbEnfants == "0") ? "0" : $nbEnfants ?>"></p>
             <p>Marié : <input type="checkbox" name="marie" value="1"></p>
             <p>Salaire annuel : <input type="text" name="salaire" value="<? echo ($S == 0) ? "0" : $S ?>"></p>

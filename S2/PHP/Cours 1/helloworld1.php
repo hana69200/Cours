@@ -6,7 +6,7 @@
     <body>
         <ul>
             <?php
-            for($i=1;$i<=20;$i++) {
+            for($i = 1; $i <= 20; $i++) {
                 echo "<li>hello world</li>";
             }
             ?>

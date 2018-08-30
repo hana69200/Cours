@@ -6,9 +6,12 @@
     <body>
         <ul>
             <?php
-            if ($_GET['nb'] > 0 && $_GET['nb'] <= 100) {
-                for($i=1;$i<=$_GET['nb'];$i++) {
-                    echo "<li>hello world</li>";
+            if (isset $_GET['nb'] && strlen($_GET['nb']) < 10) {
+                $nb = (int) htmlspecialchars($_GET['nb']);
+                if ($nb > 0 && $nb <= 100) {
+                    for($i = 1; $i <= $nb; $i++) {
+                        echo "<li>hello world</li>";
+                    }
                 }
             }
             else {
