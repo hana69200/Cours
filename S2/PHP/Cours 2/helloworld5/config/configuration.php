@@ -12,16 +12,16 @@
 const DEBUG = true; // production : false; dev : true
 
 // Accès base de données
-const BD_HOST = '';
-const BD_DBNAME = '';
-const BD_USER = '';
-const BD_PWD = '';
+const BD_HOST = 'localhost';
+const BD_DBNAME = 'cours';
+const BD_USER = 'julien';
+const BD_PWD = 'cpe7ay5u';
 
 // Langue du site
 const LANG ='FR-fr';
 
 // Paramètres du site : nom de l'auteur ou des auteurs
-const AUTEUR = ''; 
+const AUTEUR = '';
 
 //dossiers racines du site
 define('PATH_CONTROLLERS','./controllers/c_');
