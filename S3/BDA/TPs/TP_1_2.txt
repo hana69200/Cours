@@ -85,7 +85,40 @@ commit ;
 
 
 
-CREATE OR REPLACE PACKAGE pksorties AS
+/*
+1. fait
+2. en cours
+*/
+
+CREATE OR REPLACE PACKAGE pksorties IS
     TYPE type_minibus IS TABLE OF minibus%ROWTYPE;
     v_tab_minibus type_minibus;
-END;
+    
+    FUNCTION les_minibus RETURN NUMBER;
+END pksorties;
+
+
+CREATE OR REPLACE PACKAGE BODY pksorties IS
+    FUNCTION les_minibus
+    RETURN NUMBER IS
+    v_nb_minibus NUMBER(5);
+    v_index NUMBER(3) := 1;
+    BEGIN
+        SELECT COUNT(nominibus)
+        INTO v_nb_minibus
+        FROM minibus;
+        
+        FOR ligne IN (
+            SELECT nominibus, capacite
+            INTO v_tab_minibus
+            FROM minibus
+            ORDER BY capacite DESC) LOOP
+            v_tab_minibus(v_index).nominibus := ligne.nominibus;
+            v_tab_minibus(v_index).capacite := ligne.capacite;
+            v_index := v_index + 1;
+        END LOOP;
+        
+        RETURN v_nb_minibus;
+    END les_minibus;
+    
+END pksorties;
