@@ -21,6 +21,10 @@
 <h1><?php  echo TITRE_PAGE_ACCUEIL;?></h1>
 
 <!--  Formulaire -->
+<form method="post" action="<?= 'index.php?page=hello' ?>">
+<p><label for="login">Login :</label><input id="login" type="string" name="login" /></p>
+<p><input type="submit" value="Valider"/></p>
+</form>
 
 <!--  Fin de la page -->
 

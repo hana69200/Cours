@@ -1,14 +1,5 @@
 <?php
 
-//On sécurise la variable $login
-$value = isset($_POST['login']) ? htmlspecialchars($_POST['login']) : '';
-if ((strlen($value) > 0) && (strlen($value) < 50)) {
-	$login = (string) $_POST['login'];
-}
-else {
-	$erreur = 'login';
-}
-
 //On essaye de se connecter à la base de données	
 try {
     $bd = new PDO('mysql:host=' . BD_HOST . '; dbname=' . BD_DBNAME . '; charset=utf8', BD_USER, BD_PWD);
@@ -16,12 +7,12 @@ try {
 }
 //En cas d'échec on affiche le message d'erreur
 catch(PDOException $e){
-    die($error = 'connexion');
+    $erreur = 'connexion';
 }
 
 //S'il n'y a pas eu de probleme de login
-if (isset($login)) {
-    $requete = "SELECT * FROM utilisateur WHERE login = '" . $login . "'";
+if (!isset($erreur)) {
+    $requete = "SELECT mot, nbrepet FROM utilisateur WHERE login = '" . $login . "'";
     $donnees = array($login);
 	try {
 	    $query = $bd -> prepare($requete);
@@ -31,7 +22,7 @@ if (isset($login)) {
 	    }
     }
     catch(Exception $e) {
-        die($erreur = 'query');
+        $erreur = 'query';
     }
 }
 

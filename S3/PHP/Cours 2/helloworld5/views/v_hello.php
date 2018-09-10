@@ -16,15 +16,10 @@
 <?php require_once(PATH_VIEWS.'header.php');?>
 
 <!--  Zone message d'alerte -->
-<!-- <?php require_once(PATH_VIEWS.'alert.php');?> -->
+<?php require_once(PATH_VIEWS.'alert.php');?>
 
 <!--  Début de la page -->
-<h1>Test</h1>
-
-<form method="post" action="<?= 'index.php' ?>">
-<p><label for="login">Login :</label><input id="login" type="string" name="login" value="<?= isset($login) ? $login : '' ?>"/></p>
-<p><input type="submit" value="Valider"/></p>
-</form>
+<h1><?php  echo TITRE_PAGE_HELLO;?></h1>
 
 <!--  Liste  -->
 <ul>
@@ -40,7 +35,11 @@
         <div class="alert alert-danger">
             <strong><?= $alert['messageAlert'] ?></strong>
         </div>
+        <!--  Zone message d'alerte -->
+        <?php require_once(PATH_VIEWS.'alert.php');?>
+
         <?
+        
     }
     
     ?>
