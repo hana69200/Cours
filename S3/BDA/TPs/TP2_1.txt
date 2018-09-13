@@ -1,0 +1,41 @@
+/*Question 1*/
+
+CREATE OR REPLACE TRIGGER update_dept
+AFTER INSERT OR DELETE ON dept
+BEGIN
+    DECLARE
+        CURSOR c_dept IS
+            SELECT deptno FROM dept;
+        v_nb_emp NUMBER(3);
+    BEGIN
+        FOR v_dept IN c_dept LOOP
+            SELECT COUNT(empno)
+            INTO v_nb_emp
+            FROM emp
+            WHERE emp.deptno = v_dept.deptno;
+            UPDATE dept SET nb_total_emp = v_nb_emp WHERE deptno = v_dept.deptno;       
+        END LOOP;
+    END;
+END;
+
+/*Question 2*/
+CREATE OR REPLACE TRIGGER insert_emp
+BEFORE INSERT OR UPDATE ON emp
+FOR EACH ROW
+DECLARE
+    v_nb NUMBER(5);
+BEGIN
+    IF :new.job = 'president' THEN
+        IF :new.mgr IS NOT NULL THEN
+            RAISE_APPLICATION_ERROR (-20000, 'Un président ne peut pas avoir de chef.');
+        END IF;
+    ELSE
+        SELECT MIN(sal) INTO v_nb FROM emp WHERE job = 'president';
+        IF :new.sal >= v_nb THEN
+            RAISE_APPLICATION_ERROR (20001, 'Un employé normal ne peut pas avoir un salaire plus élevé que ceux des présidents.');
+        END IF;
+        IF :new.mgr IS NULL THEN
+            RAISE_APPLICATION_ERROR (20002, 'Un employé normal doit avoir un chef.');
+        END IF;
+    END IF;
+END;
