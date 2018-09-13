@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?PowerDesigner AppLocale="UTF16" ID="{200BE66D-7C15-460B-ADDF-88D651D8538F}" Label="" LastModificationDate="1536066148" Name="Diagramme de classes UML_1" Objects="152" Symbols="41" Target="Analyse" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.3.0.3248"?>
+<?PowerDesigner AppLocale="UTF16" ID="{200BE66D-7C15-460B-ADDF-88D651D8538F}" Label="" LastModificationDate="1536654154" Name="Diagramme de classes UML_1" Objects="145" Symbols="38" Target="Analyse" TargetLink="Reference" Type="{18112060-1A4B-11D1-83D9-444553540000}" signature="CLD_OBJECT_MODEL" version="15.3.0.3248"?>
 <!-- Veuillez ne pas modifier ce fichier -->
 
 <Model xmlns:a="attribute" xmlns:c="collection" xmlns:o="object">
@@ -1452,7 +1452,7 @@ Shadow=0</a:DisplayPreferences>
 <o:AssociationSymbol Id="o5">
 <a:CreationDate>1536054551</a:CreationDate>
 <a:ModificationDate>1536065891</a:ModificationDate>
-<a:Rect>((-67539,-16531), (-63641,-8619))</a:Rect>
+<a:Rect>((-67502,-16531), (-63678,-8619))</a:Rect>
 <a:ListOfPoints>((-65665,-8619),(-65665,-16531))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>3592</a:ArrowStyle>
@@ -1473,7 +1473,7 @@ SOURCE 0 Arial,8,N</a:FontList>
 <o:AssociationSymbol Id="o9">
 <a:CreationDate>1536054554</a:CreationDate>
 <a:ModificationDate>1536065896</a:ModificationDate>
-<a:Rect>((-72473,-19380), (-68575,-8611))</a:Rect>
+<a:Rect>((-72436,-19380), (-68612,-8611))</a:Rect>
 <a:ListOfPoints>((-70599,-8611),(-70599,-19380))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>3592</a:ArrowStyle>
@@ -1740,7 +1740,7 @@ SOURCE 0 Arial,8,N</a:FontList>
 <o:AssociationSymbol Id="o48">
 <a:CreationDate>1536064627</a:CreationDate>
 <a:ModificationDate>1536066148</a:ModificationDate>
-<a:Rect>((-43465,-2570), (-8869,16509))</a:Rect>
+<a:Rect>((-43502,-2570), (-8869,16509))</a:Rect>
 <a:ListOfPoints>((-43465,16509),(-43465,-1396),(-8869,-1396))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>8</a:ArrowStyle>
@@ -1761,7 +1761,7 @@ SOURCE 0 Arial,8,N</a:FontList>
 <o:AssociationSymbol Id="o50">
 <a:CreationDate>1536064642</a:CreationDate>
 <a:ModificationDate>1536066131</a:ModificationDate>
-<a:Rect>((-9865,-1890), (-5967,11649))</a:Rect>
+<a:Rect>((-9828,-1890), (-6004,11649))</a:Rect>
 <a:ListOfPoints>((-7991,11649),(-7991,-1890))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>8</a:ArrowStyle>
@@ -1782,7 +1782,7 @@ SOURCE 0 Arial,8,N</a:FontList>
 <o:AssociationSymbol Id="o52">
 <a:CreationDate>1536064883</a:CreationDate>
 <a:ModificationDate>1536065870</a:ModificationDate>
-<a:Rect>((-70042,-3650), (-45596,14001))</a:Rect>
+<a:Rect>((-70005,-3650), (-45633,14001))</a:Rect>
 <a:ListOfPoints>((-47620,14001),(-47620,6202),(-68168,6202),(-68168,-3650))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>8</a:ArrowStyle>
@@ -1865,7 +1865,7 @@ SOURCE 0 Arial,8,N</a:FontList>
 <o:AssociationSymbol Id="o62">
 <a:CreationDate>1536065959</a:CreationDate>
 <a:ModificationDate>1536066077</a:ModificationDate>
-<a:Rect>((-43589,12802), (-13666,29055))</a:Rect>
+<a:Rect>((-43589,12802), (-13703,29055))</a:Rect>
 <a:ListOfPoints>((-43589,12802),(-15540,12802),(-15540,29055))</a:ListOfPoints>
 <a:CornerStyle>2</a:CornerStyle>
 <a:ArrowStyle>8</a:ArrowStyle>
@@ -2593,7 +2593,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Code>Association_17</a:Code>
 <a:CreationDate>1536064013</a:CreationDate>
 <a:Creator>p1704709</a:Creator>
-<a:ModificationDate>1536064857</a:ModificationDate>
+<a:ModificationDate>1536654154</a:ModificationDate>
 <a:Modifier>p1704709</a:Modifier>
 <a:RoleBName>escale</a:RoleBName>
 <a:RoleAMultiplicity>0..1</a:RoleAMultiplicity>
@@ -2645,7 +2645,7 @@ LABL 0 Arial,8,N</a:FontList>
 <a:Code>Association_18</a:Code>
 <a:CreationDate>1536064883</a:CreationDate>
 <a:Creator>p1704709</a:Creator>
-<a:ModificationDate>1536065746</a:ModificationDate>
+<a:ModificationDate>1536654154</a:ModificationDate>
 <a:Modifier>p1704709</a:Modifier>
 <a:RoleAMultiplicity>0..1</a:RoleAMultiplicity>
 <a:RoleBMultiplicity>0..*</a:RoleBMultiplicity>
