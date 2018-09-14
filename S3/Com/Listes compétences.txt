@@ -1,0 +1,36 @@
+Compétences Informatiques :
+
+Outils :
+Microsoft Office (Word, Excel, PowerPoint)
+LibreOffice
+GIT
+Unity en autonomie
+Méthodes agiles (SCRUM)
+Langage UML
+Notions en ergonomie et IHM
+
+-Langages Web :
+HTML 5
+CSS 3
+PHP / MySQL
+Javascript
+
+-Programmation Logiciel :
+C
+Python
+Java
+C# en autonomie
+
+-Base de donnée :
+Oracle MySQL
+PL SQL
+PHPMyAdmin
+
+Réseau :
+Configuration de routeurs CISCO
+
+-Système d’exploitation :
+Windows,
+Linux dont les compétences du LPIC 1 en autonomie
+
+-Montage d’image : Photoshop (notions), Draw
