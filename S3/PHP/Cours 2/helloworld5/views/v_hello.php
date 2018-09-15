@@ -15,8 +15,7 @@
 <!--  En tête de page -->
 <?php require_once(PATH_VIEWS.'header.php');?>
 
-<!--  Zone message d'alerte -->
-<?php require_once(PATH_VIEWS.'alert.php');?>
+
 
 <!--  Début de la page -->
 <h1><?php  echo TITRE_PAGE_HELLO;?></h1>
@@ -24,24 +23,11 @@
 <!--  Liste  -->
 <ul>
     <?
-    if (!isset($erreur)) {
+    if (!isset($erreur) && isset($nbrepet)) {
         for ($i = 0; $i < $nbrepet; $i++) {
             echo "<li>$mot $login</li>";
         }
     }
-    else {
-        $alert = choixAlert($erreur);
-        ?>
-        <div class="alert alert-danger">
-            <strong><?= $alert['messageAlert'] ?></strong>
-        </div>
-        <!--  Zone message d'alerte -->
-        <?php require_once(PATH_VIEWS.'alert.php');?>
-
-        <?
-        
-    }
-    
     ?>
 </ul>
 
