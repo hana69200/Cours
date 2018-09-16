@@ -87,30 +87,37 @@ commit ;
 
 /*
 1. fait
-2. en cours
+2. fait
 */
 
-CREATE OR REPLACE PACKAGE pksorties IS
-    TYPE type_minibus IS TABLE OF minibus%ROWTYPE;
-    v_tab_minibus type_minibus;
-    
+DROP TABLE erreurs;
+CREATE TABLE erreurs (
+message VARCHAR2(255BYTE),
+"DATE" DATE
+);
+
+create or replace PACKAGE pksorties IS
+    TYPE type_minibus IS TABLE OF minibus%ROWTYPE INDEX BY BINARY_INTEGER;
     FUNCTION les_minibus RETURN NUMBER;
 END pksorties;
 
 
-CREATE OR REPLACE PACKAGE BODY pksorties IS
+create or replace PACKAGE BODY pksorties IS
     FUNCTION les_minibus
-    RETURN NUMBER IS
-    v_nb_minibus NUMBER(5);
+    RETURN NUMBER
+    IS
+    v_tab_minibus type_minibus;
+    v_nb_minibus NUMBER(3);
     v_index NUMBER(3) := 1;
+    err_code INT(6);
+    err_msg VARCHAR2(255);
     BEGIN
         SELECT COUNT(nominibus)
         INTO v_nb_minibus
         FROM minibus;
-        
+
         FOR ligne IN (
             SELECT nominibus, capacite
-            INTO v_tab_minibus
             FROM minibus
             ORDER BY capacite DESC) LOOP
             v_tab_minibus(v_index).nominibus := ligne.nominibus;
@@ -119,6 +126,14 @@ CREATE OR REPLACE PACKAGE BODY pksorties IS
         END LOOP;
         
         RETURN v_nb_minibus;
+        
+        EXCEPTION
+            WHEN OTHERS THEN
+                err_code := SQLCODE;
+                err_msg := SUBSTR(SQLERRM, 1, 200);
+                INSERT INTO erreurs (message, "DATE") VALUES ('Erreur n° ' || err_code || ' , ' || err_msg, CURRENT_DATE);
+                RETURN -1;
+
     END les_minibus;
-    
+
 END pksorties;
