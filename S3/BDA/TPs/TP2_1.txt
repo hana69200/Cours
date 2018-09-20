@@ -1,4 +1,4 @@
-/*Question 1*/
+﻿/*Question 1*/
 
 CREATE OR REPLACE TRIGGER update_dept
 AFTER INSERT OR DELETE ON dept
@@ -39,3 +39,49 @@ BEGIN
         END IF;
     END IF;
 END;
+
+/*Question 3*/
+
+/*Début en mode beau*/
+CREATE TABLE extrait_emp AS
+    SELECT empno,ename,sal,deptno
+    FROM scott.emp;
+
+CREATE TABLE sal_dept AS
+    SELECT d.deptno, d.dname, SUM(NVL(e.sal, 0)) dept_sal
+    FROM scott.emp e RIGHT JOIN scott.dept d
+    ON e.deptno = d.deptno group by d.deptno, d.dname;
+
+ALTER TABLE extrait_emp ADD CONSTRAINT extrait_emp_pk PRIMARY KEY(empno);
+
+ALTER TABLE sal_dept ADD CONSTRAINT sal_dept_pk PRIMARY KEY(deptno);
+
+CREATE VIEW detail_emp AS
+    SELECT e.empno, e.ename, e.sal, e.deptno, d.dname
+    FROM extrait_emp e JOIN sal_dept d ON e.deptno = d.deptno;
+/*Fin début donné*/
+/*1)
+	Pas d'insertion possible dans la vue*/
+/*2)*/
+CREATE OR REPLACE TRIGGER instead_of_emp
+INSTEAD OF INSERT OR UPDATE OR DELETE ON detail_emp
+FOR EACH ROW
+BEGIN
+    IF INSERTING THEN
+        INSERT INTO extrait_emp (empno, ename, sal, deptno) VALUES (:new.empno, :new.ename, :new.sal, :new.deptno);
+        UPDATE sal_dept SET dept_sal = dept_sal + :new.sal WHERE deptno = :new.deptno;
+    ELSIF UPDATING THEN
+        UPDATE extrait_emp SET sal = :new.sal WHERE empno = :new.empno;
+        UPDATE extrait_emp SET deptno = :new.deptno WHERE deptno = :new.deptno;
+        UPDATE sal_dept SET dept_sal = dept_sal - :old.sal WHERE deptno = :old.deptno;
+        UPDATE sal_dept SET dept_sal = dept_sal + :new.sal WHERE deptno = :new.deptno;
+    ELSIF DELETING THEN
+        DELETE FROM extrait_emp WHERE empno = :old.empno;
+        UPDATE sal_dept SET dept_sal = dept_sal - :old.sal WHERE deptno = :old.deptno;
+    END IF;
+END;
+
+/*3)*/
+INSERT INTO detail_emp (empno, ename, sal, deptno, dname) VALUES (7699, 'michel', 2990, 30, 'sales');
+UPDATE detail_emp SET sal = 3000 WHERE empno = 7699;
+DELETE FROM detail_emp WHERE empno = 7699;
