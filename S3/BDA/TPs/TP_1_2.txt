@@ -85,10 +85,7 @@ commit ;
 
 
 
-/*
-1. fait
-2. fait
-*/
+/*1)*/
 
 DROP TABLE erreurs;
 CREATE TABLE erreurs (
@@ -99,18 +96,21 @@ message VARCHAR2(255BYTE),
 create or replace PACKAGE pksorties IS
     TYPE type_minibus IS TABLE OF minibus%ROWTYPE INDEX BY BINARY_INTEGER;
     FUNCTION les_minibus RETURN NUMBER;
+    FUNCTION affectations_minibus(p_nosortie sortie.nosortie%TYPE) RETURN NUMBER;
 END pksorties;
 
+/*2)*/
 
 create or replace PACKAGE BODY pksorties IS
+    v_tab_minibus type_minibus;
+    
     FUNCTION les_minibus
     RETURN NUMBER
     IS
-    v_tab_minibus type_minibus;
-    v_nb_minibus NUMBER(3);
-    v_index NUMBER(3) := 1;
-    err_code INT(6);
-    err_msg VARCHAR2(255);
+        v_nb_minibus NUMBER(3);
+        v_index NUMBER(3) := 1;
+        err_code INT(6);
+        err_msg VARCHAR2(255);
     BEGIN
         SELECT COUNT(nominibus)
         INTO v_nb_minibus
@@ -135,5 +135,47 @@ create or replace PACKAGE BODY pksorties IS
                 RETURN -1;
 
     END les_minibus;
+    
+    
+    
+    FUNCTION affectations_minibus(p_nosortie sortie.nosortie%TYPE)
+	RETURN NUMBER
+    IS
+        CURSOR c_inscrits IS SELECT * FROM inscription_sortie WHERE nosortie = p_nosortie ORDER BY DATE_INSCRIPTION;
+        CURSOR c_minibus IS SELECT * FROM minibus;
+        nb_minibus NUMBER;
+        minibus_actuel NUMBER;
+        nb_passagers NUMBER;
+        err_msg VARCHAR2(255);
+        err_code INT(6);
+    BEGIN
+        nb_minibus := les_minibus;
+        minibus_actuel := 0;
+        nb_passagers := 0;
+        FOR v_inscrits IN c_inscrits LOOP
+             IF nb_passagers = v_tab_minibus(minibus_actuel).capacite THEN
+                minibus_actuel := minibus_actuel + 1;
+                nb_passagers := 0;
+            END IF;
+            IF (minibus_actuel <= nb_minibus) THEN
+                UPDATE inscription_sortie SET
+                nominibus = v_tab_minibus(minibus_actuel).nominibus
+                WHERE noadherent = v_inscrits.noadherent;
+                nb_passagers := nb_passagers + 1;
+            END IF;
+        END LOOP;
+        IF minibus_actuel > nb_minibus THEN 
+            RETURN nb_minibus;
+        ELSE
+            RETURN minibus_actuel;
+        END IF;
+        EXCEPTION
+            WHEN OTHERS THEN
+                ROLLBACK;
+                err_msg := sqlerrm;
+                INSERT INTO erreurs (message, "DATE") VALUES ('Erreur n° ' || err_code || ' , ' || err_msg, CURRENT_DATE);
+                COMMIT;
+                RETURN -1;
+	END affectations_minibus;
 
 END pksorties;
