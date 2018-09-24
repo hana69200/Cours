@@ -10,12 +10,18 @@
  * http://www.opensource.org/licenses/MIT
  *
  */
+ if (isset($test)) echo $test;
 //  En tête de page
 ?>
 <?php require_once(PATH_VIEWS.'header.php');?>
 
 <!--  Zone message d'alerte -->
-<?php require_once(PATH_VIEWS.'alert.php');?>
+<?php
+require_once(PATH_VIEWS.'alert.php');
+if (isset($erreur)) {
+    echo "<p>Erreur : $erreur";
+}
+?>
 
 <!--  Début de la page -->
 <h1><?php  echo TITRE_PAGE_ACCUEIL;?></h1>

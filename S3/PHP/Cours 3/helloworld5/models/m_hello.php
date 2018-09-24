@@ -12,7 +12,7 @@ catch(PDOException $e){
 
 //S'il n'y a pas eu de probleme de login
 if (!isset($erreur) && isset($login)) {
-    $requete = "SELECT mot, nbrepet FROM utilisateur WHERE login = '" . $login . "'";
+    $requete = "SELECT * FROM utilisateur WHERE login = '" . $login . "'";
     $donnees = array($login);
 	try {
 	    $query = $bd -> prepare($requete);

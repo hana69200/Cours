@@ -10,8 +10,18 @@
  * http://www.opensource.org/licenses/MIT
  */
 
+if (isset($userDAO)) {
+    
+        $erreur = 'test';
+}
+else {
+    echo '$user n\'existe pas';
+}
 
+if (isset($erreur)) {
+    $alert = choixAlert($erreur);
+}
 
 //appel de la vue
 require_once(PATH_VIEWS.$page.'.php');
-
+?>

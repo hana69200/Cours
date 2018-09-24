@@ -10,6 +10,8 @@
  * http://www.opensource.org/licenses/MIT
  *
  */
+
+if (isset($test)) echo $test;
 ?>
 
 <!--  En tête de page -->

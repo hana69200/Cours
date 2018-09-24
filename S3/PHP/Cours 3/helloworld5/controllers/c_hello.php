@@ -1,7 +1,7 @@
 <?php
 
 require_once(PATH_MODELS . 'UtilisateurDAO.php');
-
+$test = 'ok';
 // Contrôle - Neutralisation du paramètre reçu 
 if (isset($_POST['login'])) {
     $value = htmlspecialchars($_POST['login']);
