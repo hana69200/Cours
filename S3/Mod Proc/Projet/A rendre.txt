@@ -1,6 +1,8 @@
 -UN pdf avec tous les diagrammes
 -Un document avec les interprétation éventuelles du sujet
 
+On ne met que les méthodes présentes dans le diagramme de séquence
+
 On suppose :
 (sur les classes)
 l'étude peut être créée mais pas encore associée à quoique ce soit
@@ -8,3 +10,4 @@ l'étude peut être créée mais pas encore associée à quoique ce soit
 (sur les associations)
 un et un seul étudiant peut être relié à un ou plusieurs frais
 une et une seule facture peut être liée à un ou plusieurs frais
+un étudiant ne peut être responsable que d'une et une seule étude
