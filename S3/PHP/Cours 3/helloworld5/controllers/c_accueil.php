@@ -10,12 +10,8 @@
  * http://www.opensource.org/licenses/MIT
  */
 
-if (isset($userDAO)) {
-    
-        $erreur = 'test';
-}
-else {
-    echo '$user n\'existe pas';
+if (isset($_GET['erreur'])) {
+    $erreur = htmlspecialchars($_GET['erreur']);
 }
 
 if (isset($erreur)) {

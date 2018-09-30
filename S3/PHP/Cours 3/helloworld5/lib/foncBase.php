@@ -17,9 +17,6 @@ function choixAlert($message)
         case 'url_non_valide' :
             $alert['messageAlert'] = TEXTE_PAGE_404;
             break;
-        case 'test' :
-            $alert['messageAlert'] = "Test";
-            break;
         default :
             $alert['messageAlert'] = MESSAGE_ERREUR;
     }
