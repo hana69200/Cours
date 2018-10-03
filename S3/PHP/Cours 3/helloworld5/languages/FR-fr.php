@@ -1,7 +1,6 @@
 <?php
 //isoler ici dans des constantes les textes affichés sur le site
 define('LOGO', 'Logo de la compagnie'); // Affiché si image non trouvée
-
 define('MENU_ACCUEIL', 'Accueil');
 define('TITRE_PAGE_ACCUEIL', 'Accueil');
 define('TITRE_PAGE_HELLO', 'Résultat');

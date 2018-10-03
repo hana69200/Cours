@@ -25,17 +25,17 @@ const AUTEUR = 'Julien GIRAUD';
 
 //dossiers racines du site
 define('PATH_CONTROLLERS', './controllers/c_');
+define('PATH_ENTITY', './entities/');
 define('PATH_ASSETS', './assets/');
 define('PATH_LIB', './lib/');
 define('PATH_MODELS', './models/m_');
 define('PATH_VIEWS', './views/v_');
 define('PATH_TEXTES', './languages/');
-define('PATH_ENTITY', './entities/');
 
 //sous dossiers
-define('PATH_CSS', PATH_ASSETS.'css/');
-define('PATH_IMAGES', PATH_ASSETS.'images/');
-define('PATH_SCRIPTS',PATH_ASSETS.'scripts/');
+define('PATH_CSS', PATH_ASSETS . 'css/');
+define('PATH_IMAGES', PATH_ASSETS . 'images/');
+define('PATH_SCRIPTS', PATH_ASSETS . 'scripts/');
 //define("PATH_GALERIE",'galerie/');
 //define('PATH_LOG','log/');
 

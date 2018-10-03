@@ -1,0 +1,20 @@
+http://www.anthonybusson.fr/index.php/teaching
+
+Execution :
+NOM=$1
+clear
+gcc -o $NOM $NOM.c
+./$NOM
+rm $NOM
+
+man 2 [nom commande] -> doc appelle système
+man 3 [nom commande] -> doc lib c
+
+strlen(maChaine); -> nombre de caractères
+sizeof(maChaine); -> taille en octets
+
+#include<unistd.h>
+write [id E/S] [adresse du msg à écrire] [nombre d'octets]
+
+TOUJOURS tester si les appelles systèmes ont fonctionnés avec un perror()
+

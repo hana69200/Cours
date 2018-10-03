@@ -24,7 +24,7 @@ class Connexion {
     }
 
     public function getBdd() {
-        return $this->_bdd;
+        return $this -> _bdd;
     }
 
 }

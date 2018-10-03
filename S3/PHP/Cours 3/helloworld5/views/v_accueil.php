@@ -20,7 +20,7 @@ require_once(PATH_VIEWS.'alert.php');
 ?>
 
 <!--  Début de la page -->
-<h1><?php  echo TITRE_PAGE_ACCUEIL;?></h1>
+<h1><?= TITRE_PAGE_ACCUEIL ?></h1>
 
 <!--  Formulaire -->
 <form method="post" action="<?= 'index.php?page=hello' ?>">
