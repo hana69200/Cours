@@ -20,3 +20,4 @@ if(isset($alert))
 	</div>
 <?php
 }
+?>
