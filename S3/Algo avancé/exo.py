@@ -26,4 +26,4 @@ def getMirror(racine):
     return courant
 
 def supprVal(racine, val):
-    
+
