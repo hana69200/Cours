@@ -81,20 +81,3 @@ def suppr(ABR, val):
         # On répète l'action sur maxGauche
         return suppr(minDroit, val)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
