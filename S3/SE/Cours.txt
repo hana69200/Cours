@@ -18,3 +18,13 @@ write [id E/S] [adresse du msg à écrire] [nombre d'octets]
 
 TOUJOURS tester si les appelles systèmes ont fonctionnés avec un perror()
 
+Dans un programme de processus,
+wait(&monEntier) // Renvoi le pid du premier fils à s'être terminé --> à l'adresse passée en paramètre, il s'agit d'un appel bloquant, renvoi 0 ou -1 en cas d'erreur ou s'il n'y a pas de fils
+waitpid(pid, état : bloquant/non bloquant, &monEntier)
+
+Si un fils s'est déjà éxecuté avant qu'on fasse le wait, l'OS vide la pile du processus (vide son code), il ne s'éxecute pas mais l'OS a toujours les informations du processus vide en RAM.
+Seul le wait permet de nettoyer les informations des processus fils et ainsi d'empêcher de remplir la ram de zombies.
+
+Si un père meurt alors qu'il a encore un ou plusieurs fils en vie, du point de vue du système leur père devient le processus init
+
+WEXITSTATUS(retourExit) // Retourne le dernier octet (le plus à droite) parmis les 32 bits retournés par un processus. Cela correspond à la valeur retournée par le exit() : elle est comprise entre 0 et 255 (un -n deviendra n)

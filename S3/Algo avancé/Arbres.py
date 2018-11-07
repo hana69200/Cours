@@ -37,7 +37,7 @@ def parcourtEtage(racine):
         mafile.ajouter(arbre)
     while !mafile.estVide(): #Tant qu'il y a des éléments dans mafile
         #traitement sur "mafile.getDebut().valeur"
-        if mafile.getDebut.fd != None: #ATTENTION la droite et la gauche sont inversés à la lecture
+        if mafile.getDebut.fdz != None: #ATTENTION la droite et la gauche sont inversés à la lecture
             mafile.ajouter(mafile.getDebut.fd)
         if mafile.getDebut.fg != None:
             mafile.ajouter(mafile.getDebut.fg)
