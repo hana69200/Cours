@@ -8,3 +8,5 @@ jre = java runtime environment -> permet d'executer du java compilé
 jdk = compilateur + jre -> permet de compiler ET d'executer
 javac nomFichier.java -> compile
 java nomFichier -> execute
+Compilation servlet :
+java -classpath adresse.jar
