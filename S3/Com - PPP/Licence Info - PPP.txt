@@ -1,6 +1,8 @@
-Projet : L3 + Master en alternance\
+﻿Projet : L3 + Master en alternance\
 Sur la section formation du site de l'universite :
 http://licence-info.univ-lyon1.fr/
+
+http://www.univ-lyon2.fr/recherche/www3-ed-512-infomaths-informatique-et-mathematique-de-lyon--300030.kjsp
 
 -> Explications des differentes L3 informatique :
 Elles sont a CPGE sauf informatique fondamental qui est a l'ENS Lyon
@@ -71,3 +73,15 @@ http://offre-de-formations.univ-lyon1.fr/ue-16375-12/programmation-concurrente.h
 Liste des debouches qui m'interessent : a faire
 
 Liste des poursuites qui m'interessent : a faire
+
+
+
+
+
+
+
+
+Je m'oriente vers tel type d'[école | étude | cursus] pour tel ou tel raison...
+Le PPP du S1 m'a fait prendre conscience de ...
+Au S2...
+
