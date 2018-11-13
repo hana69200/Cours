@@ -1,4 +1,4 @@
-Communication d’insertion  - S3
+﻿Communication d’insertion  - S3
 
 Le marché du recrutement
 
@@ -29,6 +29,8 @@ lemondeinformatique.fr
 
 https://www.leguidedesmetiers.fr/fr/secteur/informatique
 Liste des métiers de l'informatique avec descriptifs des technologies/formations
+
+https://www.indeed.fr/emplois?as_and=informatique&as_phr=&as_any=&as_not=&as_ttl=&as_cmp=&jt=internship&st=&as_src=&salary=&radius=25&l=Bourg-en-Bresse+%2801%29&fromage=any&limit=10&sort=&psf=advsrch
 
 1) Trouvez des éléments d’information sur le marché de l’emploi en informatique
 2) Trouvez des informations sur des technologies qui vous intéressent
