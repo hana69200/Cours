@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
                     break; //gérer l'erreur de execvp, si pas d'erreur le break et le reste est supprimé
                 
                 default: // Traitement du père
-                    wait(&retourFils);
+                    wait(&retourFils); // Traiter erreur wait si pas de fils
             
             } // Fin switch
             
