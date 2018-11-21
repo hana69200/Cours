@@ -32,17 +32,26 @@ int main(int argc, char* argv[]) {
         // Si l'entrée utilisateur n'est pas vide, exécution de la commande par le fils créé
         if (ligne_vide(l) == 0) {
             int retourFork = fork();
-            switch (retourFork) { // Manque la gestion des erreurs (-1 pour erreurs)
+            switch (retourFork) {
                 case 0: // Traitement du fils
-                    execvp(l[0], l);
-                    break; //gérer l'erreur de execvp, si pas d'erreur le break et le reste est supprimé
+                    if ((execvp(l[0], l)) == -1) { // Traitement de l'erreur de execvp
+						perror("Erreur traitement fils");
+						exit(1);
+					}
+				
+				case -1: // Traitement de l'erreur du fork
+					perror("Erreur fork\n");
+					exit(1);
                 
                 default: // Traitement du père
-                    wait(&retourFils); // Traiter erreur wait si pas de fils
+                    if ((wait(&retourFils)) == -1) { // Traitement de l'erreur du wait si pas de fils
+						perror("Erreur fils");
+						exit(1);
+					}
             
             } // Fin switch
             
-        } // Fin if ligne_vide()
+        } // Fin if ligne_vide
         
     } // Fin do
     while (1);
