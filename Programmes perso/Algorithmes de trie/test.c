@@ -372,13 +372,13 @@ void quicksort(int tab[], int taille)
 
 int main()
 {
-	int nb=133; //nombre d'entier, taille sur x, 133 au maximum ou 43
-	int larg=44; //valeur maximale des entiers, taille sur y, 44 au maximum ou 135
+	int nb=169; //nombre d'entier, taille sur x, 133 au maximum ou 43
+	int larg=40; //valeur maximale des entiers, taille sur y, 44 au maximum ou 135
 	int tab[nb];
 	while (1)
 	{
 		fill(nb, tab, larg);
-		gravity(tab, nb);
+		bubble(nb, tab);
 		yprint(nb, tab);
 		//insertion(nb, tab);
 		sleep(10);
