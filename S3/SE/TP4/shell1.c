@@ -7,14 +7,13 @@
 #include <unistd.h>
 #include "ligne_commande.h"
 
-void cd(char* adresse);
-void export(char* nomVariable);
+int isCommandeInterne(char**);
+void cd(char*);
+void export(char*);
 
 int main(int argc, char* argv[]) {
 
     int retourFils;
-    int isCommandeInterne(char*);
-    void executeCommandeInterne(char**);
 
     do {
         printf("____$");
@@ -33,17 +32,12 @@ int main(int argc, char* argv[]) {
         if (fin_de_fichier(l) == 1) break;
         
         // Si l'entrée utilisateur est vide, ça reboucle tout seul
-        
-        
-        
             
         // Si l'entrée utilisateur n'est pas vide
         if (ligne_vide(l) == 0) {
         
             // S'il s'agit d'une commande interne
-            if (isCommandeInterne(l[0])) {
-                // Exécution de la commande en interne
-                executeCommandeInterne(l);
+            if (isCommandeInterne(l)) { // Exécution de la commande en interne
             }
             // S'il s'agit d'une commande externe
             else {
@@ -79,23 +73,41 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
-int isCommandeInterne(char* commande) {
-    if ((strcmp(commande, "cd")) == 0 || (strcmp(commande, "exit")) == 0 || (strcmp(commande, "export")) == 0) {
-        return 1;
-    }
-    return 0;
-}
-
-void executeCommandeInterne(char** commande) {
+int isCommandeInterne(char** commande) {
     if (strcmp(commande[0], "cd") == 0) {
 	    cd(commande[1]);
+	    return 1;
     }
     else if(strcmp(commande[0], "exit") == 0) {
 	    exit(0);
+	    return 1;
     }
     else if(strcmp(commande[0],"export") == 0) {
 	    export(commande[1]);
+	    return 1;
     }
+    if (sizeof(commande) > 2) {
+        for (int i = sizeof(commande); i > 0; i--) {
+            if (strcmp(commande[i], ">") {
+                fd=open(commande[i + 1], O_WRONLY | O_CREAT, 777);
+                write(fd, tableau,...)
+                return 1;
+            }
+            else if (strcmp(commande[i], ">>") {
+                return 1;
+            }
+            else if (strcmp(commande[i], "2>") {
+                return 1;
+            }
+            else if (strcmp(commande[i], "2>>") {
+                return 1;
+            }
+            else if (strcmp(commande[i], "<") {
+                return 1;
+            }
+        }
+    }
+    return 0;
 }
 
 void cd(char* adresse) {

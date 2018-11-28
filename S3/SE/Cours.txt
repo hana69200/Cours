@@ -28,3 +28,9 @@ Seul le wait permet de nettoyer les informations des processus fils et ainsi d'e
 Si un père meurt alors qu'il a encore un ou plusieurs fils en vie, du point de vue du système leur père devient le processus init
 
 WEXITSTATUS(retourExit) // Retourne le dernier octet (le plus à droite) parmis les 32 bits retournés par un processus. Cela correspond à la valeur retournée par le exit() : elle est comprise entre 0 et 255 (un -n deviendra n)
+
+"ls fichier > file 2>&1"
+La commande est lue de droite à gauche
+"2>&1" redirige toutes les sorties vers la sortie standard (erreur et réussite)
+et "> file" redirige la sortie standard dans le fichier "file"
+Le fichier "file" contient donc les messages de réussite et d'erreur sans distinction
