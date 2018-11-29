@@ -1,4 +1,4 @@
-2 Licences à Nauthibus : Info et "MAGE" je crois
+﻿2 Licences à Nauthibus : Info et "MAGE" je crois
 Jury de poursuite d'études fin janvier
 Pour avoir mon classement j'envoie un mail à la prof de la conférence avec objet : demande de classement (par semestre)
 Demander l'avis de l'iut au plus vite
@@ -7,6 +7,7 @@ L3 informatique sur dossier:
     Attention aux maths : baisse de 1 à 1.5 points de moyenne
     --> limite en dessous de 11, après 11 c'est bon (sur les 3 semestres)
 Voir L3 Miage
+    En fait c'est un master après une licence info
 En soit une L3 informatique ne vaut "rien" sans le Master
 
 
