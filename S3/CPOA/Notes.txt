@@ -1,4 +1,0 @@
-https://getbootstrap.com/docs/4.1/components/dropdowns/
-
-Faire séparemment un diagramme de classe d'analyse (sans les attributs/méthodes) et
-un diagramme de classe de conception (avec tout ce qu'il faut pour générer du code)
