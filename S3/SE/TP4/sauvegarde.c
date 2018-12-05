@@ -13,6 +13,7 @@ void export(char*);
 char** update(char**);
 void copy(char* src, char* dest);
 
+
 int main(int argc, char* argv[]) {
 
     int retourFils;
@@ -36,7 +37,9 @@ int main(int argc, char* argv[]) {
         // Si l'entrée utilisateur est vide, ça reboucle tout seul
             
         // Si l'entrée utilisateur n'est pas vide
+        printf("Cooucou 1");
         if (ligne_vide(l) == 0) {
+            printf("Cooucou 2");
         
             // S'il s'agit d'une commande interne
             if (isCommandeInterne(l)) { // Exécution de la commande en interne
@@ -57,6 +60,7 @@ int main(int argc, char* argv[]) {
 				        exit(1);
                     
                     default: // Traitement du père
+                        // Il faut prendre en compte le "&" --> waitpid(..., WNOHANS)
                         if ((wait(&retourFils)) == -1) { // Traitement de l'erreur du wait si pas de fils
 					        perror("Erreur fils");
 					        exit(1);
@@ -76,7 +80,7 @@ int main(int argc, char* argv[]) {
 }
 
 int isCommandeInterne(char** commande) {
-    int i = 0, fd, retourFils;
+    printf("Cooucou");
     if (strcmp(commande[0], "cd") == 0) {
 	    cd(commande[1]);
 	    return 1;
@@ -89,19 +93,19 @@ int isCommandeInterne(char** commande) {
 	    export(commande[1]);
 	    return 1;
     }
-    else {
-        while (commande[i] != NULL) {
-            // Traitements des redirections
-            if (strcmp(commande[i], ">") == 0) {
-                switch (fork()) {
+    else if (sizeof(commande) > 2) {
+        for (int i = sizeof(commande); i > 0; i--) {
+            if (strcmp(commande[i], ">")) {
+                int fd;
+                int retourFils;
+                switch (fork()) { /*
                     case 0: // Traitement du fils
-                        fd = open(commande[i + 1], O_CREAT | O_RDWR | O_APPEND, 0600);
+                        fd = open(commande[i + 1], O_WRONLY | O_CREAT, 777);
                         if (dup2(fd, 1) < 0) {
                             perror("Erreur dup2 avec >");
                             exit(1);
                         }
-				        close(fd);
-                        char** newCommande = update(commande);
+                        char ** newCommande = update(commande);
                         if ((execvp(newCommande[0], newCommande)) == -1) { // Traitement de l'erreur de execvp
 					        perror("Erreur traitement fils");
 					        exit(1);
@@ -117,13 +121,24 @@ int isCommandeInterne(char** commande) {
 					        perror("Erreur fils");
 					        exit(1);
 				        }
-                return 1;
+                return 1;*/
                 } // Fin switch
+            } // Fin if
+            else if (strcmp(commande[i], ">>")) {
+                return 1;
             }
-            
-            i++;
+            else if (strcmp(commande[i], "2>")) {
+                return 1;
+            }
+            else if (strcmp(commande[i], "2>>")) {
+                return 1;
+            }
+            else if (strcmp(commande[i], "<")) {
+                return 1;
+            }
         }
     }
+    printf("Cooucou");
     return 0;
 }
 
