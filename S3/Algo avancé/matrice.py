@@ -1,6 +1,8 @@
 def afficherMatrice(mat):
     for ligne in mat:
-        print(ligne)
+        for element in ligne:
+            print(element, end=' ')
+        print('\n', end='')
 
 file = open("graphe.txt", "r")
 
