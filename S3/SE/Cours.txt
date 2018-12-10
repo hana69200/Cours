@@ -34,3 +34,46 @@ La commande est lue de droite à gauche
 "2>&1" redirige toutes les sorties vers la sortie standard (erreur et réussite)
 et "> file" redirige la sortie standard dans le fichier "file"
 Le fichier "file" contient donc les messages de réussite et d'erreur sans distinction
+
+
+
+
+Redirection (cours de Jonathan)
+On part de "a.sh > test.txt
+On veut rediriger la sortie standard de "a.sh" vers l'entrée standard de "test.txt"
+Dans un processus, l'entrée standard est 0 et la sortie standard c'est 1
+On va dire à "a.sh" que sa sortie c'est "text.txt"
+On va déjà créer un fichier :
+int file = open(leNomDuFichier, O_WONLY | O_CREAT, 777);
+On gère les erreurs :
+if (file < 0) {
+    perror("Erreur open");
+}
+Il reste à exécuter a.sh en changeant sa sortie standard
+Vu qu'on est le programme, c'est notre sortie standard qui être changée
+file contient le descripteur de mon fichier de sortie
+On va donc remplacer notre sortie standard par file
+La commande "dup2" permet de "remplacer paramètre 1 par paramètre 2" :
+dup2([la nouvelle valeur du descripteur], [l'entrée standard]);
+--> int retourDup = dup2(file, 1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
