@@ -1,0 +1,3 @@
+Projet réalisé durant ma deuxième année de DUT.
+Pour le moment cela fonctionne en Google Script sur un fichier Google Spreadsheet.
+L'objectif était de porter cette application en PHP + base de données SQL mais je n'ai pas encore pris le temps de le faire.
