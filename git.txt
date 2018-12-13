@@ -1,7 +1,0 @@
-@echo off
-git pull
-echo appuyer sur une touche pour terminer la sauvegarde git.
-pause
-git add --all
-git commit -m "MAJ"
-git push
