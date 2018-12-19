@@ -1,4 +1,4 @@
-import matrice as god
+import matrice_adjacence as god
 
 class Arrete():
     def __init__(self, sommet1, sommet2, valuation):
