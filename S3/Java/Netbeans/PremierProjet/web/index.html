@@ -12,5 +12,14 @@ and open the template in the editor.
     </head>
     <body>
         <div>Oh un <a href="./test.jsp">servlet</a></div>
+        <form method="post" action="actionServlet">
+            <input type="hidden" name="page" value="test" />
+            Nom : <input type="text" name="nom" />
+            <br/>
+            Prénom : <input type="text" name="prenom" />
+            <br/>
+            <input type="submit" value="OK" />
+        </form>
+        
     </body>
 </html>
