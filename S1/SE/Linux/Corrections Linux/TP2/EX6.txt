@@ -1,4 +1,4 @@
-Exercice 6 : Les filtres et les expressions régulières (suite)
+﻿Exercice 6 : Les filtres et les expressions régulières (suite)
 
 Créer un fichier "fruits.txt" contenant les mots suivant (un par ligne) : tomate, poire, pomme, cerise, Fraise, fraise, courgette, POMME3, afraise.
 
@@ -25,7 +25,7 @@ egrep ai fruits.txt
 
 4. Les lignes dont le nom contient un chiffre
 
-De meme qu'a la 3 mais "ai" doit etre un chiffre :
+De même qu'à la 3 mais "ai" doit être un chiffre :
 egrep [0123456789] fruits.txt
 MAIS il existe une syntaxe plus simple qu'il faut utiliser :
 egrep [0-9] fruits.txt
@@ -43,5 +43,5 @@ egrep -i ^[a-z]{5}$ fruits.txt
 ATTENTION la correction de M. Samba n'est pas bonne pour cette question.
 Sa version est :
 egrep ^.{5}$ fruits.txt
-Ce qui affiche tous les mots de 5 caracteres (lettre ou chiffre).
+Ce qui affiche tous les mots de 5 caractères (lettre ou chiffre).
 

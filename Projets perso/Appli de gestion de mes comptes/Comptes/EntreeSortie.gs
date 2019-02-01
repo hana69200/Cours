@@ -1,22 +1,32 @@
 function EntreeSortie() {
 
-  //Déclaration du tableau d'affichage
-  var tab_affichage = [];
-  
-  //Déclaration des contenus de cellule à retourner
-  tab_affichage.push('Bilan total : ' + getTotalActuel() + ' €');
-  tab_affichage.push('Bilan perso : ' + getTotalPotentiel() + ' €');
-  tab_affichage.push('Bilan du mois actuel : ' + getBilanMoisActuel() + ' €');
-  tab_affichage.push('Bilan du mois dernier : ' + getBilanMoisDernier() +' €');
-  tab_affichage.push('Total qu\'on me doit : ' + getTotalDu() + ' €');
-  tab_affichage.push('Remboursements en attente : ' + getNbRemboursement());
-  
-  //Déclaration de la cellule de référence (impossible à mettre plus haut)
-  var cellules_reference = [new Cellule('B', 2), new Cellule('B', (sheet.getLastRow() - tab_affichage.length + 1))];
-  
-  //Gestion de l'affichage
-  for (var i = 0; i < cellules_reference.length; i++) {
-    affichage(tab_affichage, cellules_reference[i], getTotalActuel());
+    // Déclaration des variables
+    var tab_affichage = [], cellules_reference = [];
+    var i = 0;
+
+    // Ajout du contenu à afficher
+    if (getTotalDu() != 0) {
+      tab_affichage.push('Bilan total : ' + getBilanTotal() + ' €');
+    }
+    tab_affichage.push('Bilan perso : ' + getBilanPerso() + ' €');
+    tab_affichage.push('Total des entrées : ' + getTotalEntree() + ' €');
+    tab_affichage.push('Total des sorties : ' + getTotalSortie() + ' €');
+    tab_affichage.push('Total qu\'on me doit : ' + getTotalDu() + ' €');
+    if (getTotalDu() != 0) {
+      tab_affichage.push('Remboursements en attente : ' + getNbRemboursement());
+    }
+
+    // Ajout des cellule où afficher le contenu
+    for (i ; i < taille_colone - tab_affichage.length; i += tab_affichage.length + 15) {
+      cellules_reference.push(new Cellule('B', 2 + i));
+    }
+
+    // Affichage des bilans finaux
+    for (i = 0; i < cellules_reference.length; i++) {
+      affichage(tab_affichage, cellules_reference[i], getBilanTotal());
+    }
+
+    // Affichage des bilans mensuels
+    afficherTousLesBilans();
+
   }
-  
-}

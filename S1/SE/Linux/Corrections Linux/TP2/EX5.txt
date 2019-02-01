@@ -1,4 +1,4 @@
-Exercice 5 : Les filtres et les expressions régulières
+﻿Exercice 5 : Les filtres et les expressions régulières
 
 Constituer un annuaire de quelques correspondants avec le format suivant : 
 nom : ville : numéro de téléphone

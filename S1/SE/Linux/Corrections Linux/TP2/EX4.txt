@@ -1,4 +1,4 @@
-Exercice 4 : Les périphériques
+﻿Exercice 4 : Les périphériques
 
 1. Essayer la commande "tty".
 Quelle est son utilité ?
@@ -16,7 +16,7 @@ Utiliser la commande "tty" dans le deuxieme terminal.
 Ici cela donne :
 /dev/pts/1
 
-Pour ecrire dans le deuxieme terminal depuis le premier il faut utiliser la commande :
+Pour écrire dans le deuxieme terminal depuis le premier il faut utiliser la commande :
 echo 42 > /dev/pts/1
 
 

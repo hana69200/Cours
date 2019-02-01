@@ -1,4 +1,4 @@
-Exercice 2 : Le système de gestion de fichiers
+﻿Exercice 2 : Le système de gestion de fichiers
 
 1. Se déplacer dans le répertoire '/etc',  et copier le fichier "fstab" dans le répertoire TP01.
 
@@ -16,30 +16,30 @@ mv fstab table
 
 3. Créer un répertoire "systeme" dans TP01.
 
-Methode 1 :
-Creer le repertoire 'systeme' depuis n'importe ou avec :
+Méthode 1 :
+Créer le répertoire 'systeme' depuis n'importe ou avec :
 mkdir ~/SELINUX/TP01/systeme
 
 Methode 2 :
-A cause de la question 2 nous sommes deja dans TP01.
-On peut donc directement creer 'systeme' avec :
+À cause de la question 2 nous sommes déjà dans TP01.
+On peut donc directement créer 'systeme' avec :
 mkdir systeme
 
 4. En restant dans le répertoire TP01,  déplacer "table" dans "systeme".
 
 Deplacer le fichier avec :
 mv table systeme
-ou pour etre plus clair :
+ou pour être plus clair :
 mv table systeme/
 
 5. En étant dans le répertoire TP01, faire une copie de "table" nommée "table1" dans votre répertoire accueil.
 
-Copier le repertoire dans le repertoire d'accueil avec :
+Copier le répertoire dans le répertoire d'accueil avec :
 cp /systeme/table ~/table1
 
 6. Afficher le contenu du répertoire courant.
 
-Lister les fichiers et repertoires avec :
+Lister les fichiers et répertoires avec :
 ls ~/
 
 7. Afficher l’inode de table1.

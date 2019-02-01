@@ -20,7 +20,7 @@ git clone https://github.com/LicorneMagique/Projet-web.git
 pour sauvegarder :
 git push
 
-pour re extraire les fichiers de l'archive git :
+pour re extraire les fichiers de l'archive git (en écrasant les modifications) :
 git checkout -f HEAD
 
 SSH:

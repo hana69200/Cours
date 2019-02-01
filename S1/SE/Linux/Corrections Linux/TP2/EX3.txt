@@ -1,11 +1,11 @@
-Exercice 3 : Les redirections
+﻿Exercice 3 : Les redirections
 
 1. Stocker, dans un fichier texte, la liste des fichiers et répertoires de votre répertoire d’accueil.
 Vérifier que cela a fonctionné.
 
 Stocker la liste des fichiers et repertoires dans un fichier avec :
 ls > ~/liste_repertoires.txt
-et verifier que cela a marche avec :
+et verifier que cela a marché avec :
 cat ~/liste_repertoires.txt
 
 Ce qui donne en une commande :
