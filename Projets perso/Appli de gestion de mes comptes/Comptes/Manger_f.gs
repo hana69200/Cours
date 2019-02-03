@@ -6,14 +6,14 @@ function getBilanRepas() {
      */
     return (getSoldeReel() - getSoldeOfficiel()).toFixed(2);
   }
-
+  
   function getBudjetCafe() {
     /**
      * Description : Retourne le montant utilisé dans les distributeurs
      */
     return (getTotalIzly() - getTotalRU()).toFixed(2);
   }
-
+  
   function getNbRepas() {
     /**
      * Description : Retourne le nombre de repas compabilisés
@@ -26,14 +26,14 @@ function getBilanRepas() {
     }
     return total;
   }
-
+  
   function getSigneManger(ligne) {
     /**
      * Description : Retourne 1 s'il s'agit d'une entrée d'argent, -1 sinon
      */
     return is(ligne, 'manger') ? 1 : -1;
   }
-
+  
   function getSoldeOfficiel() {
     /**
      * Description : Retourne le montant que je suis censé posséder
@@ -49,7 +49,7 @@ function getBilanRepas() {
     }
     return total.toFixed(2);
   }
-
+  
   function getSoldeReel() {
     /**
      * Description : Retourne le montant qu'il me reste
@@ -60,7 +60,7 @@ function getBilanRepas() {
     }
     return total.toFixed(2);
   }
-
+  
   function getTotalDepenseOfficiel() {
     /**
      * Description : Retourne le montant total que je suis censé avoir dépensé pour manger à l'université
@@ -73,7 +73,7 @@ function getBilanRepas() {
     }
     return total.toFixed(2);
   }
-
+  
   function getTotalDepenseReel() {
     /**
      * Description : Retourne le montant total que j'ai réellement dépensé
@@ -86,14 +86,14 @@ function getBilanRepas() {
     }
     return total.toFixed(2);
   }
-
+  
   function getTotalGagne() {
     /**
      * Description : Retourne le montant total que j'ai gagné sur les repas
      */
     return (getTotalDepenseOfficiel() - getTotalReelDepensePourManger()).toFixed(2);
   }
-
+  
   function getTotalIzly() {
     /**
      * Description : Retourne le montant total que j'ai mis sur mon compte Izly
@@ -106,7 +106,7 @@ function getBilanRepas() {
     }
     return total.toFixed(2);
   }
-
+  
   function getTotalRecu() {
     /**
      * Description : Retourne le montant total que j'ai reçu pour manger
@@ -119,7 +119,7 @@ function getBilanRepas() {
     }
     return total.toFixed(2);
   }
-
+  
   function getTotalReelDepensePourManger() {
     /**
      * Description : Retourne le montant total que j'ai réellement dépensé pour manger à l'université
@@ -132,7 +132,7 @@ function getBilanRepas() {
     }
     return total.toFixed(2);
   }
-
+  
   function getTotalRU() {
     /**
      * Description : Retourne le montant total que j'ai réellement dépensé pour manger au RU
@@ -145,3 +145,4 @@ function getBilanRepas() {
     }
     return total.toFixed(2);
   }
+  

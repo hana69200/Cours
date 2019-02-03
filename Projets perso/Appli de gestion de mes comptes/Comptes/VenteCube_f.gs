@@ -4,7 +4,7 @@ function getBilan() {
      */
     return (getCA() - getInvestissement()).toFixed(2);
   }
-
+  
   function getCA() {
     /**
      * Description : Retourne le chiffre d'affaires du commerce
@@ -17,7 +17,7 @@ function getBilan() {
     }
     return recu.toFixed(2);
   }
-
+  
   function getInvestissement() {
     /**
      * Description : Retourne l'investissement total du commerce
@@ -30,7 +30,7 @@ function getBilan() {
     }
     return depense.toFixed(2);
   }
-
+  
   function getMontantAchat(cell) {
     /**
      * Description : Retourne le montant de l'achat de la cellule passée en paramètre
@@ -39,7 +39,7 @@ function getBilan() {
     var tab = getLigneToTab(cell);
     return parseFloat(toEnglishNumber(tab[(getIndex(tab, '€') -1)]));
   }
-
+  
   function getMontantCredit(cell) {
     /**
      * Description : Retourne le montant du crédit de la cellule passée en paramètre
@@ -48,7 +48,7 @@ function getBilan() {
     var tab = getLigneToTab(cell);
     return parseFloat(toEnglishNumber(tab[(getIndex(tab, '€') -1)]));
   }
-
+  
   function getMontantRemboursement(cell) {
     /**
      * Description : Retourne le montant du remboursement de la cellule passée en paramètre
@@ -57,7 +57,7 @@ function getBilan() {
     var tab = getLigneToTab(cell);
     return parseFloat(toEnglishNumber(tab[(getIndex(tab, '€') -1)]));
   }
-
+  
   function getMontantVente(cell) {
     /**
      * Description : Retourne le montant de la vente de la cellule passée en paramètre
@@ -66,7 +66,7 @@ function getBilan() {
     var tab = getLigneToTab(cell);
     return parseFloat(toEnglishNumber(tab[(getIndex(tab, '€') -1)]));
   }
-
+  
   function getNbAchete() {
     /**
      * Description : Retourne le nombre total de cubes achetés
@@ -79,7 +79,7 @@ function getBilan() {
     }
     return nb;
   }
-
+  
   function getNbAcheteLigne(cell) {
     /**
      * Description : Retourne le nombre de cubes achetés de la cellule passée en paramètre
@@ -88,7 +88,7 @@ function getBilan() {
     var tab = getLigneToTab(cell);
     return parseInt(tab[(getIndex(tab, is(cell, 'cube') ? 'cube' : 'cubes')  -1)]);
   }
-
+  
   function getNbCredit() {
     /**
      * Description : Retourne le nombre de remboursements en attente
@@ -104,7 +104,7 @@ function getBilan() {
     }
     return credit - remboursement;
   }
-
+  
   function getNbNeufVendu() {
     /**
      * Description : Retourne le nombre total de cubes neufs vendus
@@ -115,7 +115,7 @@ function getBilan() {
     }
     return nb;
   }
-
+  
   function getNbNeufVenduLigne(cell) {
     /**
      * Description : Retourne le nombre de cubes neufs vendus de la cellule passée en paramètre
@@ -124,7 +124,7 @@ function getBilan() {
     var tab = getLigneToTab(cell);
     return parseInt(tab[(getIndex(tab, is(cell, 'neuf') ? 'neuf' : 'neufs')  -2)]);
   }
-
+  
   function getNbRecu() {
     /**
      * Description : Retourne le nombre total de cubes reçus
@@ -137,7 +137,7 @@ function getBilan() {
     }
     return nb;
   }
-
+  
   function getNbRecuLigne(cell) {
     /**
      * Description : Retourne le nombre de cubes reçus de la cellule passée en paramètre
@@ -146,14 +146,14 @@ function getBilan() {
     var tab = getLigneToTab(cell);
     return parseInt(tab[(getIndex(tab, is(cell, 'cube') ? 'cube' : 'cubes')  -1)]);
   }
-
+  
   function getNbVendu() {
     /**
      * Description : Retourne le nombre total de cubes vendus
      */
     return getNbNeufVendu() + getNbVieuxVendu();
   }
-
+  
   function getNbVieuxVendu() {
     /**
      * Description : Retourne le nombre total de vieux cubes vendus
@@ -164,7 +164,7 @@ function getBilan() {
     }
     return nb;
   }
-
+  
   function getNbVieuxVenduLigne(cell) {
     /**
      * Description : Retourne le nombre de vieux cubes vendus de la cellule passée en paramètre
@@ -173,29 +173,29 @@ function getBilan() {
     var tab = getLigneToTab(cell);
     return parseInt(tab[(getIndex(tab, 'vieux') -1)]);
   }
-
+  
   function getReception() {
     /**
      * Description : Retourne le nombre total de cubes en attente de réception
      */
     return getNbAchete() - getNbRecu();
   }
-
+  
   function getStock() {
     /**
      * Description : Retourne le nombre total de cubes en stock
      */
     return getNbAchete() - getNbNeufVendu() - getReception();
   }
-
+  
   function getStockPotentiel() {
     /**
-     * Description : Retourne le nombre total de cubes que le commerce aura en stock
+     * Description : Retourne le nombre total de cubes que le commerce aura en stock 
      * une fois qu'il aura réceptionné tous les cubes qu'il attend
      */
     return getStock() + getReception();
   }
-
+  
   function getTotalCreance() {
     /**
      * Description : Retourne le total de la somme des remboursements que le commerce attend
@@ -211,23 +211,24 @@ function getBilan() {
     }
     return (credit - remboursement).toFixed(2);
   }
-
+  
   function isAchat(cell) {
     return is(cell, 'achat');
   }
-
+  
   function isCredit(cell) {
     return is(cell, 'crédit');
   }
-
+  
   function isReception(cell) {
     return is(cell, 'réception');
   }
-
+  
   function isRemboursement(cell) {
     return is(cell, 'remboursement');
   }
-
+  
   function isVente(cell) {
     return is(cell, 'vente');
   }
+  

@@ -3,7 +3,10 @@ function VenteCube() {
     // Déclarations générales
     var tab_affichage = [];
     var cellule_reference = new Cellule('B', 2);
-
+    
+    // Ajout de la date si c'est une nouvelle ligne
+    ajoutDate(false);
+    
     // Ajout du contenu à afficher
     tab_affichage.push('Bilan : ' + getBilan() + ' €');
     tab_affichage.push('Stock de cube : ' + getStock());
@@ -20,8 +23,9 @@ function VenteCube() {
       tab_affichage.push('Nombre de crédits en attente : ' + getNbCredit() + ' €');
       tab_affichage.push('Total qu\'on me doit : ' + getTotalCreance() + ' €');
     }
-
+    
     // Affichage du contenu
     affichage(tab_affichage, cellule_reference, getBilan());
-
+    
   }
+  

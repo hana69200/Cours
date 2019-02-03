@@ -5,7 +5,7 @@ function affichage(tab, cell, bilan) {
      * @param {Cellule} cell - Cellule de référence
      * @param {float} bilan - Valeur du bilan
      */
-
+  
     // Efface la cellule A1
     if (colone[0] != '') {
       baisseColone();
@@ -13,12 +13,12 @@ function affichage(tab, cell, bilan) {
     else if (colone[1] == '') {
       monteColone();
     }
-
+    
     // Écriture dans les cellules
     for (var i = 0; i < tab.length; i++) {
       sheet.getRange(cell.toString(i)).setValue(tab[i]);
     }
-
+    
     // Personnalisation du fond des cellules
     for (var i = 0; i < tab.length; i++) {
       sheet.getRange(cell.toString(i)).setBackground(gris);
@@ -27,31 +27,42 @@ function affichage(tab, cell, bilan) {
       sheet.getRange(cell.toString(i)).setHorizontalAlignment('right');
       sheet.getRange(cell.toString(i)).setBorder(false, true, false, true, false, false);
     }
-
+    
     // Personnalisation de l'affichage du bilan (première cellule)
     sheet.getRange(cell.toString()).setBackground((bilan < 0) ? rouge : vert);
     sheet.getRange(cell.toString()).setFontColor((bilan < 0) ? jaune : bleu);
     sheet.getRange(cell.toString()).setFontSize(11);
     sheet.getRange(cell.toString()).setFontWeight('bold');
     sheet.getRange(cell.toString()).setBorder(true, true, true, true, false, false);
-
+    
     // Personnalisation de l'affichage de la dernière cellule
     sheet.getRange(cell.toString(tab.length - 1)).setBorder(null, true, true, true, false, false);
-
+    
   }
-
+  
   function affichageModifEnCours() {
     /**
      * Affiche le message 'CHARGEMENT' dans B1
      */
-
+  
     sheet.getRange('B1').setBackground(rouge);
     sheet.getRange('B1').setFontColor(jaune);
     sheet.getRange('B1').setFontWeight('bold');
     sheet.getRange('B1').setHorizontalAlignment('center');
     sheet.getRange('B1').setValue('CHARGEMENT');
   }
-
+  
+  function ajoutDate(bool) {
+    /**
+     * Ajoute la date en début de ligne pour la cellule A1 si elle n'y est pas
+     */
+    if (colone[0] != '' && getLigneToTab(colone[0])[0] != "Le") {
+      var valeur = sheet.getRange('A1').getValue();
+      sheet.getRange('A1').setValue(getDate(bool) + valeur);
+      colone[0] = getDate(bool) + valeur;
+    }
+  }
+  
   function baisseColone() {
     /**
      * Décale toutes les lignes de la colone A d'un cran vers le bas
@@ -61,8 +72,12 @@ function affichage(tab, cell, bilan) {
       sheet.getRange(cell.toString(1 + i)).setValue(colone[i]);
     }
       sheet.getRange(cell.toString()).clear();
+    
+    // Mise à jour des variables globales
+    taille_colone = sheet.getLastRow();
+    colone = sheet.getRange('A1:A' + taille_colone).getValues();
   }
-
+  
   function cleanSheet() {
     /**
      * Supprime toute trace de données hors de la première colone
@@ -70,7 +85,7 @@ function affichage(tab, cell, bilan) {
     sheet.getRange('B2:Y999').clear();
     sheet.setColumnWidths(2, 24, 100); // Attention : x, y, z --> y = 26-x
   }
-
+  
   function getIndex(tab, mot) {
     /**
      * Retourne l'index d'un mot dans un tableau de mots
@@ -83,7 +98,28 @@ function affichage(tab, cell, bilan) {
     }
     return -1;
   }
-
+  
+  function getDate(bool) {
+    /**
+     * Retourne la date du jour selon que 'long' soit à 'true' ou à 'false'
+     * Sous la forme "Le lundi 24 janvier 2018" si 'long' est à 'true'
+     * Sous la forme "Le 24 janvier 2018" si 'long' est à 'false'
+     */
+    var date = new Date();
+    var nomJour = semaine[date.getDay()];
+    var numJour = date.getDate() == 1 ? "1er" : date.getDate();
+    var moisJour = mois[date.getMonth()];
+    var annee = date.getFullYear();
+    var dateFinale;
+    
+    // Écriture de la date dans la variable
+    dateFinale = "Le ";
+    dateFinale += bool ? (nomJour + " ") : "";
+    dateFinale += numJour + " " + moisJour + " " + annee + " : ";
+    
+    return dateFinale;
+  }
+  
   function clear(tab) {
     /**
      * Vide le tableau
@@ -94,7 +130,15 @@ function affichage(tab, cell, bilan) {
       tab.pop();
     }
   }
-
+  
+  function getAnnee(cell) {
+    /**
+     * Retourne l'année de la cellule passée en paramètre
+     */
+    var tab = getLigneToTab(cell);
+    return tab[3];
+  }
+  
   function getLigneToTab(cell) {
     /**
      * Retourne un tableau de mots à partir d'un string
@@ -104,26 +148,23 @@ function affichage(tab, cell, bilan) {
     var ligne = cell + ' ';
     var tab = [];
     var mot = '';
+    var commentaire = false;
     for (var i = 0; i < ligne.length; i++) {
       if (ligne[i] != ' ') {
-        mot = mot + ligne[i];
+        if (ligne[i] == '(') commentaire = true;
+        if (!commentaire) {
+          mot = mot + ligne[i];
+        }
+        if (ligne[i] == ')') commentaire = false;
       }
-      else {
+      else if (mot != '') {
         tab.push(mot);
         mot = '';
       }
     }
     return tab;
   }
-
-  function getAnnee(cell) {
-    /**
-     * Retourne l'année de la cellule passée en paramètre
-     */
-    var tab = getLigneToTab(cell);
-    return tab[3];
-  }
-
+  
   function getMois(cell) {
     /**
      * Retourne le mois de la cellule passée en paramètre
@@ -131,7 +172,7 @@ function affichage(tab, cell, bilan) {
     var tab = getLigneToTab(cell);
     return tab[2];
   }
-
+  
   function getMontant(cell) {
     /*
      * Retourne le montant d'une cellule
@@ -141,7 +182,7 @@ function affichage(tab, cell, bilan) {
     var tab = getLigneToTab(cell);
     return is(cell, '€') ? parseFloat(toEnglishNumber(tab[(getIndex(tab, '€') -1)])) : 0;
   }
-
+  
   function is(cell, mot) {
     /*
      * Indique si un mot se trouve dans une cellule
@@ -155,7 +196,7 @@ function affichage(tab, cell, bilan) {
     }
     return false;
   }
-
+  
   function monteColone() {
     /**
      * Décale toutes les lignes de la colone A d'un cran vers le haut
@@ -165,10 +206,12 @@ function affichage(tab, cell, bilan) {
       sheet.getRange(cell.toString(i)).setValue(colone[i + 1]);
     }
     sheet.getRange(cell.toString(colone.length - 1)).clear();
+    
+    // Mise à jour des variables globales
     taille_colone = sheet.getLastRow();
     colone = sheet.getRange('A1:A' + taille_colone).getValues();
   }
-
+  
   function toEnglishNumber(nb_fr) {
     /*
      * Normalise les écritures de nombre à virgule au format anglais
@@ -183,7 +226,7 @@ function affichage(tab, cell, bilan) {
     }
     return nb_eu;
   }
-
+  
   function traitement(fonction) {
     /**
      * Gère les traitements de la fonction 'main'
@@ -194,3 +237,4 @@ function affichage(tab, cell, bilan) {
     sheet.autoResizeColumns(1, 25); // Redimensionnement des colones
     sheet.getRange('B1').clear(); // Supprime 'affichage en cours'
   }
+  

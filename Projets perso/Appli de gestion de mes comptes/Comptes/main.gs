@@ -3,6 +3,8 @@ var sheet = SpreadsheetApp.getActiveSheet();
 var taille_colone = sheet.getLastRow();
 var colone = sheet.getRange('A1:A' + taille_colone).getValues();
 var alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+var semaine = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
+var mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
 
 // Déclaration des couleurs
 var noir = '#000000';

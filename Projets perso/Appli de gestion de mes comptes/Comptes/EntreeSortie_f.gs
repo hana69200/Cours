@@ -160,7 +160,7 @@ function afficherTousLesBilans() {
     /**
      * Description : Retourne 1 si le montant de la cellule correspondante est une entrée, -1 sinon
      */
-    return getLigneToTab(cell)[4] == 'entrée' ? 1 : -1;
+    return is(cell, 'entrée') ? 1 : -1;
   }
 
   function getSortieMois(annee, mois) {

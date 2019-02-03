@@ -5,6 +5,7 @@
  * @param {int} nombre - Numéro de la ligne de la cellule.
  */
 var Cellule = function(lettre, nombre) {
+
     this.lettre = lettre;
     this.nombre = nombre;
 
@@ -36,4 +37,5 @@ var Cellule = function(lettre, nombre) {
       if (typeof(nb) == 'undefined') nombre = 0;
       return this.lettre + (this.nombre + nombre);
     }
+
   }

@@ -4,6 +4,9 @@ function EntreeSortie() {
     var tab_affichage = [], cellules_reference = [];
     var i = 0;
 
+    // Ajout de la date si c'est une nouvelle ligne
+    ajoutDate(false);
+
     // Ajout du contenu à afficher
     if (getTotalDu() != 0) {
       tab_affichage.push('Bilan total : ' + getBilanTotal() + ' €');
@@ -29,4 +32,4 @@ function EntreeSortie() {
     // Affichage des bilans mensuels
     afficherTousLesBilans();
 
-  }
+}
