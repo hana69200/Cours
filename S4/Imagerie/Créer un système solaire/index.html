@@ -30,49 +30,55 @@
             // Initialisation of your objects / materials / light
             var solarSystem = new THREE.Object3D();
             scene.add(solarSystem);
-            var ballSun = new THREE.SphereGeometry(1, 60, 60);
-            var ballJup = new THREE.SphereGeometry(1, 60, 60);
-            var ballMar = new THREE.SphereGeometry(1, 60, 60);
-            var ballEur = new THREE.SphereGeometry(1, 60, 60);
+            var ball = new THREE.SphereGeometry(1, 60, 60);
             var sunMaterial = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
             var jupMaterial = new THREE.MeshBasicMaterial( { color: 0xff7051 } );
             var marMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
             var eurMaterial = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-            var sun = new THREE.Mesh(ballSun, sunMaterial);
-            var jup = new THREE.Mesh(ballJup, jupMaterial);
-            var mar = new THREE.Mesh(ballMar, marMaterial);
-            var eur = new THREE.Mesh(ballEur, eurMaterial);
+            var sun = new THREE.Mesh(ball, sunMaterial);
+            var jup = new THREE.Mesh(ball, jupMaterial);
+            var mar = new THREE.Mesh(ball, marMaterial);
+            var eur = new THREE.Mesh(ball, eurMaterial);
             
-            sun.scale.set(0.5, 0.5, 0.5);
-            jup.scale.set(0.1, 0.1, 0.1);
-            mar.scale.set(0.05, 0.05, 0.05);
-            eur.scale.set(0.05, 0.05, 0.05);
+            var scaleSun = 0.5;
+            var scaleJup = 0.2;
+            var scaleMar = 0.1;
+            var scaleEur = 0.05;
+
+            sun.scale.set(scaleSun, scaleSun, scaleSun);
+            jup.scale.set(scaleJup, scaleJup, scaleJup);
+            mar.scale.set(scaleMar, scaleMar, scaleMar);
+            eur.scale.set(scaleEur, scaleEur, scaleEur);
 
             solarSystem.add(sun);
             solarSystem.add(jup);
             solarSystem.add(mar);
             solarSystem.add(eur);
             
-            var angleJup = 0;
-            var angleMar = 0;
-            var angleEur = 0;
+            var angle = 0;
 
+            var vitesseJup = 1;
+            var vitesseMar = 3;
+            var vitesseEur = 4;
+
+            var distanceJup = 2;
+            var distanceMar = 1;
+            var distanceEur = 0.5
 
             // This is executed for each frames
             function render() {
                 requestAnimationFrame( render );
                 // Animation code goes here
-                angleJup += 0.017;
-                jup.position.x = 2 * Math.cos(angleJup);
-                jup.position.y = 2 * Math.sin(angleJup);
+                angle = (angle + 0.017)%(Math.PI * 2);
                 
-                angleMar += 0.034;
-                mar.position.x = 1 * Math.cos(angleMar);
-                mar.position.y = 1 * Math.sin(angleMar);
+                jup.position.x = distanceJup * Math.cos(angle * vitesseJup);
+                jup.position.y = distanceJup * Math.sin(angle * vitesseJup);
+                
+                mar.position.x = distanceMar * Math.cos(angle * vitesseMar);
+                mar.position.y = distanceMar * Math.sin(angle * vitesseMar);
 
-                angleEur += 0.05;
-                eur.position.x = (jup.position.x) + Math.cos(angleEur)/2;
-                eur.position.y = (jup.position.y) + Math.sin(angleEur)/2;
+                eur.position.x = (jup.position.x) + Math.cos(angle * vitesseEur) * distanceEur;
+                eur.position.y = (jup.position.y) + Math.sin(angle * vitesseEur) * distanceEur;
                 
                 renderer.render( scene, camera );
             }
