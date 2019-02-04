@@ -1,0 +1,33 @@
+Cours 0 : Intro → https://perso.liris.cnrs.fr/amelie.cordier/teaching/intro-ai/slides/index.html#1
+
+"L'IA étudie les manières dont nous pouvons concevoir, construire et fabriquer des agents capables d'agir intelligemment."
+On peut dire que l'IA a pour but de simuler l'intelligence humaine.
+
+Une IA faible est un programme informatique spécialisé dans une tache (reconnaissance, jeu de go...). Il possède donc une forme d'intelligence.
+Une IA forte n'est pas spécialisée dans un domaine, elle est capable d'apprendre des choses dans un domaine et de les transposer dans un autre domaine.
+
+Les agents sont ceux qui peuvent agir dans un environnement (les humains, les animaux, les robots d'une chaine de montage...).
+
+Apprendre à reconnaître une image permet de mieux en créee : on inverse le processus et ça augmente la créativité de l'IA.
+
+Méthode 1 face à un problème : comprendre les mécanismes pour créer un programme qui répondre au problème
+Méthode 2 : regarder où se trouve la solution (dans le cerveau, chez les animaux style fourmis) et simuler cet environnement pour y faire résoudre le problème → simulation de réseau de norones
+
+Les deux grand courants de l'IA : L'IA Symbolique et l'IA Numérique
+L'IA symbolique : on essaie de donner un maximum de connaissances de haut niveau à l'IA et on y fait des calculs pour déterminer les actions à faire
+L'IA numérique = machine learning : on a un modèle mathématique (réseau de norones par exemple), on lui donne en entrée une image, il doit nous dire si c'est ou non une image de chat, si c'est la bonne on lui dit, sinon on oui dit aussi... en boucle jusqu'à ce qu'il comprenne
+
+Le CONNEXIONNISME est le fait d'utiliser un réseau de norones. Toute la dificulté du connexionnisme est de savoir combien de norones il faut et comment connecter les norones entre eux
+
+-------------------------------------------------------------------------------
+
+Cours 1 : Recherche de chemins → https://perso.liris.cnrs.fr/pierre-antoine.champin/enseignement/intro-ia/parts/chemins.html
+
+Site de visualisation des algorithmes de recherche : https://qiao.github.io/PathFinding.js/visual/
+
+Dijkstra : ne marche que dans un graph à coûts positif ou nul
+
+A* : espèce de version de Dijkstra qui prend en compte une heuristique optimiste (sur recherche plus courte distance : la distance du vol d'oiseau généralement)
+Heuristique Euclidienne → distance mathématique la plus courte
+Heuristique Manhattan → distance "escalier" la plus courte
+
