@@ -1,8 +1,9 @@
-//TD1
+// Ajout du trigger sur la page
 window.addEventListener("load", () => start());
 
 
 start = () => {
+	document.querySelector("button").disabled = true; // Désactivation du bouton
 	document.querySelectorAll("input").forEach(inp => {
 
 		console.log(inp);
@@ -18,23 +19,25 @@ start = () => {
 				map[l.htmlFor] = document.querySelector(`#${l.htmlFor}`);
 			});
 
+            // Vérification de l'âge
 			if (map["age"].value < 18) {
 				error = true;
 				console.debug("Erreur Age");
 				const pError = document.createElement("p");
 				pError.innerText = "Vous devez avoir au moins 18 ans";
 				errorDiv.appendChild(pError);
+            }
 
-			}
-			if (!map["id"].value.match("^[a-zA-Z]{1,12}$")) {
+            // Vérification de l'identifiant
+			if (!map["id"].value.match("^[a-zA-Z]{1,12}$")) { // Composé de 1 à 12 lettre(s)
 				error = true;
 				console.debug("Erreur id");
 				const pError = document.createElement("p");
-				pError.innerText = "Votre identifiant doit faire entre 1 et 12 caractères";
+				pError.innerText = "Votre identifiant doit faire entre 1 et 12 caractères et uniquement composé de lettres";
 				errorDiv.appendChild(pError);
-
 			}
 
+            // On vérifie que les mots de passes sont identitiques
 			if (!(map["pwdC"].value === map["pwd"].value)) {
 				error = true;
 				console.debug("Erreur Pwdc");
@@ -43,6 +46,7 @@ start = () => {
 				errorDiv.appendChild(pError);
 			}
 
+            // Vérification de la checkbox des CGU
 			if (!map["cgu"].checked) {
 				error = true;
 				console.debug("Erreur Cgu");
@@ -51,10 +55,10 @@ start = () => {
 				errorDiv.appendChild(pError);
 			}
 
-			// Check mdp JS_tpx_guichard_...
-
-			const pwd = map["pwd"].value;
-			let pwdF = 100;
+			const pwd = map["pwd"].value; // Mot de passe
+            let pwdF = 100; // Pourcentage du mot de passe bien tapé
+            
+            // Vérification de la taille du mot de passe
 			if (pwd.length < 8) {
 				error = true;
 				pwdF-= 20;
@@ -64,71 +68,58 @@ start = () => {
 				errorDiv.appendChild(pPwdError);
 			}
 
+            // Vérification de la présence de lettre(s) minuscule(s) dans le mot de passe
 			if (!pwd.match("[a-z]+")) {
 				error = true;
 				pwdF-= 20;
 				const pPwdError = document.createElement("p");
 				pPwdError.innerText = "Le mot de passe doit au moins 1 une lettre minuscule";
 				errorDiv.appendChild(pPwdError);
-
 			}
 
+            // Vérification de la présence de lettre(s) majuscule(s) dans le mot de passe
 			if (!pwd.match("[A-Z]+")) {
 				error = true;
 				pwdF-= 20;
 				const pPwdError = document.createElement("p");
-				pPwdError.innerText = "Le mot de passe doit  avoir au moins 1 une lettre majuscule";
+				pPwdError.innerText = "Le mot de passe doit avoir au moins 1 une lettre majuscule";
 				errorDiv.appendChild(pPwdError);
-
 			}
 
+            // Vérification de la présence de chiffre(s) dans le mot de passe
 			if (!pwd.match("[0-9]")) {
 				error = true;
 				pwdF-= 20;
 				const pPwdError = document.createElement("p");
 				pPwdError.innerText = "Le mot de passe doit faire au moins 1 chiffre";
 				errorDiv.appendChild(pPwdError);
-
-
 			}
 
-			if (!pwd.match("[^0-9]+[^a-z]+[^A-Z]")) {
+            // Vérification de la présence de caractère spécial dans le mot de passe
+			if (!pwd.match("[^0-9]+[^a-z]+[^A-Z]")) { // Ni chiffre ni lettre
 				error = true;
 				pwdF-= 20;
 				const pPwdError = document.createElement("p");
 				pPwdError.innerText = "Le mot de passe doit faire au moins 1 caractère spécial";
 				errorDiv.appendChild(pPwdError);
-
 			}
 
+            // Affichage du pourcentage du mot de passe bien tapé
 			let pError = document.createElement("span");
 			pError.innerText = `${pwdF}%`;
 			pwdSpan.appendChild(pError);
 
-
 			console.debug("");
-			console.log(map);
+            console.log(map);
+            
+            // Gestion de l'état du bouton
 			if (!error) {
 				document.querySelector("button").disabled = false;
 			}
+			else {
+				document.querySelector("button").disabled = true;
+
+			}
 		});
 	});
-}
-
-
-// Intro
-
-hw = () => console.log("Hello world");
-countV = (str) => {
-	let count = 0;
-
-	str.forEach(c => {
-		if (c.includes("a") || c.includes("e") || c.includes("i") || c.includes("o") || c.includes("u")) {
-			count++;
-		}
-
-	});
-
-	return count;
-
 };
