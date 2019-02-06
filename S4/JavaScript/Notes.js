@@ -1,4 +1,4 @@
-// J'en suis là → https://openclassrooms.com/fr/courses/2984401-apprenez-a-coder-avec-javascript/3195501-manipulez-les-chaines-de-caracteres
+// J'en suis là → https://openclassrooms.com/fr/courses/2984401-apprenez-a-coder-avec-javascript/3196346-trop-classe-la-poo
 // https://openclassrooms.com/fr/courses/1916641-dynamisez-vos-sites-web-avec-javascript/1916901-premiers-pas-en-javascript
 // https://openclassrooms.com/fr/courses/1631636-simplifiez-vos-developpements-javascript-avec-jquery
 
@@ -86,3 +86,36 @@ for (const element of tableau) {
 // Ajout à la fin du tableau : push(element)
 // Ajout au début du tableau : unshift(element)
 // Supprimer tout en récupérant le dernier élément du tableau : pop()
+
+{const motInitial = "Coucou";
+// Mettre en majuscules une chaîne de caractères
+var motMinuscule = motInitial.toUpperCase();
+// Mettre en minuscules une chaîne de caractères
+var motMajuscule = motInitial.toLowerCase();
+
+console.log("Azerty" === "azerty");
+console.log("Azerty" == "azerty");
+
+// On peut parcourir une chaîne de caractères avec le for optimisé
+for (const lettre of "test") {
+    console.log(lettre);
+}
+// Mais avec un forEach() il faut la convertir en un vrai tableau de caractères
+Array.from("test").forEach(lettre => {
+    console.log(lettre);
+});}
+
+// Fonctions pour vérifier le début ou la fin d'une chaîne de caractères : startsWith() et endsWith()
+{const chanson = "Honky Tonk Women";
+console.log(chanson.startsWith("Honk")); // true
+console.log(chanson.endsWith("men")); // true
+
+// Obtenir la première position du premier caractère d'un mot :
+console.log(chanson.indexOf("Tonk")); // 6
+console.log(chanson.indexOf("is")); // -1
+
+// Le split()
+const listeMois = "Jan,Fev,Mar,Avr,Mai,Jun,Jul,Aou,Sep,Oct,Nov,Dec";
+const mois = listeMois.split(",");
+console.log(mois[0]); // "Jan"
+console.log(mois[11]);} // "Dec"

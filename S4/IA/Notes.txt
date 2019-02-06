@@ -27,7 +27,22 @@ Site de visualisation des algorithmes de recherche : https://qiao.github.io/Path
 
 Dijkstra : ne marche que dans un graph à coûts positif ou nul
 
-A* : espèce de version de Dijkstra qui prend en compte une heuristique optimiste (sur recherche plus courte distance : la distance du vol d'oiseau généralement)
+A* [a star] : espèce de version de Dijkstra qui prend en compte une heuristique optimiste (la plus courte distance possible ou moins)
 Heuristique Euclidienne → distance mathématique la plus courte
 Heuristique Manhattan → distance "escalier" la plus courte
+Si l'heuristique n'est pas optimiste l'algorithme ne peut pas garantir que le chemin trouvé est le plus court mais le temps de calcul pourrait être moins long.
 
+L'heuristique est le terme savant pour parler de la pifométrie. P-A. Champin, 2019.
+
+-------------------------------------------------------------------------------
+
+Cours 2 : Résolution de problème
+
+Un problème peut être modélisé par un graphe d'état où chacun des noeuds est une situation.
+La résolution du problème devient alors une recherche de chemin(s).
+
+La représentation du graphe d'état dans sa totalité est un concepte humain, en réalité on ne charge en mémoire que les noeuds qui nous intéressent pour chaque situation.
+
+Sur un graphe l'heuristique (optimiste) conciste à dire qu'il y a plus de chance de trouver la solution en se dirigeant vers un noeud plus proche de l'état final que vers un noeud plus proche de l'état de départ.
+
+Cas du graphe de Hanoi https://fr.wikipedia.org/wiki/Tours_de_Hano%C3%AF#/media/File:Hanoi-Graph-3-text.png
