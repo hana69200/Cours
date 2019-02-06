@@ -1,0 +1,32 @@
+form div {
+    margin: 1em;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: #e0e0e0;
+
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+form div label {
+
+    display: inline-block;
+    min-width: 12rem;
+}
+div {
+    width: 100%;
+}

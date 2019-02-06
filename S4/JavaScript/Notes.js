@@ -1,14 +1,17 @@
-// J'en suis là → https://openclassrooms.com/fr/courses/2984401-apprenez-a-coder-avec-javascript/3196346-trop-classe-la-poo
-// https://openclassrooms.com/fr/courses/1916641-dynamisez-vos-sites-web-avec-javascript/1916901-premiers-pas-en-javascript
+// J'en suis là → https://openclassrooms.com/fr/courses/1916641-dynamisez-vos-sites-web-avec-javascript/1916901-premiers-pas-en-javascript
 // https://openclassrooms.com/fr/courses/1631636-simplifiez-vos-developpements-javascript-avec-jquery
 
-// Site pour installer node.js (pour exécuter du JS sur vscode) : nodejs.org
+// Cours de Champin : https://perso.liris.cnrs.fr/pierre-antoine.champin/enseignement/intro-js/slides/s1.html
 
 // Le bon vieux système d'affichage
 console.log("Hello Wordl!");
 
-// Déclaration de variables
-{let michel; // On peut toujours utiliser 'var' mais 'let' c'est mieux
+// Déclaration de variables globales
+{michel = "";
+// Déclaration de variables normales
+var michel = "";
+// Déclaration de variables accessibles uniquement dans le bloc
+let michel = "";}
 
 console.log(michel); // Affiche 'undefined' par défaut
 
@@ -66,6 +69,24 @@ const stylo = {
 
 console.log(stylo.toString());
 
+// Création de classes
+class Stylo {
+    constructor(type, couleur, marque) {
+      this.type = type;
+      this.couleur = couleur;
+      this.marque = marque;
+    }
+    toString() {
+        return `${this.type}, ${this.couleur} et ${this.marque}`;
+    }
+}
+
+{const stylo = new Stylo("plume", "noir", "Fontaine");
+console.log(stylo.toString());
+
+// Héritage : il s'agit de la notion de prototype en JavaScript
+const VIP = Object.create(new Stylo());} // VIP hérite de Stylo
+
 // Déclaration d'un tableau (en JS le type des objets n'importe pas)
 {const tableau = ["Bonjour", 7, { message: "Coucou maman" }, true];
 const taille = tableau.length;
@@ -119,3 +140,4 @@ const listeMois = "Jan,Fev,Mar,Avr,Mai,Jun,Jul,Aou,Sep,Oct,Nov,Dec";
 const mois = listeMois.split(",");
 console.log(mois[0]); // "Jan"
 console.log(mois[11]);} // "Dec"
+

@@ -46,3 +46,8 @@ La représentation du graphe d'état dans sa totalité est un concepte humain, e
 Sur un graphe l'heuristique (optimiste) conciste à dire qu'il y a plus de chance de trouver la solution en se dirigeant vers un noeud plus proche de l'état final que vers un noeud plus proche de l'état de départ.
 
 Cas du graphe de Hanoi https://fr.wikipedia.org/wiki/Tours_de_Hano%C3%AF#/media/File:Hanoi-Graph-3-text.png
+
+Il existe cependant des problème qu'on ne neut pas modéliser avec des graphes :
+    - Ceux où le nombre de décision à chaque étape est ou peut être infini
+    - Ceux où le résultat des décisions est inconnu ou incertain
+    - Ceux où il y a plusieurs personnes qui prennent les décision
