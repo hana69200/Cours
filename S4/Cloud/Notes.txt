@@ -1,0 +1,5 @@
+Support de cours : tinyurl.com/CC-IUT2019
+Support bonus pour aller plus loin : https://clarolineconnect.univ-lyon1.fr/workspaces/7816/open/tool/home#/tab/6498
+
+Google Trends permet d'avoir des graphiques d'évolution de sujets de recherches : https://trends.google.fr/trends/explore?date=all&q=machine%20learning
+
