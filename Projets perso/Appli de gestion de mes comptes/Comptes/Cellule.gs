@@ -1,7 +1,7 @@
 /**
  * Cellule Spreadsheet
  * @constructor
- * @param {string} lettre - Lettre de la colone de la cellule.
+ * @param {string} lettre - Lettre de la colonne de la cellule.
  * @param {int} nombre - Numéro de la ligne de la cellule.
  */
 var Cellule = function(lettre, nombre) {
@@ -38,4 +38,4 @@ var Cellule = function(lettre, nombre) {
       return this.lettre + (this.nombre + nombre);
     }
 
-  }
+}

@@ -7,11 +7,11 @@ function affichage(tab, cell, bilan) {
      */
   
     // Efface la cellule A1
-    if (colone[0] != '') {
-      baisseColone();
+    if (colonne[0] != '') {
+      baisseColonne();
     }
-    else if (colone[1] == '') {
-      monteColone();
+    else if (colonne[1] == '') {
+      monteColonne();
     }
     
     // Écriture dans les cellules
@@ -44,7 +44,6 @@ function affichage(tab, cell, bilan) {
     /**
      * Affiche le message 'CHARGEMENT' dans B1
      */
-  
     sheet.getRange('B1').setBackground(rouge);
     sheet.getRange('B1').setFontColor(jaune);
     sheet.getRange('B1').setFontWeight('bold');
@@ -56,47 +55,53 @@ function affichage(tab, cell, bilan) {
     /**
      * Ajoute la date en début de ligne pour la cellule A1 si elle n'y est pas
      */
-    if (colone[0] != '' && getLigneToTab(colone[0])[0] != "Le") {
+    if (colonne[0] != '' && lignes[0][0] != "Le") {
       var valeur = sheet.getRange('A1').getValue();
       sheet.getRange('A1').setValue(getDate(bool) + valeur);
-      colone[0] = getDate(bool) + valeur;
+      colonne[0] = getDate(bool) + valeur;
     }
   }
   
-  function baisseColone() {
+  function baisseColonne() {
     /**
-     * Décale toutes les lignes de la colone A d'un cran vers le bas
+     * Décale toutes les lignes de la colonne A d'un cran vers le bas
      */
     var cell = new Cellule('A', 1);
-    for (var i = 0; i < colone.length; i++) {
-      sheet.getRange(cell.toString(1 + i)).setValue(colone[i]);
+    for (var i = 0; i < colonne.length; i++) {
+      sheet.getRange(cell.toString(1 + i)).setValue(colonne[i]);
     }
       sheet.getRange(cell.toString()).clear();
     
     // Mise à jour des variables globales
-    taille_colone = sheet.getLastRow();
-    colone = sheet.getRange('A1:A' + taille_colone).getValues();
+    taille_colonne = sheet.getLastRow();
+    colonne = sheet.getRange('A1:A' + taille_colonne).getValues();
+    lignes = remplirLignes();
   }
   
   function cleanSheet() {
     /**
-     * Supprime toute trace de données hors de la première colone
+     * Supprime toute trace de données hors de la première colonne
      */
     sheet.getRange('B2:Y999').clear();
     sheet.setColumnWidths(2, 24, 100); // Attention : x, y, z --> y = 26-x
   }
   
-  function getIndex(tab, mot) {
+  function clear(tab) {
     /**
-     * Retourne l'index d'un mot dans un tableau de mots
-     * @param {string[]} tab - Tableau des mots d'une cellule
-     * @param {string} mot - Mot dont on cherche l'index
-     * @return {int} - Index du mot
+     * Vide le tableau
      */
-    for (var i = 0; i < tab.length; i++) {
-      if (tab[i] == mot) return i;
+    var i;
+    var taille = tab.length;
+    for (i = 0; i < taille; i++) {
+      tab.pop();
     }
-    return -1;
+  }
+  
+  function getAnnee(index) {
+    /**
+     * Retourne l'année de la cellule passée en paramètre
+     */
+    return lignes[index][3];
   }
   
   function getDate(bool) {
@@ -120,31 +125,26 @@ function affichage(tab, cell, bilan) {
     return dateFinale;
   }
   
-  function clear(tab) {
+  function getIndex(tab, mot) {
     /**
-     * Vide le tableau
+     * Retourne l'index d'un mot dans un tableau de mots
+     * @param {string[]} tab - Tableau des mots d'une cellule
+     * @param {string} mot - Mot dont on cherche l'index
+     * @return {int} - Index du mot
      */
-    var i;
-    var taille = tab.length;
-    for (i = 0; i < taille; i++) {
-      tab.pop();
+    for (var i = 0; i < tab.length; i++) {
+      if (tab[i] == mot) return i;
     }
+    return -1;
   }
   
-  function getAnnee(cell) {
-    /**
-     * Retourne l'année de la cellule passée en paramètre
-     */
-    var tab = getLigneToTab(cell);
-    return tab[3];
-  }
-  
-  function getLigneToTab(cell) {
+  function getLigneToTab(index) {
     /**
      * Retourne un tableau de mots à partir d'un string
      * @param {string} cell - String d'une cellule
      * @return {string[]} tab - Tableau de mots
      */
+    var cell = colonne[index];
     var ligne = cell + ' ';
     var tab = [];
     var mot = '';
@@ -165,51 +165,62 @@ function affichage(tab, cell, bilan) {
     return tab;
   }
   
-  function getMois(cell) {
+  function getMois(index) {
     /**
      * Retourne le mois de la cellule passée en paramètre
      */
-    var tab = getLigneToTab(cell);
+    var cell = colonne[index];
+    var tab = getLigneToTab(index);
     return tab[2];
   }
   
-  function getMontant(cell) {
+  function getMontant(index) {
     /*
      * Retourne le montant d'une cellule
      * @param {string} cell - Tableau de mots d'une cellule
      * @return {float} - Montant de la cellule
      */
-    var tab = getLigneToTab(cell);
-    return is(cell, '€') ? parseFloat(toEnglishNumber(tab[(getIndex(tab, '€') -1)])) : 0;
+    var tab = getLigneToTab(index);
+    return is(index, '€') ? parseFloat(toEnglishNumber(tab[(getIndex(tab, '€') -1)])) : 0;
   }
   
-  function is(cell, mot) {
+  function is(index, mot) {
     /*
      * Indique si un mot se trouve dans une cellule
      * @param {string[]} cell - Tableau de mots
      * @param {string} mot - Mot à chercher
      * @return {boolean} - Booléen à true si mot a été trouvé
      */
-    var tab = getLigneToTab(cell);
+    var tab = getLigneToTab(index);
     for (var i = 0; i < tab.length; i++) {
       if (tab[i] == mot) return true;
     }
     return false;
   }
   
-  function monteColone() {
+  function monteColonne() {
     /**
-     * Décale toutes les lignes de la colone A d'un cran vers le haut
+     * Décale toutes les lignes de la colonne A d'un cran vers le haut
      */
     var cell = new Cellule('A', 1);
-    for (var i = 1; i < colone.length; i++) {
-      sheet.getRange(cell.toString(i)).setValue(colone[i + 1]);
+    for (var i = 1; i < colonne.length; i++) {
+      sheet.getRange(cell.toString(i)).setValue(colonne[i + 1]);
     }
-    sheet.getRange(cell.toString(colone.length - 1)).clear();
+    sheet.getRange(cell.toString(colonne.length - 1)).clear();
     
     // Mise à jour des variables globales
-    taille_colone = sheet.getLastRow();
-    colone = sheet.getRange('A1:A' + taille_colone).getValues();
+    taille_colonne = sheet.getLastRow();
+    colonne = sheet.getRange('A1:A' + taille_colonne).getValues();
+    lignes = remplirLignes();
+  }
+  
+  function remplirLignes() {
+    var tab = [];
+    var i;
+    for (i = 0; i < taille_colonne; i++) {
+      tab.push(getLigneToTab(i));
+    }
+    return tab;
   }
   
   function toEnglishNumber(nb_fr) {
@@ -234,7 +245,7 @@ function affichage(tab, cell, bilan) {
     affichageModifEnCours(); // Affiche 'modif en cours'
     cleanSheet(); // Nettoyage de la feuille
     fonction();
-    sheet.autoResizeColumns(1, 25); // Redimensionnement des colones
+    sheet.autoResizeColumns(1, 25); // Redimensionnement des colonnes
     sheet.getRange('B1').clear(); // Supprime 'affichage en cours'
   }
   
