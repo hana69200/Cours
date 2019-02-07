@@ -2,7 +2,7 @@ form div {
     margin: 0.6em;
 }
 * {
-    font-family: "Segoe UI";
+    font-family: "Segoe UI", serif;
 }
 
 html, body {
@@ -19,6 +19,20 @@ body {
     align-items: center;
 }
 
+
+div p {
+    margin-left: 1rem;
+    display: list-item;
+    list-style-type: square;
+
+}
+
+.error {
+    background-color: rgba(255, 0, 0, 0.13);
+
+}
+
+
 form {
     display: flex;
     justify-content: center;
@@ -26,7 +40,7 @@ form {
     flex-direction: column;
     background-color: #d3d3d354;
     padding : 2rem;
-    min-width: 35rem;
+    min-width: 40rem;
     border-radius: 1rem;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     transition: all 0.3s linear;
@@ -59,7 +73,7 @@ button {
 }
 
 button:hover {
-    background-color: lightgray;
+    background-color: rgba(64, 211, 76, 0.3);
 }
 button:disabled {
     background-color: #adadad;
@@ -70,8 +84,13 @@ form div input {
     font-size: 1rem;
     line-height: 1.2;
     border-radius: 0.25rem;
+    transition: all 0.3s ease-in;
+
 }
-div {
-    width: 100%;
+
+form div input:hover{
+    transform: scale(1.1);
 }
+
+
 
