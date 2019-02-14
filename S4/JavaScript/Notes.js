@@ -3,6 +3,10 @@
 
 // Cours de Champin : https://perso.liris.cnrs.fr/pierre-antoine.champin/enseignement/intro-js/slides/s1.html
 
+/* ---------- ---------- Notes du premier cours d'Open Classroom ---------- ---------- */
+
+// Cours : https://openclassrooms.com/fr/courses/2984401-apprenez-a-coder-avec-javascript/
+
 // Le bon vieux système d'affichage
 console.log("Hello Wordl!");
 
@@ -141,3 +145,8 @@ const mois = listeMois.split(",");
 console.log(mois[0]); // "Jan"
 console.log(mois[11]);} // "Dec"
 
+/* ---------- ---------- Notes du TP avec Jonathan ---------- ---------- */
+
+// Cours sur le addEventListener : https://developer.mozilla.org/fr/docs/Web/API/EventTarget/addEventListener
+
+// Liste des types d'événements des eventListener : https://developer.mozilla.org/fr/docs/Web/Events
