@@ -1,5 +1,45 @@
 var VenteCube_f = function () {
 
+    this.donnees = [];
+
+    // Création d'une transaction
+    var tr = function (at, ae, c, m, n, rn, ru, rt, ve, vu) {
+        this.achat = at;
+        this.achete = ae;
+        this.credit = c;
+        this.montant = m;
+        this.neufVendu = n;
+        this.reception = rn;
+        this.recu = ru;
+        this.remboursement = rt;
+        this.vente = ve;
+        this.vieuxVendu = vu;
+    }
+
+    this.constructor = function () {
+        var i, achat, achete, credit, montant, neufVendu, reception, recu, remboursement, vente, vieuxVendu;
+        for (i = 0; i < taille_colonne; i++) {
+            achat = this.isAchat(i);
+            if (achat) {
+                achete = this.getNbAcheteLigne(i);
+            }
+            credit = this.isCredit(i);
+            montant = getMontant(i);
+            reception = this.isReception(i);
+            if (reception) {
+                recu = this.getNbRecuLigne(i);
+            }
+            remboursement = this.isRemboursement(i);
+            vente = this.isVente(i);
+            if (vente) {
+                neufVendu = this.getNbNeufVenduLigne(i);
+                vieuxVendu = this.getNbVieuxVenduLigne(i);
+            }
+
+            this.donnees.push(new tr(achat, achete, credit, montant, neufVendu, reception, recu, remboursement, vente, vieuxVendu));
+        }
+    }
+
     this.getBilan = function () {
         /**
          * Description : Retourne le bilan globale du commerce
@@ -13,8 +53,8 @@ var VenteCube_f = function () {
          */
         var recu = 0, i = 0;
         for (i; i < taille_colonne; i++) {
-            if (this.isVente(i)) {
-                recu += this.getMontantVente(i);
+            if (this.donnees[i].vente) {
+                recu += this.donnees[i].montant;
             }
         }
         return recu.toFixed(2);
@@ -26,47 +66,11 @@ var VenteCube_f = function () {
          */
         var depense = 0, i = 0;
         for (i; i < taille_colonne; i++) {
-            if (this.isAchat(i)) {
-                depense += this.getMontantAchat(i);
+            if (this.donnees[i].achat) {
+                depense += this.donnees[i].montant;
             }
         }
         return depense.toFixed(2);
-    }
-
-    this.getMontantAchat = function (index) {
-        /**
-         * Description : Retourne le montant de l'achat de la cellule passée en paramètre
-         */
-        if (!this.isAchat(index)) return '';
-        var tab = lignes[index];
-        return parseFloat(toEnglishNumber(tab[tab.indexOf('€') - 1]));
-    }
-
-    this.getMontantCredit = function (index) {
-        /**
-         * Description : Retourne le montant du crédit de la cellule passée en paramètre
-         */
-        if (!this.isCredit(index)) return '';
-        var tab = lignes[index];
-        return parseFloat(toEnglishNumber(tab[tab.indexOf('€') - 1]));
-    }
-
-    this.getMontantRemboursement = function (index) {
-        /**
-         * Description : Retourne le montant du remboursement de la cellule passée en paramètre
-         */
-        if (!this.isRemboursement(index)) return '';
-        var tab = lignes[index];
-        return parseFloat(toEnglishNumber(tab[tab.indexOf('€') - 1]));
-    }
-
-    this.getMontantVente = function (index) {
-        /**
-         * Description : Retourne le montant de la vente de la cellule passée en paramètre
-         */
-        if (!this.isVente(index)) return '';
-        var tab = lignes[index];
-        return parseFloat(toEnglishNumber(tab[tab.indexOf('€') - 1]));
     }
 
     this.getNbAchete = function () {
@@ -75,8 +79,8 @@ var VenteCube_f = function () {
          */
         var nb = parseInt(0), i = 0;
         for (i; i < taille_colonne; i++) {
-            if (this.isAchat(i)) {
-                nb += this.getNbAcheteLigne(i);
+            if (this.donnees[i].achat) {
+                nb += this.donnees[i].achete;
             }
         }
         return nb;
@@ -86,7 +90,6 @@ var VenteCube_f = function () {
         /**
          * Description : Retourne le nombre de cubes achetés de la cellule passée en paramètre
          */
-        if (!this.isAchat(index)) return '';
         var tab = lignes[index];
         return parseInt(tab[tab.indexOf(is(index, 'cube') ? 'cube' : 'cubes') - 1]);
     }
@@ -133,8 +136,8 @@ var VenteCube_f = function () {
          */
         var nb = parseInt(0), i = 0;
         for (i; i < taille_colonne; i++) {
-            if (this.isReception(i)) {
-                nb += this.getNbRecuLigne(i);
+            if (this.donnees[i].reception) {
+                nb += this.donnees[i].recu;
             }
         }
         return nb;
@@ -162,7 +165,9 @@ var VenteCube_f = function () {
          */
         var nb = parseInt(0), i = 0;
         for (i; i < taille_colonne; i++) {
-            nb += this.getNbVieuxVenduLigne(i);
+            if (this.donnees[i].vente) {
+                nb += this.donnees[i].vieuxVendu;
+            }
         }
         return nb;
     }
@@ -204,11 +209,11 @@ var VenteCube_f = function () {
          */
         var credit = 0, remboursement = 0, i = 0;
         for (i; i < taille_colonne; i++) {
-            if (this.isCredit(i)) {
-                credit += this.getMontantVente(i);
+            if (this.donnees[i].credit) {
+                credit += this.donnees[i].montant;
             }
-            else if (isRemboursement(i)) {
-                remboursement += this.getMontantRemboursement(i);
+            else if (this.donnees[i].remboursement) {
+                remboursement += this.donnees[i].montant;
             }
         }
         return (credit - remboursement).toFixed(2);

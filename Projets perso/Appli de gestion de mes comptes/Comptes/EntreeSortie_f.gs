@@ -13,7 +13,6 @@ var EntreeSortie_f = function () {
 
     this.constructor = function () {
         var i, annee, mois, signe, montant, remboursable, rembourse;
-        console.log("Appel du constructeur");
         for (i = 0; i < taille_colonne; i++) {
             annee = lignes[i][3];
             mois = lignes[i][2];

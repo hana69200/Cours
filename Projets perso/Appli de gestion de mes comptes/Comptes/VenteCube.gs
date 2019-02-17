@@ -11,6 +11,9 @@ function VenteCube() {
     // Décallage la cellule A1
     decallageCelluleA1();
 
+    // init
+    f.constructor();
+
     // Ajout du contenu à afficher
     tab_affichage.push('Bilan : ' + f.getBilan() + ' €');
     tab_affichage.push('Stock de cube : ' + f.getStock());
