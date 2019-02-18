@@ -10,6 +10,9 @@ function Manger() {
     // Décallage la cellule A1
     decallageCelluleA1();
 
+    // init
+    f.constructor();
+
     // Ajout du contenu à afficher
     tab_affichage.push('Bilan des repas : ' + f.getBilanRepas() + ' €');
     tab_affichage.push('Solde officiel : ' + f.getSoldeOfficiel() + ' €');

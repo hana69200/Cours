@@ -1,5 +1,31 @@
 var Manger_f = function () {
 
+    this.donnees = [];
+
+    // Création d'une transaction
+    var tr = function (i, m, o, re, ru, s) {
+        this.izly = i;
+        this.montant = m;
+        this.officiel = o; // #ru
+        this.repas = re; // est-ce un repas
+        this.ru = ru; // j'ai mangé au vrai ru
+        this.signe = s; // 1 s'il s'agit d'une entrée d'argent, -1 sinon
+    }
+
+    this.constructor = function () {
+        var i, izly, montant, officiel, repas, ru, signe;
+        for (i = 0; i < taille_colonne; i++) {
+            izly = is(i, 'izly');
+            montant = getMontant(i);
+            officiel = is(i, '#ru');
+            repas = is(i, 'en') || is(i, 'au');
+            ru = is(i, 'ru');
+            signe = is(i, 'manger') ? 1 : -1;
+
+            this.donnees.push(new tr(izly, montant, officiel, repas, ru, signe));
+        }
+    }
+
     this.getBilanRepas = function () {
         /**
          * Description : Retourne un montant positif ou négatif
@@ -22,18 +48,11 @@ var Manger_f = function () {
          */
         var total = parseInt(0), i = 0;
         for (i; i < taille_colonne; i++) {
-            if (is(i, 'en') || is(i, 'au')) {
+            if (this.donnees[i].repas) {
                 total += 1;
             }
         }
         return total;
-    }
-
-    this.getSigneManger = function (index) {
-        /**
-         * Description : Retourne 1 s'il s'agit d'une entrée d'argent, -1 sinon
-         */
-        return is(index, 'manger') ? 1 : -1;
     }
 
     this.getSoldeOfficiel = function () {
@@ -42,11 +61,11 @@ var Manger_f = function () {
          */
         var total = 0, i = 0;
         for (i; i < taille_colonne; i++) {
-            if (is(i, '#ru')) {
+            if (this.donnees[i].officiel) {
                 total += -3.25;
             }
-            else if (is(i, 'manger')) {
-                total += getMontant(i);
+            else if (this.donnees[i].signe > 0) {
+                total += this.donnees[i].montant;
             }
         }
         return total.toFixed(2);
@@ -58,7 +77,7 @@ var Manger_f = function () {
          */
         var total = 0, i = 0;
         for (i; i < taille_colonne; i++) {
-            total += getMontant(i) * this.getSigneManger(i);
+            total += this.donnees[i].montant * this.donnees[i].signe
         }
         return total.toFixed(2);
     }
@@ -69,7 +88,7 @@ var Manger_f = function () {
          */
         var total = 0, i = 0;
         for (i; i < taille_colonne; i++) {
-            if (is(i, '#ru')) {
+            if (this.donnees[i].officiel) {
                 total += 3.25;
             }
         }
@@ -82,8 +101,8 @@ var Manger_f = function () {
          */
         var total = 0, i = 0;
         for (i; i < taille_colonne; i++) {
-            if (!is(i, 'manger')) {
-                total += getMontant(i);
+            if (this.donnees[i].signe < 0) {
+                total += this.donnees[i].montant;
             }
         }
         return total.toFixed(2);
@@ -102,8 +121,8 @@ var Manger_f = function () {
          */
         var total = 0, i = 0;
         for (i; i < taille_colonne; i++) {
-            if (is(i, 'izly')) {
-                total += getMontant(i);
+            if (this.donnees[i].izly) {
+                total += this.donnees[i].montant;
             }
         }
         return total.toFixed(2);
@@ -115,8 +134,8 @@ var Manger_f = function () {
          */
         var total = 0, i = 0;
         for (i; i < taille_colonne; i++) {
-            if (is(i, 'manger')) {
-                total += getMontant(i);
+            if (this.donnees[i].signe > 0) {
+                total += this.donnees[i].montant;
             }
         }
         return total.toFixed(2);
@@ -128,8 +147,8 @@ var Manger_f = function () {
          */
         var total = 0, i = 0;
         for (i; i < taille_colonne; i++) {
-            if (is(i, '#ru')) {
-                total += getMontant(i);
+            if (this.donnees[i].officiel) {
+                total += this.donnees[i].montant;
             }
         }
         return total.toFixed(2);
@@ -141,8 +160,8 @@ var Manger_f = function () {
          */
         var total = 0, i = 0;
         for (i; i < taille_colonne; i++) {
-            if (is(i, 'ru')) {
-                total += getMontant(i);
+            if (this.donnees[i].ru) {
+                total += this.donnees[i].montant;
             }
         }
         return total.toFixed(2);
