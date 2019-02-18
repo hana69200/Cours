@@ -1,4 +1,4 @@
-function encode(text, decallage, modulo) {
+function encode(text, decallage, modulo) { // modulo le diable
     var nb;
     var result = "";
     for (let c of text) {
@@ -11,5 +11,5 @@ function encode(text, decallage, modulo) {
 }
 
 function decode(text, decallage, modulo) {
-    return encode(text, modulo - decallage);
+    return encode(text, -decallage, modulo);
 }
