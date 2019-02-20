@@ -33,7 +33,7 @@ console.log(`${x} + ${y} = ${x + y}`); // "3 + 7 = 10"
 
 // On peut forcer un type (ou une convertion)
 const nb = 5;
-const txt = Number(nb);}
+const txt = Number(nb);
 
 // Interractions avec l'utilisateur
 /*{const prenom = prompt("Entrez votre prénom :");
