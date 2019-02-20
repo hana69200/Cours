@@ -1,4 +1,9 @@
 start = () => {
+	var counter = 0;
+	var topscore = 1000000;
+	var topscores = [];
+	var historic = document.getElementById("won_topscores");
+	
 	if (window.location.hash == "" || window.location.hash == "#") {
 		window.location.hash = "#1";
 	}
@@ -26,8 +31,41 @@ start = () => {
 		return li;
 	}
 	
+	function unwon() {
+		historic.innerText = "";
+		document.getElementById("won_div").style.display = "none";
+		document.getElementById("clicks").style.display = "";
+	}
+	
+	function won() {
+		if (counter < 10) {
+			alert("Vous avez triché...");
+			window.location.hash = "#1";
+			return;
+		}
+		
+		topscores[topscores.length] = counter;
+		if (counter < topscore) {
+			topscore = counter;
+		}
+		
+		for (var i = 0; i < topscores.length; i++) {
+			if (i == 0) {
+				historic.innerText += topscores[i];
+			} else {
+				historic.innerText += ", " + topscores[i];
+			}
+		}
+		document.getElementById("won_clicks").innerText = counter;
+		document.getElementById("won_topscore").innerText = topscore;
+		
+		document.getElementById("won_div").style.display = "";
+		document.getElementById("clicks").style.display = "none";
+	}
+	
 	function hashchange() {
 		var hash = parseInt(window.location.hash.substring(1), 10);
+		document.getElementById("counter").innerText = counter;
 		
 		var url = "json/chapitre" + hash + ".json";
 		var req = new XMLHttpRequest();
@@ -42,8 +80,20 @@ start = () => {
 				createLink(chapter.links[i].link, chapter.links[i].txt)
 			);
 		}
+		
+		if (chapter.links.length == 0) {
+			won();
+		} else {
+			unwon();
+			if (hash == 1) {
+				counter = 0;
+				document.getElementById("clicks").style.display = "none";
+			}
+		}
+		counter++;
 	}
 	
+	document.getElementById("clicks").style.display = "none";
 	window.addEventListener("hashchange", hashchange);
 };
 
