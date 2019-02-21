@@ -51,3 +51,21 @@ Il existe cependant des problème qu'on ne neut pas modéliser avec des graphes 
     - Ceux où le nombre de décision à chaque étape est ou peut être infini
     - Ceux où le résultat des décisions est inconnu ou incertain
     - Ceux où il y a plusieurs personnes qui prennent les décision
+
+-------------------------------------------------------------------------------
+
+Cours 3 : Prolog
+
+L'idée est de juste donner des données à la machine et d'utiliser un programme assez générique pour exploiter ces données de façon générale.
+
+Prolog a cependant rencontré ses limites, surtout à cause du coût des calculs exponentiellement croissant avec la complexité du problème donné au programme.
+
+-------------------------------------------------------------------------------
+
+Cours 4 : "Web Sémantique" | "Web de données (liées)"
+
+https://perso.liris.cnrs.fr/pierre-antoine.champin/enseignement/intro-ia/parts/websem.html
+
+L'idée est de "doubler" les données du web de façon à ce que la machine puisse comprendre les données déjà compréhensibles par les humains.
+
+Le web sémantique utilise le modèle de données RDF, des prédicats binaires et des requêtes en N3
