@@ -9,7 +9,8 @@ def nuanceGris(tab, size):
             R = pixels[x, y][0]
             V = pixels[x, y][1]
             B = pixels[x, y][2]
-            G = int(0.299 * R + 0.587 * V + 0.114 * B)
+            G = int(0.299 * R + 0.587 * V + 0.114 * B)# coding: utf8
+
             pixels[x, y] = (G, G, G)
 
 
@@ -40,9 +41,9 @@ if __name__ == "__main__":
             B = pixels[x, y][2]  # Couleur Bleu
             pixels[x, y] = (R, V, B)
 
-    switch(choix):
-        case "nuanceGris":
-            nuanceGris(pixels, size)
+    '''switch(choix):
+        case "nuanceGris":'''
+    nuanceGris(pixels, size)
 
     # Enregistre l'image
     image.save(path + filename.split(".")[0] + "_nuanceGris.png", "PNG")
@@ -53,6 +54,7 @@ if __name__ == "__main__":
     # Pixel Rouge(0) en position 0,0
     print(pix[0][0][0])
     print(pixels[0, 0][0])
+
 
     # Création d'une nouvelle image et l'affiche
     newimage = Image.fromarray(pix)

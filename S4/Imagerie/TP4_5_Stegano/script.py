@@ -1,6 +1,5 @@
 from PIL import Image
-import decode
-import encode
+from decode import *
 import numpy
 import stegano
 import sys

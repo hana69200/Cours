@@ -1,15 +1,36 @@
-# coding: utf8
-# chargement des fonctionalité d'image ainsi que de low et high
 from stegano import *
+from PIL import Image
+import numpy
+import stegano
 
-# charge le fichier
-size, image = image_load('message_x.png')
 
-# crée une nouvelle image de résultat
-result = image_new(size)
+if __name__ == "__main__":
 
-# ici votre code de decodage
-...
+    path = './exercices/'
+    filename = 'message_x.png'
+    newFilename = 'message_x_decode.png'
 
-# sauvegarde l'image
-image_save(result, size, 'resultat.png')
+    # Read image
+    image = Image.open(path + filename)
+
+    # Read pixels
+    pixels = image.load()
+
+    for x in range(size[0]):
+        for y in range(size[1]):
+            R = pixels[x, y][0]  # Couleur Rouge
+            V = pixels[x, y][1]  # Couleur Verte
+            B = pixels[x, y][2]  # Couleur Bleu
+            pixels[x, y] = (R, V, B)
+
+    for x in range(size[0]):
+        for y in range(size[1]):
+            R = pixels[x, y][0]
+            V = pixels[x, y][1]
+            B = pixels[x, y][2]
+            G = int(0.299 * R + 0.587 * V + 0.114 * B)# coding: utf8
+
+            pixels[x, y] = (G, G, G)
+
+    # Enregistre l'image
+    image.save(path + newFilename, "PNG")
