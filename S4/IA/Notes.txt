@@ -1,4 +1,4 @@
-Cours 0 : Intro → https://perso.liris.cnrs.fr/amelie.cordier/teaching/intro-ai/slides/index.html#1
+Cours 1 : Intro → https://perso.liris.cnrs.fr/amelie.cordier/teaching/intro-ai/slides/index.html#1
 
 "L'IA étudie les manières dont nous pouvons concevoir, construire et fabriquer des agents capables d'agir intelligemment."
 On peut dire que l'IA a pour but de simuler l'intelligence humaine.
@@ -21,7 +21,7 @@ Le CONNEXIONNISME est le fait d'utiliser un réseau de norones. Toute la dificul
 
 -------------------------------------------------------------------------------
 
-Cours 1 : Recherche de chemins → https://perso.liris.cnrs.fr/pierre-antoine.champin/enseignement/intro-ia/parts/chemins.html
+Cours 2 : Recherche de chemins → https://perso.liris.cnrs.fr/pierre-antoine.champin/enseignement/intro-ia/parts/chemins.html
 
 Site de visualisation des algorithmes de recherche : https://qiao.github.io/PathFinding.js/visual/
 
@@ -36,7 +36,7 @@ L'heuristique est le terme savant pour parler de la pifométrie. P-A. Champin, 2
 
 -------------------------------------------------------------------------------
 
-Cours 2 : Résolution de problème
+Cours 3 : Résolution de problème
 
 Un problème peut être modélisé par un graphe d'état où chacun des noeuds est une situation.
 La résolution du problème devient alors une recherche de chemin(s).
@@ -54,7 +54,7 @@ Il existe cependant des problème qu'on ne neut pas modéliser avec des graphes 
 
 -------------------------------------------------------------------------------
 
-Cours 3 : Prolog
+Cours 4 : Prolog
 
 L'idée est de juste donner des données à la machine et d'utiliser un programme assez générique pour exploiter ces données de façon générale.
 
@@ -62,10 +62,29 @@ Prolog a cependant rencontré ses limites, surtout à cause du coût des calculs
 
 -------------------------------------------------------------------------------
 
-Cours 4 : "Web Sémantique" | "Web de données (liées)"
+Cours 5 : "Web Sémantique" | "Web de données (liées)"
 
 https://perso.liris.cnrs.fr/pierre-antoine.champin/enseignement/intro-ia/parts/websem.html
 
 L'idée est de "doubler" les données du web de façon à ce que la machine puisse comprendre les données déjà compréhensibles par les humains.
 
 Le web sémantique utilise le modèle de données RDF, des prédicats binaires et des requêtes en N3
+
+-------------------------------------------------------------------------------
+
+Cours 6 : Deuxième partie de l'introduction à l'IA (avec Serge Fenet)
+
+IA forte -> niveau d'abstraction tellement fort qu'elle a la capacité de résoner sur elle-même
+
+Motivations actuelles de la recherche et utilisation de l'IA :
+    - La puissance de calcul
+    - La non linéarité dans la courbe de temps de calcul (rapport puissance CPU/complexité du problème)
+    - Les structures de données (pas du tout assez bien structurées à l'époque)
+
+Un système complexe est un ensemble de composants en interraction doté de certaines caractéristiques :
+    - Auto-organisation des composants (stimulis extérieurs)
+    - Comportements observés différents selon l'échelle
+    - Comportement global non prévisible de façon analytique (théorie du chaos)
+
+Voir "Computational complexity" de Papadimitriou
+Zoo des complexités : http://www.complexityzoo.com/

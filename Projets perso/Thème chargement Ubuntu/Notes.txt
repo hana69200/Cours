@@ -1,0 +1,51 @@
+Fichier de notes pour la création de mon thème de chargement d'Ubuntu
+
+Source : https://doc.ubuntu-fr.org/plymouth
+
+Les fichiers de thèmes sont dans le dossier suivant :
+/usr/share/plymouth/themes
+
+On y trouve deux raccourcis en plus des dossiers de thème :
+/usr/share/plymouth/themes/default.plymouth
+/usr/share/plymouth/themes/text.plymouth
+
+Ils pointent vers :
+/etc/alternatives/default.plymouth
+/etc/alternatives/text.plymouth
+
+Le thème choisi par le programme de démarrage est déterminé par le fichier default.plymouth.
+
+Actuellement ceux-ci pointent respectivement vers :
+/usr/share/plymouth/themes/edubuntu-logo/edubuntu-logo.plymouth
+/usr/share/plymouth/themes/lubuntu-text/lubuntu-text.plymouth
+
+On va changer de thème par défaut avec la commande suivante :
+sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/spinner/spinner.plymouth 200
+sudo update-alternatives --config default.plymouth
+
+/usr/share/plymouth/themes/edubuntu-logo/edubuntu-logo.plymouth                 150       mode automatique
+  1            /usr/share/plymouth/themes/edubuntu-logo/edubuntu-logo.plymouth                 150       mode manuel
+  2            /usr/share/plymouth/themes/kubuntu-logo/kubuntu-logo.plymouth                   150       mode manuel
+  3            /usr/share/plymouth/themes/lubuntu-logo/lubuntu-logo.plymouth                   150       mode manuel
+* 4            /usr/share/plymouth/themes/sabily/sabily.plymouth                               60        mode manuel
+  5            /usr/share/plymouth/themes/spinner/spinner.plymouth                             70        mode manuel
+  6            /usr/share/plymouth/themes/ubuntu-gnome-logo/ubuntu-gnome-logo.plymouth         100       mode manuel
+  7            /usr/share/plymouth/themes/ubuntu-logo/ubuntu-logo-scale-2.plymouth             99        mode manuel
+  8            /usr/share/plymouth/themes/ubuntu-logo/ubuntu-logo.plymouth                     100       mode manuel
+  9            /usr/share/plymouth/themes/ubuntu-mate-logo/ubuntu-mate-logo-scale-2.plymouth   149       mode manuel
+  10           /usr/share/plymouth/themes/ubuntu-mate-logo/ubuntu-mate-logo.plymouth           150       mode manuel
+  11           /usr/share/plymouth/themes/ubuntustudio-logo/ubuntustudio-logo.plymouth         150       mode manuel
+  12           /usr/share/plymouth/themes/xubuntu-logo/xubuntu-logo.plymouth      
+
+Méthode manuelle avec d'autres thèmes
+Commencez par télécharger les thèmes de votre choix, ici pour les environnements Gnome/Unity et xfce, et ici pour kde.
+Pour l'installer suivez cette procédure en saisissant dans un terminal les commandes suivantes :
+
+Placez les fichiers nécessaires dans /lib/plymouth/themes, par exemple : /lib/plymouth/themes/mon-theme :
+sudo cp -r /chemin/vers/le/dossier/de/mon-theme /lib/plymouth/themes/
+Installez le thème désiré (la syntaxe à utiliser peut-être lue dans le manuel man update-alternatives) :
+sudo update-alternatives --install /lib/plymouth/themes/default.plymouth default.plymouth /lib/plymouth/themes/mon-theme/mon-theme.plymouth 200 
+Ensuite définissez votre thème comme thème par défaut :
+sudo update-alternatives --set default.plymouth /lib/plymouth/themes/mon-theme/mon-theme.plymouth
+Et finalement, reconstruisez votre img :
+sudo update-initramfs -u
