@@ -41,11 +41,6 @@ Méthode manuelle avec d'autres thèmes
 Commencez par télécharger les thèmes de votre choix, ici pour les environnements Gnome/Unity et xfce, et ici pour kde.
 Pour l'installer suivez cette procédure en saisissant dans un terminal les commandes suivantes :
 
-Placez les fichiers nécessaires dans /lib/plymouth/themes, par exemple : /lib/plymouth/themes/mon-theme :
-sudo cp -r /chemin/vers/le/dossier/de/mon-theme /lib/plymouth/themes/
-Installez le thème désiré (la syntaxe à utiliser peut-être lue dans le manuel man update-alternatives) :
-sudo update-alternatives --install /lib/plymouth/themes/default.plymouth default.plymouth /lib/plymouth/themes/mon-theme/mon-theme.plymouth 200 
-Ensuite définissez votre thème comme thème par défaut :
-sudo update-alternatives --set default.plymouth /lib/plymouth/themes/mon-theme/mon-theme.plymouth
-Et finalement, reconstruisez votre img :
+sudo update-alternatives --install /usr/share/plymouth/themes/default.plymouth default.plymouth /usr/share/plymouth/themes/mon-theme/mon-theme.plymouth 200 
+sudo update-alternatives --set default.plymouth /usr/share/plymouth/themes/mon-theme/mon-theme.plymouth
 sudo update-initramfs -u
