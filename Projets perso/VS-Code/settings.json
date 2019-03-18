@@ -1,0 +1,56 @@
+{
+    "code-runner.saveAllFilesBeforeRun": true, // Linux Windows
+    "code-runner.executorMap": { // Linux Windows
+        "javascript": "node", // Linux
+        "java": "cd $dir && javac $fileName && java $fileNameWithoutExt", // Linux
+        "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt", // Linux
+        "cpp": "cd $dir && make && make run", // Linux
+        "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt", // Linux
+        "php": "php", // Linux
+        "python": "python3 -u", // Linux
+        "perl": "perl", // Linux
+        "perl6": "perl6", // Linux
+        "ruby": "ruby", // Linux
+        "go": "go run", // Linux
+        "lua": "lua", // Linux
+        "groovy": "groovy", // Linux
+        "powershell": "powershell -ExecutionPolicy ByPass -File", // Linux
+        "bat": "cmd /c", // Linux
+        "shellscript": "bash", // Linux
+        "fsharp": "fsi", // Linux
+        "csharp": "scriptcs", // Linux
+        "vbscript": "cscript //Nologo", // Linux
+        "typescript": "ts-node", // Linux
+        "coffeescript": "coffee", // Linux
+        "scala": "scala", // Linux
+        "swift": "swift", // Linux
+        "julia": "julia", // Linux
+        "crystal": "crystal", // Linux
+        "ocaml": "ocaml", // Linux
+        "r": "Rscript", // Linux
+        "applescript": "osascript", // Linux
+        "clojure": "lein exec", // Linux
+        "haxe": "haxe --cwd $dirWithoutTrailingSlash --run $fileNameWithoutExt", // Linux
+        "rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt", // Linux
+        "racket": "racket", // Linux
+        "ahk": "autohotkey", // Linux
+        "autoit": "autoit3", // Linux
+        "dart": "dart", // Linux
+        "pascal": "cd $dir && fpc $fileName && $dir$fileNameWithoutExt", // Linux
+        "d": "cd $dir && dmd $fileName && $dir$fileNameWithoutExt", // Linux
+        "haskell": "runhaskell", // Linux
+        "nim": "nim compile --verbosity:0 --hints:off --run" // Linux
+    },
+    "editor.acceptSuggestionOnEnter": "off", // Linux Windows
+    "editor.detectIndentation": false, // Linux Windows
+    "editor.minimap.enabled": false, // Linux Windows
+    "editor.quickSuggestions": false, // Linux Windows
+    "editor.quickSuggestionsDelay": 10, // Linux Windows
+    "editor.renderLineHighlight": "gutter", // Linux Windows
+    "editor.wordWrap": "on", // Linux Windows
+    "extensions.ignoreRecommendations": true, // Linux Windows
+    "php.validate.executablePath": "/usr/bin/php", // Linux Windows
+    "python.linting.pylintEnabled": false, // Linux Windows
+    "python.pythonPath": "/usr/bin/python3", // Linux Windows
+    "workbench.colorTheme": "Monokai" // Linux Windows
+}
