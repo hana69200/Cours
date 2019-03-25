@@ -96,3 +96,9 @@ Cours 7 : La complexité du monde
 Le temps de calcul en IA est utilisé suivant deux axes :
     - Explorer le monde → parcourir la courbe en allant un peu partout au pif
     - Exploiter → regarder le voisinage d'un point
+
+-------------------------------------------------------------------------------
+
+Cours 8 : Les limites de l'IA
+
+L'apprentissage par deep learning est biaisé par les données avec lesquels il a appris : https://www.nature.com/articles/d41586-018-05707-8
