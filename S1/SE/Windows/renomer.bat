@@ -1,10 +1,7 @@
 @echo off
 
 if '%1' == [] (
-rem = if "%1" == [] (
-rem = if [%1] == [] (
-
-	echo pas d'argument
+    echo pas d'argument
 	goto :EOF
 )
 

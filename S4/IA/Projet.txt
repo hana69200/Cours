@@ -9,3 +9,4 @@ Projet 7 : Optimisation combinatoire [programmation par contrainte]
         - Domaines d'application
         - Limitations
 
+maximisation de la qualite
